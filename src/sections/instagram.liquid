@@ -1,0 +1,65 @@
+{%- assign title = section.settings.title -%}
+{%- assign code = section.settings.code -%}
+{%- assign background = section.settings.background -%}
+{%- assign cta_url = section.settings.cta_url -%}
+{%- assign cta_text = section.settings.cta_text -%}
+{%- assign cta_text_color = section.settings.cta_text_color -%}
+{%- assign cta_color = section.settings.cta_color -%}
+
+
+<div class="instagram-section full-content left-side">
+    <h1 class="extra uppercase">{{ title }}</h1>    
+    {% if section.settings.add_link_label != blank and section.settings.view_link_label %}
+        <div class="option">
+            <a>{{ section.settings.add_link_label }}</a>
+            <a href="{{ section.settings.view_link }}">{{ section.settings.view_link_label }}</a>
+        </div>   
+    {% endif %}
+    
+    <div class="instagram-carousel">
+        {{ code }}
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "instagram section",
+    "settings": [
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "Join Our Community"
+        },
+        {
+            "type": "textarea",
+            "id": "code",
+            "label": "Code",
+            "info":"Copy and paste from Pixlee"
+        },
+        {
+            "type": "text",
+            "id": "add_link_label",
+            "label": "Add link label",
+            "default": "Add your photo"
+        },
+        {
+            "type": "text",
+            "id": "view_link_label",
+            "label": "View link label",
+            "default": "View Gallery"
+        },
+        {
+          "type": "url",
+          "id": "view_link",
+          "label": "View link"
+        }
+    ],
+    "presets": [
+        {
+            "category": "Social media",
+            "name":"instagram"
+        }
+    ]
+}
+{% endschema %}

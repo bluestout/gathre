@@ -1,0 +1,56 @@
+#shopify-section-login, #shopify-section-register{
+    .content{
+        margin-bottom: 100px;
+        background-color: $light-white;
+        @include media-query('medium-down'){
+            padding: 0;
+            margin-bottom: 10px;
+        }
+        .login-section{
+            position: relative;
+            .login-content{
+                position: absolute;
+                right: 0;
+                height: 100%;
+                display: flex;
+                @include media-query('medium-down'){
+                    position: static;
+                    display: table;
+                    width: 100%;
+                }
+                .content{
+                    max-width: 400px;
+                    display: table;
+                    margin: auto;
+                    @include media-query('medium-down'){
+                        padding: 20px 30px;
+                    }
+                    h1{
+                        margin-bottom: 50px;
+                        @include media-query('medium-down'){
+                            margin-bottom: 20px;
+                            font-size: $h2_size;
+                        }
+                    }
+                   
+                    a{
+                        font-size: 14px;
+                        &.fright{
+                            font-size: 12px;
+                            font-family: $font-hero;
+                            text-decoration: underline;
+                        }
+                    }
+                    .pannel{
+                        margin-top: 30px;
+                        .button{
+                            margin-bottom: 10px;
+                            margin-top: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+

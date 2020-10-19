@@ -1,0 +1,96 @@
+{% if section.settings.grid_style %}
+    {% assign class = 'full-width' %}
+{% else %}
+    {% assign class = '' %}
+{% endif %}
+<div class="image_text_grid_section slideanim {{ class }}">
+    <div class="container">
+        <div class="image_text_block grid">
+            <h4 class="uppercase hide medium-down--show text-center">{{ section.settings.mobile_title }}</h4>
+            <div class="grid__item large-up--five-twelfths medium-down--hide">
+                <div class="image-field grid">
+                    <div class="grid__item one-half first">
+                        {% for block in section.blocks %}
+                            {% assign modulo = forloop.index | modulo : 2 %}
+                            {% if block.type == 'image_block' and modulo == 1 %}
+                                <div class="grid__item one-whole image-item">
+                                    {% include 'responsive-image' with
+                                        image: block.settings.image,
+                                        max_width: 768,
+                                        max_height: 768
+                                    %}
+                                    {% if block.settings.second_image != blank %}
+                                        {% include 'responsive-image' with
+                                            image: block.settings.second_image,
+                                            max_width: 768,
+                                            max_height: 768,
+                                            wrapper_class: "second animated fadeIn"
+                                        %}
+                                    {% endif %}
+    
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+    
+                    <div class="grid__item one-half two">
+                        {% for block in section.blocks %}
+                            {% assign modulo = forloop.index | modulo : 2 %}
+                            {% if block.type == 'image_block' and modulo == 0 %}
+                                <div class="grid__item one-whole image-item">
+                                    {% include 'responsive-image' with
+                                        image: block.settings.image,
+                                        max_width: 768,
+                                        max_height: 768
+                                    %}
+                                    {% if block.settings.second_image != blank %}
+                                        {% include 'responsive-image' with
+                                            image: block.settings.second_image,
+                                            max_width: 768,
+                                            max_height: 768,
+                                            wrapper_class: "second animated fadeIn"
+                                        %}
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+    
+                </div>
+            </div>
+            <div class="grid__item large-up--seven-twelfths">
+                <div class="text-field grid">
+                    <div class="grid__item one-whole title-content medium-down--hide"  style="background-color: {{ section.settings.bg_color }};">
+                        <div class="content">
+                            <h1 class="extra uppercase">{{ section.settings.title }}</h1>
+                            {{ section.settings.desc }}
+                            {% if section.settings.button_url != blank and section.settings.button_label %}
+                                <a href="{{ section.settings.button_url }}" class="button fleft small brown">{{ section.settings.button_label }}</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="grid__item one-whole icon-content">
+                        <div class="content">
+                            {% for block in section.blocks %}
+                                {% if block.type == 'icon_block' %}
+                                    <div class="icon_block">
+                                        {% if block.settings.icon_svg != blank %}
+                                            {{ block.settings.icon_svg }}
+                                        {% else %}
+                                            <img src="{{ block.settings.icon_img | img_url : 'original' }}">        
+                                        {% endif %}
+                                        {{ block.settings.title }}
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        {% if section.settings.button_url != blank and section.settings.button_label %}
+                            <a href="{{ section.settings.button_url }}" class="button small brown large-up--hide">{{ section.settings.button_label }}</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>

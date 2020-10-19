@@ -1,0 +1,130 @@
+{% assign variant_list = '' %}
+
+{% for variant_val in product.variants %}
+    {% for option_val in variant_val.options %}
+        {% assign varaint_str = option_val | downcase | remove: " " %}
+        {% unless variant_list contains varaint_str %}
+            {% assign variant_list = variant_list | append: ',' | append: varaint_str %}
+        {% endunless %}
+    {% endfor %}
+{% endfor %}
+
+{% assign variant_list = variant_list | replace_first: ',', '' %}
+
+{% assign variant_array = variant_list | split: ',' %}
+{% assign swatch_type = "" %}
+{% assign option_val = option | downcase %}
+{% if product.available %}
+    {% assign product_variant = product.first_available_variant %}
+{% else %}
+    {% assign product_variant = product.variants[0] %}
+{% endif %}
+
+{% assign active_option_list = '' %}
+{% for active_option in product_variant.options %}
+    {% assign active_option_str = active_option | downcase | remove: ' ' | remove: '/' %}
+    {% assign active_option_list = active_option_list | append: active_option_str %}
+{% endfor %}
+{% assign option_str = option | downcase %}
+{% assign swatch_list = '' %}
+{% if option_str contains 'print' %}
+    {% capture swatch_list %}
+    {% for variant in product.variants %}
+        {% if product.first_available_variant.title contains variant.title %}
+            {% assign active_variant = 'active' %}
+        {% else %}
+            {% assign active_variant = '' %}
+        {% endif %}
+
+        {% if variant.featured_image.src != blank %}
+            <div class="option bg_image available showable {{variant.title  | downcase | remove: ' ' | remove: '/'}} {{ variant_available }} {{ active_variant }}" variant-target="{{variant.title | downcase | remove: ' ' | remove: '/' }}">
+                <a title="{{variant.title | capitalize}}"><img src="{{ variant.featured_image.src | img_url: '50x' }}" ></a>
+            </div>
+        {% else %}
+            <div class="option label showable available {{variant.title}} {{ variant_available }} {{ active_variant }}" variant-target="{{variant.title | downcase | remove: ' ' | remove: '/' }}">
+                <h5>{{variant.title}}</h5>
+            </div>
+        {% endif %}
+    {% endfor %}
+    {% endcapture %}
+{% elsif option_str contains 'color' %}
+    {% capture swatch_list %}
+        {% for variant_title in variant_array %}
+            {% for block in section.blocks %}
+                {% if block.type == 'swatch' %}
+                    {% assign title = block.settings.title | downcase | remove: ' ' | remove: '/' %}
+                    {% if block.settings.type == 'color'  and variant_title == title %}
+                        {% unless swatch_type contains block.settings.sub_type %}
+                            {% if block.settings.type == 'color' %}
+                                {% assign swatch_type = swatch_type | append: block.settings.sub_type | append: ', ' %}
+                            {% endif %}
+                        {% endunless %}
+
+                        {% if active_option_list contains title %}
+                            {% assign active_variant = 'active' %}
+                            {% assign active_subtype = block.settings.sub_type %}
+                        {% else %}
+                            {% assign active_variant = '' %}
+                        {% endif %}
+
+                        {% if block.settings.bg_image != blank %}
+                            <div class="option bg_image available {{block.settings.sub_type}} {{block.settings.title  | downcase | remove: ' ' | remove: '/'}} {{ variant_available }} {{ active_variant }}" variant-target="{{block.settings.title | downcase | remove: ' ' | remove: '/' }}">
+                                <a title="{{title | capitalize}}"><img src="{{ block.settings.bg_image | img_url: '50x' }}" >    </a>
+                            </div>
+                        {% else %}
+                            <div class="option label showable available {{block.settings.sub_type}} {{block.settings.title}} {{ variant_available }} {{ active_variant }}" variant-target="{{block.settings.title | downcase | remove: ' ' | remove: '/' }}">
+                                <h5>{{block.settings.title}}</h5>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    {% endcapture %}
+{% else %}
+    {% capture swatch_list %} 
+        {% for variant_title in variant_array %}
+            {% for block in section.blocks %}
+                {% if block.type == 'swatch' %}
+                    {% assign title = block.settings.title | downcase | remove: ' ' | remove: '/' %}
+                    {% if block.settings.type != 'color' %}
+                        {% if variant_title == title %}
+                            {% if active_option_list contains title %}
+                                {% assign active_variant = 'active' %}
+                                {% assign active_subtype = block.settings.sub_type %}
+                            {% else %}
+                                {% assign active_variant = '' %}
+                            {% endif %}
+                            <div class="option label showable available {{block.settings.sub_type}} {{block.settings.title}} {{ variant_available }} {{ active_variant }}" variant-target="{{block.settings.title | downcase | remove: ' ' | remove: '/' }}">
+                                <h5>{{block.settings.title}}</h5>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    {% endcapture %}
+{% endif %}
+
+
+<div class="swatch-form">
+    <h5 class="bold uppercase">{{ option | downcase | replace_first: 'color', 'available colors' | replace_first: 'title', 'select title' }}</h5>
+    {% if option contains 'Color' %}
+        <div class="sub_type">
+            {% assign swatch_type_array = swatch_type | split: ', ' %}
+            {% for type in swatch_type_array %}
+                {% if type != blank %}
+                    {% if active_subtype == type %}
+                        <label class="sub_option bold uppercase active" data-target="{{ type }}">{{ type }}</label>
+                    {% else %}
+                        <label class="sub_option bold uppercase" data-target="{{ type }}">{{ type }}</label>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div class="option-pannel">
+        {{ swatch_list }}
+    </div>
+</div>

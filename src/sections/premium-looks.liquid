@@ -1,0 +1,158 @@
+<div class="premium-section" style="background-color: {{ section.settings.bg_color }};">
+    <h1 class="extra text-center uppercase medium-down--hide" style="color: {{ section.settings.title_color }};">{{ section.settings.title }}</h1>
+    <div class="carousel premium medium-down--hide" delay-time="{{ section.settings.delay }}">
+        {% for block in section.blocks %}
+            <div class="carousel-cell">
+                <img src="{{ block.settings.image | img_url: 'original' }}" alt="{{ block.settings.title }}" />
+                <div class="caption">
+                    <div class="icons" style="background-color: {{ block.settings.icon_bg_color }};">
+                        {% if block.settings.icon_svg != blank %}
+                            {{ block.settings.icon_svg }}
+                        {% else %}
+                            {% include 'responsive-image' with
+                                image: block.settings.icon_img,
+                                max_width: 320,
+                                max_height: 320
+                            %}
+                        {% endif %}
+                    </div>
+                    <h3 class="bold text-center uppercase">{{ block.settings.title }}</h3>
+                </div>
+            </div>
+        {% endfor %}
+        {% for block in section.blocks %}
+            <div class="carousel-cell">
+                <img src="{{ block.settings.image | img_url: 'original' }}" alt="{{ block.settings.title }}" />
+                <div class="caption">
+                    <div class="icons" style="background-color: {{ block.settings.icon_bg_color }};">
+                        {% if block.settings.icon_svg != blank %}
+                            {{ block.settings.icon_svg }}
+                        {% else %}
+                            {% include 'responsive-image' with
+                                image: block.settings.icon_img,
+                                max_width: 320,
+                                max_height: 320
+                            %}
+                        {% endif %}
+                    </div>
+                    <h3 class="bold text-center uppercase">{{ block.settings.title }}</h3>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="premium-grid medium-up--hide grid">
+        {% for block in section.blocks %}
+            <div class="grid__item one-half">
+                <div class="mobile-icon">
+                    {% if block.settings.mobile_icon_svg != blank %}
+                        {{block.settings.mobile_icon_svg}}
+                    {% else %}
+                        <img src="{{ block.settings.mobile_icon_img | img_url : 'original' }}">
+                    {% endif %}
+                    <span class="bold uppercase text-left">{{block.settings.title}}</span>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+{% schema %}
+{
+    "name": "Premium look section",
+    "settings": [
+        {
+            "type": "range",
+            "id": "delay",
+            "label": "Carousel delay",
+            "unit": "s",
+            "min": 1,
+            "max": 10,
+            "step": 1,
+            "default": 1
+        },
+        {
+            "type": "color",
+            "id": "bg_color",
+            "label": "Background color",
+            "default": "#FBF9F8"
+        },
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "Premium Look & Feel"
+        },
+        {
+            "type": "color",
+            "id": "title_color",
+            "label": "Title color",
+            "default": "#C5B097"
+        }
+    ],
+    "blocks": [
+        {
+            "name": "Carousel image",
+            "type": "Image_block",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "Image"
+                },
+                {
+                    "type": "header",
+                    "content": "desktop icon"
+                },
+                {
+                    "type": "html",
+                    "id": "icon_svg",
+                    "label": "Icon (svg)"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "icon_img",
+                    "label": "Icon (image)"
+                },
+                {
+                    "type": "header",
+                    "content": "mobile icon"
+                },
+                {
+                    "type": "html",
+                    "id": "mobile_icon_svg",
+                    "label": "Icon (svg)"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "mobile_icon_img",
+                    "label": "Icon (image)"
+                },
+                {
+                    "type": "color",
+                    "id": "icon_bg_color",
+                    "label": "Icon background color",
+                    "default": "#C5B097"
+                },
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title"
+                },
+                {
+                    "type": "color",
+                    "id": "title_color",
+                    "label": "Title color",
+                    "default": "#030303"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "category": "carousel",
+            "name":"Premium carousel"
+        }
+    ]
+}
+{% endschema %}

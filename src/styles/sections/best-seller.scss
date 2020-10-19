@@ -1,0 +1,40 @@
+.best_sellers{
+    padding: $grid-gutter * 10;
+    @include media-query('small'){
+        padding: 15px;
+    }
+    .content{
+        margin-top: $grid-gutter * 10;
+        @include media-query('small'){
+            margin-top: $grid-gutter * 2;
+        }
+        a{
+            color: $black;
+        }
+        .product-item{
+            @include media-query('medium-down'){
+                min-height: auto!important;
+                .info{
+                    p{
+                        &.light{
+                            line-height: 17px;
+                        }
+                        &.price{
+                            display: block;
+                            .spr-badge{
+                                display: table;
+                                width: auto;
+                                margin: 0;
+                                float: left;
+                                .spr-starrating{
+                                    margin: 0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+        }
+    }
+}

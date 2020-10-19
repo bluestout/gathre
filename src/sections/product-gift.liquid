@@ -1,0 +1,170 @@
+
+{% assign variant_val = product.first_available_variant %}
+{% assign variant_validator = variant_val.title %}
+<div class="container">
+    <div class="product-section gift grid">
+        <div class="product-content full-content">
+            <div class="product-image_gallery grid__item large-up--two-thirds">
+                <div class="main-images">
+                    <div class="grid image-block active">
+                        <div class="grid__item large-up--one-whole">
+                            {% include 'responsive-image' with
+                                image: product.featured_image,
+                                max_width: 502,
+                                max_height: 502,
+                                square: true,
+                                wrapper_class: 'feature-image'
+                            %} 
+                            <a class="wish-icon">{% include 'icon_pack', icon: "love" %}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="product-info grid__item large-up--one-third">
+                {% include 'product-info' with item: variant_val %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "content",
+    "settings": [
+        {
+            "type": "range",
+            "id": "delay",
+            "label": "Delay",
+            "min": 1,
+            "max": 10,
+            "step": 1,
+            "default": 5
+        },
+        {
+            "type": "richtext",
+            "id": "related_desc",
+            "label": "Collection carousel description",
+            "default": "<p>A dropcloth for life and all it’s beautiful messes</p>"
+        }
+    ],
+    "blocks": [
+        {
+            "name": "image-text",
+            "type": "image-text",
+            "settings": [
+                {
+                    "type": "select",
+                    "id": "type",
+                    "label": "Template",
+                    "options": [
+                        {
+                            "value": "style_1",
+                            "label": "Style 1"
+                        },
+                        {
+                            "value": "style_2",
+                            "label": "Style 2"
+                        }
+                    ]
+                },
+                {
+                    "type": "image_picker",
+                    "id": "feature_image",
+                    "label": "Feature image"
+                },
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title",
+                    "default": "Premium Look & Feel."
+                },
+                {
+                    "type": "richtext",
+                    "id": "desc",
+                    "label": "Description"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "icon_image_1",
+                    "label": "Icon image"
+                },
+                {
+                    "type": "html",
+                    "id": "icon_svg_1",
+                    "label": "Icon svg"
+                },
+                {
+                    "type": "text",
+                    "id": "icon_title_1",
+                    "label": "Icon title",
+                    "default": "Wipeable and water-resistant."
+                },
+                {
+                    "type": "image_picker",
+                    "id": "icon_image_2",
+                    "label": "Icon image"
+                },
+                {
+                    "type": "html",
+                    "id": "icon_svg_2",
+                    "label": "Icon svg"
+                },
+                {
+                    "type": "text",
+                    "id": "icon_title_2",
+                    "label": "Icon title",
+                    "default": "Folds compactly for easy storage and transportation."
+                },
+                {
+                    "type": "image_picker",
+                    "id": "icon_image_3",
+                    "label": "Icon image"
+                },
+                {
+                    "type": "html",
+                    "id": "icon_svg_3",
+                    "label": "Icon svg"
+                },
+                {
+                    "type": "text",
+                    "id": "icon_title_3",
+                    "label": "Icon title",
+                    "default": "Free of toxins, PVC, phthalates, and lead. CPSIA compliant."
+                }
+            ]
+        },
+        {
+            "name": "collection",
+            "type": "collection",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "Feature image"
+                },
+                {
+                    "type": "collection",
+                    "id": "collection",
+                    "label": "Collection"
+                }
+            ]
+        },
+        {
+            "name": "gift message",
+            "type": "gift_msg",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title"
+                },
+                {
+                    "type": "richtext",
+                    "id": "desc",
+                    "label": "Description"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

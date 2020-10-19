@@ -1,0 +1,73 @@
+/**
+ * Insert your styles with Liquid below.
+ *
+ * Import additional stylesheets into this sheet using CSS imports:
+ * @import url('./global/form.scss');
+ */
+
+ @font-face {
+  font-family: 'Gothic720 Lt BT Light';
+  src: url({{'Gothic720BT-LightB.eot' | asset_url }}) format('embedded-opentype'),
+      url({{'Gothic720BT-LightB.woff2' | asset_url }}) format('woff2'),
+      url({{'Gothic720BT-LightB.woff' | asset_url }}) format('woff'),
+      url({{'Gothic720BT-LightB.ttf' | asset_url }}) format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gothic720 BT Roman';
+  src: url({{'Gothic720BT-RomanB.eot' | asset_url }}) format('embedded-opentype'),
+      url({{'Gothic720BT-RomanB.woff2' | asset_url }}) format('woff2'),
+      url({{'Gothic720BT-RomanB.woff' | asset_url }}) format('woff'),
+      url({{'Gothic720BT-RomanB.ttf' | asset_url }}) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gothic720 Lt BT Light Italic';
+  src: url({{'Gothic720BT-LightItalicB.eot' | asset_url }}) format('embedded-opentype'),
+      url({{'Gothic720BT-LightItalicB.woff2' | asset_url }}) format('woff2'),
+      url({{'Gothic720BT-LightItalicB.woff' | asset_url }}) format('woff'),
+      url({{'Gothic720BT-LightItalicB.ttf' | asset_url }}) format('truetype');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gotham Book';
+  src: url({{'GothamBook.eot' | asset_url }}) format('embedded-opentype'),
+      url({{'GothamBook.woff2' | asset_url }}) format('woff2'),
+      url({{'GothamBook.woff' | asset_url }}) format('woff'),
+      url({{'GothamBook.ttf' | asset_url }}) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+  .shopping_link{
+    line-height: 60px;
+    text-decoration: underline;
+    font-size: 12px;
+    font-family: 'Gotham Book';
+    position: relative;
+    padding-left: 35px;
+    &::before{
+        content: " ";
+        background: url({{ 'arrow-left.png' | asset_url }});
+        width: 43px;
+        height: 28px;
+        display: table;
+        background-size: contain;
+        float: left;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: absolute;
+        left: -10px;
+        top: -9px;
+    }
+  }

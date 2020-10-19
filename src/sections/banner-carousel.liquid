@@ -1,0 +1,129 @@
+<div class="banner-carousel-section full-content">
+    <div class="carousel banner-carousel">
+        {% for block in section.blocks %}
+            <div class="carousel-cell" style="background-color: {{ block.settings.bg_color }};">
+                <div class="banner-content">
+                    <div class="grid__item five-twelfths image-content medium-down--one-whole">
+                        <div class="content">
+                            {% include 'responsive-image' with
+                                image: block.settings.image,
+                                max_width: 430,
+                                max_height: 430
+                            %}
+                            <a class="image_title capitalize extra">{{ block.settings.image_title }}</a>  
+                        </div>
+                    </div>
+                    <div class="grid__item seven-twelfths medium-down--one-whole title-content"> 
+                        <div class="content">
+                            <h2 class="extra uppercase medium-down--hide" style="color: {{ block.settings.title_color }};">{{ block.settings.title }}</h2>
+                            <h2 class="extra uppercase medium-down--show hide" style="color: {{ block.settings.title_color }};"> {% include 'icon_pack', icon: 'quote' %} {{ block.settings.mobile_title }}</h2>
+                            <div class="stars">
+                                {% for star in (1..5) %}
+                                    {% if star <= block.settings.star %}
+                                        {% assign class = "active" %}
+                                    {% else %}
+                                        {% assign class = "" %}
+                                    {% endif %}
+                                    {% include 'icon_pack' width icon: "star", class: class %}
+                                {% endfor %}
+                            </div>
+                            {{ block.settings.desc }}
+                            <h3 class="extra">{{ block.settings.author }}</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        
+      </div>
+</div>
+
+{% schema %}
+{
+    "name": "banner carousel",
+    "settings": [
+        {
+            "type": "checkbox",
+            "id": "grid_style",
+            "label": "Full width ?"
+        },
+        {
+            "type": "range",
+            "id": "delay",
+            "label": "Time delay",
+            "min": 1,
+            "max": 10,
+            "step": 1,
+            "default": 10
+        }
+    ],
+    "blocks" : [
+        {
+            "name": "carousel block",
+            "type": "carousel",
+            "settings": [
+                {
+                    "type": "color",
+                    "id": "bg_color",
+                    "label": "Background color",
+                    "default": "#C5B097"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "Image"
+                },
+                {
+                    "type": "text",
+                    "id": "image_title",
+                    "label": "Image title",
+                    "default": "Micro in Jade"
+                },
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title",
+                    "default": "Over 9000 five star reviews. That’s a lot of Special Moments."
+                },
+                {
+                    "type": "text",
+                    "id": "mobile_title",
+                    "label": "Mobile title"
+                },
+                {
+                    "type": "color",
+                    "id": "title_color",
+                    "label": "Title color"
+                },
+                {
+                    "type": "range",
+                    "id": "star",
+                    "label": "Stars",
+                    "min": 1,
+                    "max": 5,
+                    "step": 1,
+                    "default": 4
+                },
+                {
+                    "type": "richtext",
+                    "id": "desc",
+                    "label": "Description",
+                    "default": "<p>Got this for a baby shower gift for my sister-in-law. The quality is amazing and so many uses!</p>"
+                },
+                {
+                    "type": "text",
+                    "id": "author",
+                    "label": "Author",
+                    "default": "Emily K."
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "category": "carousel",
+            "name":"banner carousel"
+        }
+    ]
+}
+{% endschema %}

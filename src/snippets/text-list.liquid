@@ -1,0 +1,25 @@
+<div class="text-list">
+    <h1 class="text-center">{{ block.settings.title }}</h1>
+    <div class="list">
+        <table>
+            <thead>
+                <th></th>
+                <th>{{ 'commponent.text_list.brown_tier' | t }}</th>
+                <th>{{ 'commponent.text_list.silver_tier' | t }}</th>
+                <th>{{ 'commponent.text_list.gold_tier' | t }}</th>
+            </thead>
+            <tbody>
+                {% for block in section.blocks %}
+                    {% if block.type == 'table' %}
+                        <tr>
+                            <td class="name">{{ block.settings.name }}</td>
+                            <td class="desc">{{ block.settings.bronze_tier | replace: '*', '<span class="circle"></span>' }}</td>
+                            <td class="desc">{{ block.settings.silver_tier | replace: '*', '<span class="circle"></span>' }}</td>
+                            <td class="desc">{{ block.settings.gold_tier | replace: '*', '<span class="circle"></span>' }}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

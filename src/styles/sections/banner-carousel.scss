@@ -1,0 +1,140 @@
+.banner-carousel-section{
+    padding-top: 0;
+    padding-bottom: 0;
+    .banner-carousel{
+        background-color: $white;
+        .carousel-cell{
+            width: 100%;
+            margin-bottom: $grid-gutter * 20;
+            @include media-query('medium-down'){
+                margin-top: 50px;
+                margin-bottom: 0;
+            }
+            .banner-content{
+                padding: $grid-gutter * 5 $grid-gutter * 7.5;
+                position: relative;
+                display: table;
+                width: 100%;
+                min-height: 380px;
+                @include media-query('medium-down'){
+                    padding: 0;
+                    display: table;
+                    min-height: auto;
+                }
+                .image-content{
+                    float: right;
+                    height: 0;
+                    @include media-query('medium-down'){
+                        height: auto;
+                        padding: 0;
+                    }
+                    .image_title{
+                        max-width: 430px;
+                        margin: auto;
+                        width: 100%;
+                        display: block;
+                        margin-top: $grid-gutter * 2.5;
+                        text-decoration: underline;
+                        text-transform: none;
+                        @include media-query('medium-down'){
+                            display: none;
+                        }
+                        &:hover{
+                            color: $brown;
+                        }
+                    }
+                }
+                .title-content{
+                    .content{
+                        max-width: $grid-gutter * 50;
+                        @include media-query('medium-down'){
+                            padding: $grid-gutter * 2;
+                            padding-bottom: 0;
+                        }
+                        h2{
+                            color: $white;
+                            @include media-query('medium-down'){
+                                color: $black;
+                                position: absolute;
+                                top: -$grid-gutter * 5;
+                                left: 0;
+                                width: calc(100% - 49px);
+                                line-height: 18px;
+                            }
+                            svg{
+                                width: 10px;
+                                height: 10px;
+                            }
+                        }
+                        .stars{
+                            @include media-query('medium-down'){
+                                position: absolute;
+                                bottom: 14px;
+                                right: 20px;
+                            }
+                            svg{
+                                g{
+                                    fill: #E7DFD6;
+                                    stroke: #E7DFD6;
+                                }
+                                &.active{
+                                    g{
+                                        fill: $white;
+                                        stroke: $white;
+                                    }
+                                }
+                            }
+                        }
+                        p{
+                            color: $white;
+                        }
+                    }
+                }
+            }
+        }
+        .flickity-prev-next-button{
+            bottom: 216px;
+            &:hover{
+                background-color: transparent;
+            }
+            &.previous{
+                left: 75px;
+            }
+            &.next{
+                left: 123px;
+            }
+            svg{
+                path{
+                    fill: white;
+                }
+            }
+            @include media-query('medium-down'){
+                display: block;
+                top: 22px;
+                width: 20px;
+                &::after{
+                    font-family: monospace;
+                    font-size: 24px;
+                }
+                svg{
+                    display: none;
+                }
+                &.previous{
+                    left: auto;
+                    right: 20px;
+                    &:after{
+                        content: "<";
+                    }
+                }
+                &.next{
+                    left: auto;
+                    right: 0;
+                    &:after{
+                        content: ">";
+                    }
+                }
+               
+            }
+        }
+    }
+}

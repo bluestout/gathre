@@ -1,0 +1,39 @@
+.premium-section{
+    padding: $grid-gutter * 2 0;
+    .carousel{
+        margin-top: $grid-gutter * 4;
+        .carousel-cell{
+            margin: 0;
+            .caption{
+                .icons{
+                    display: flex;
+                    width: $grid-gutter * 10;
+                    height: $grid-gutter * 10;
+                    margin: -$grid-gutter * 5 auto 0;
+                    position: relative;
+                    svg{
+                        margin: auto;
+                        filter: invert(1);
+                    }
+                }
+            }
+        }
+    }
+    .premium-grid {
+        .grid__item{
+            display: flex;
+            .mobile-icon{
+                display: inline-flex;
+                margin: 5px auto;
+                svg{
+                    margin: auto $grid-gutter;
+                }
+                span{
+                    line-height: $grid-gutter * 2;
+                    vertical-align: middle;
+                    white-space: nowrap;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,85 @@
+<div class="info">
+    <div class="heading-title">
+      {% if product.tags contains 'bestseller' %}
+      <span class="best-seller__badge">
+        {% include 'icon_pack', icon: 'bestseller' %}
+        {{ 'products.product.best_seller' | t }}
+      </span>
+      {% endif %}
+      <span class="stamped-product-reviews-badge stamped-main-badge" data-id="{{ product.id }}" data-product-sku="{{ product.handle }}" style="display: inline-block;">{{ product.metafields.stamped.badge }}</span>
+    </div>
+
+    <div class="product-title" data-handle="{{ product.handle }}">
+        <h1 class="extra uppercase">{{ product.title }} - {{ item.title }}</h1>
+        <p class="title extra price">
+            {% if item.available %}
+                {% if item.compare_at_price > item.price %}
+                    {{ item.price | money }} <del>{{ item.compare_at_price | money }}</del>
+                {% else %}
+                    {{ item.price | money }}
+                {% endif %}
+            {% else %}
+                {{ 'products.product.sold_out' | t }}
+            {% endif %}
+        </p>
+        {% include 'afterpay' %}
+    </div>
+    <div class="product-pannel">
+        {% if product.handle == 'gift-card' %}
+            <div class="gift-swatch">
+                {% for option in product.options %}
+                    <div class="swatch-form">
+                        <h5 class="bold uppercase">{{ option | downcase | replace_first: 'title', 'select title' }}</h5>
+                        <div class="option-pannel">
+                            {% for variant in product.variants %}
+                                <a variant-id="{{ variant.id }}" class="option label available showable {% if forloop.index == 1 %} active {% endif %}"><h5>{{ variant.title }}</h5></a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="swatch"></div>
+        {% endif %}
+
+        <a href="/collections/swatch-studio" class="order_swatch extra">{{ 'products.product.order_swatches' | t }}</a>
+        <form class="product_form">
+            <input type="hidden" name="id" class="variant" value="{{item.id}}">
+            <input type="hidden" name="type" class="type" value="product">
+            <input type="hidden" name="quantity" class="quantity" value="1">
+            {% if product.available %}
+                {% assign cls = '' %}
+            {% else %}
+                {% assign cls = 'disable' %}
+            {% endif %}
+            <button class="ajax-submit add_cart brown {{ cls }} button">
+                <span class="text">{{ 'products.product.add_to_cart' | t }}</span>
+                <svg x="0px" y="0px" width="32px" height="32px" viewBox="0 0 32 32" class="checkmark">
+                    <path fill="none" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" d="M9,17l3.9,3.9c0.1,0.1,0.2,0.1,0.3,0L23,11"/>
+                </svg>
+            </button>
+            <div class="alert danger animate bounceIn">
+                <p></p>
+            </div>
+            {% if product.handle != 'gift-card' %}
+                {% unless product.tags contains "exclude_free_shipping" %}
+                    <p class="text-center">
+                        <i><span class="shipping_message">{{ 'products.product.free_shipping_delivery' | t }}</span><a class="text-center">{{ 'products.product.free_shipping_message' | t }}</a></i>
+                    </p>
+                {% endunless %}
+            {% endif %}
+        </form>
+    </div>
+    <div class="product-description">
+        {{ product.description | replace: '<h6', '</div></div><div class="option-pannel"><div class="option-heading"><h6' | replace: '</h6>', '</h6></div><div class="option-content animated fadeInDown">' | append: '</div></div>' | remove_first: '</div></div>' }}
+
+        {% if product.handle == 'gift-card' %}
+            {% for block in section.blocks %}
+                {% if block.type == 'gift_msg' %}
+                    <h6><span>{{ block.settings.title }}</span></h6>
+                    {{ block.settings.desc }}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>

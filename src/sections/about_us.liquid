@@ -1,0 +1,159 @@
+<div class="about_us-section">
+    {% include 'page-banner', title: page.title %}
+    
+    {% for block in section.blocks %}
+        {% if block.type == 'image' %}
+            {% include 'image-text-basic' with type: block.settings.type %}
+        {% elsif block.type == 'text' %}
+            {% include 'text-block' %}
+        {% endif %}
+        
+    {% endfor %}
+
+</div>
+
+
+{% schema %}
+{
+    "name": "page section",
+    "settings": [
+        {
+            "type": "image_picker",
+            "id": "feature_image",
+            "label": "Feature image"
+        },
+        {
+            "type": "image_picker",
+            "id": "mobile_feature_image",
+            "label": "Feature image"
+        },
+        {
+            "type": "color",
+            "id": "title_color",
+            "label": "Title color"
+        },
+        {
+            "type": "select",
+            "id": "pos",
+            "label": "Hero banner title postion",
+            "options": [
+                {
+                    "value": "left",
+                    "label": "Left"
+                },
+                {
+                    "value": "right",
+                    "label": "Right"
+                },
+                {
+                    "value": "center",
+                    "label": "Center"
+                }
+            ]
+        }
+    ],
+    "blocks":[
+        {
+            "name": "text block",
+            "type": "text",
+            "settings": [
+                {
+                    "type": "color",
+                    "id": "bg_color",
+                    "label": "Background color"
+                },
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title"
+                },
+                {
+                    "type": "richtext",
+                    "id": "desc",
+                    "label": "Description"
+                },
+                {
+                    "type": "html",
+                    "id": "icon",
+                    "label": "Icon"
+                }
+            ]
+        },
+        {
+            "name": "image block",
+            "type": "image",
+            "settings": [
+                {
+                    "type": "color",
+                    "id": "bg_color",
+                    "label": "Background color"
+                },
+                {
+                    "type": "checkbox",
+                    "id": "full_width",
+                    "label": "Full width?"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "feature_image",
+                    "label": "Image"
+                },
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title"
+                },
+                {
+                    "type": "checkbox",
+                    "id": "devider",
+                    "label": "Devider"
+                },
+                {
+                    "type": "richtext",
+                    "id": "desc",
+                    "label": "Description"
+                },
+                {
+                    "type": "html",
+                    "id": "list",
+                    "label": "List"
+                },
+                {
+                    "type": "select",
+                    "id": "type",
+                    "label": "Template",
+                    "options": [
+                        {
+                            "value": "style_1",
+                            "label": "Style 1"
+                        },
+                        {
+                            "value": "style_2",
+                            "label": "Style 2"
+                        },
+                        {
+                            "value": "style_3",
+                            "label": "Style 3"
+                        }
+                    ]
+                },
+                {
+                    "type": "select",
+                    "id": "pos",
+                    "label": "Position",
+                    "options": [
+                        {
+                            "value": "left",
+                            "label": "Left"
+                        },
+                        {
+                            "value": "right",
+                            "label": "Right"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

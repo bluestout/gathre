@@ -1,0 +1,124 @@
+.image_text_origin_section{
+    @include media-query('medium-down'){
+        padding: 15px;
+    }
+    .image-text-block{
+        padding: $grid-gutter * 8 0;
+        margin: 0 $grid-gutter * 10;
+        display: flex;
+        position: relative;
+        @include media-query('medium-down'){
+            padding: 0 ;
+            margin: -$grid-gutter;
+            display: block;
+        }
+        .heading-title{
+            position: absolute;
+            right: 0;
+            font-size: $p_size;
+            line-height: 50px;
+            margin: 0;
+            color: #030303;
+            opacity: 0.27;
+            text-transform: uppercase;
+            @include media-query('medium-down'){
+                display: none;
+
+            }
+        }
+        
+        .grid__item{
+            margin: auto;
+            @include media-query('medium-down'){
+                margin-bottom: -$grid-gutter;
+            }
+            .text-field{
+                max-width: 422px;
+                @include media-query('medium-down'){
+                    padding: $grid-gutter 15px;
+                    position: absolute;
+                    height: 100%;
+                    left: 50%;
+                    width: 50%;
+                    display: flex;
+                }
+                .content{
+                    @include media-query('medium-down'){
+                        max-width: 200px;
+                        margin: auto;
+                    }
+                    h1{
+                        @include media-query('medium-down'){
+                            line-height: 20px;
+                            font-size: 14px;
+                            color: $brown;
+                            &:after{
+                                display: none;
+                            }
+                        }
+                    }
+                    p{
+                        @include media-query('medium-down'){
+                            display: none;
+                        }
+                    }
+                    a{
+                        float: left;
+                        @include media-query('medium-down'){
+                            background: transparent;
+                            color: black;
+                            text-align: left;
+                            padding-left: 0;
+                            font-size: 12px;
+                            margin: 0;
+                            text-decoration: underline;
+                            &::after{
+                                content: ">";
+                                position: absolute;
+                                font-family: monospace;
+                                font-size: 34px;
+                                margin-left: 20px;
+                            }
+                        }
+                        
+                    }
+                }
+            }
+            .image-field{
+                padding-left: $grid-gutter * 10;
+                display: inline-flex;
+                width: 100%;
+                @include media-query('medium-down'){
+                    padding-left: 0;
+                }
+                .feature-image{
+                    width: calc(60% + 50px);
+                    margin-top: 50px;
+                    position: relative;
+                    @include media-query('medium-down'){
+                        width: 100%;
+                        margin-top: 0;
+                    }
+                    &:first-child{
+                        margin-top: 0;
+                        width: 40%;
+                        margin-right: -$grid-gutter * 5;
+                        z-index: 3;
+                        @include media-query('medium-down'){
+                            display: none;
+                        }
+                    }
+                    p{
+                        position: absolute;
+                        top: 0;
+                        right: $grid-gutter * 2;
+                        margin: 0;
+                        @include media-query('medium-down'){
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,37 @@
+{% assign product_price = variant.price %}
+{% assign product_compare_at_price  = variant.compare_at_price %}
+
+{% assign main_img_url = 'bc-sf-filter-no-image.gif' | asset_url %}
+
+{% if variant.featured_image%}
+  {% assign main_img_url = variant.featured_image  %}
+{% endif %}
+
+  <div class="product-item">
+    <a href="{{ variant.url }}">
+        <div class="feature-image">
+            {% render 'responsive-image' with
+                image: main_img_url,
+                max_width: 380,
+                max_height: 380,
+                square: true
+            %}
+        </div>
+        <div class="info">
+            <p class="light text-left">{{product.title}} - {{ variant.title }}</p>
+            <p class="extra price text-left">
+                {% if variant.available %}
+                    {% if product_compare_at_price > product_price %}
+                        {{ product_price | money_without_trailing_zeros  }}
+                        <del>{{ product_compare_at_price | money_without_trailing_zeros  }}</del>
+                    {% else %}
+                        <span>{{ variant.price | money_without_trailing_zeros  }}</span>
+                    {% endif %}
+                {% else %}
+                    <span>{{ 'products.product.sold_out' | t }}</span>
+                {% endif %}
+            </p>
+        </div>
+    </a>
+  </div>
+

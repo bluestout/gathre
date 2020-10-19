@@ -1,0 +1,151 @@
+<div class="work-with-us-section">
+    {% for block in section.blocks %}
+        {% if block.type == 'image_block' %}
+            {% include 'image-text-basic' %}
+        {% endif %}
+    {% endfor %}
+    <div class="full-content">
+        <div class="content">
+            <div class="slide_heading">
+                <h1 class="uppercase light">{{ section.settings.title }}</h1>
+                {{ section.settings.desc }}
+                <a class="read_more content_btn">
+                    <span>{{ 'blogs.article.read_more' | t }}</span>
+                    {% include 'icon_pack' with icon: "plus", class: "plus" %}
+                    {% include 'icon_pack' with icon: "minus", class: "minus" %}
+                </a>
+            </div>
+            <div class="content_block">
+                {{ section.settings.sub_desc }}
+                {{ section.settings.sub_list }}
+            </div>
+            {% for block in section.blocks %}
+                {% if block.type == 'text-block' %}
+                    <div class="text-block">
+                        <h4 class="bold uppercase">{{ block.settings.title }}</h4>
+                        {% if block.settings.html != blank %}
+                            {{ block.settings.html }}
+                        {% endif %}
+
+                        {% if block.settings.desc != blank %}
+                            {{ block.settings.desc }}
+                        {% endif %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+{% schema %}
+{
+    "name": "work with us section",
+    "settings": [
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "Fulfillment Assistant"
+        },
+        {
+            "type": "richtext",
+            "id": "desc",
+            "label": "Description"
+        },
+        {
+            "type": "header",
+            "content": "sub header"
+        },
+        {
+            "type": "richtext",
+            "id": "sub_desc",
+            "label": "Sub description"
+        },
+        {
+            "type": "html",
+            "id": "sub_list",
+            "label": "sub List"
+        }
+    ],
+    "blocks" : [
+        {
+            "name": "Text block",
+            "type": "text-block",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title"
+                },
+                {
+                    "type": "html",
+                    "id": "html",
+                    "label": "Description"
+                },
+                {
+                    "type": "richtext",
+                    "id": "desc",
+                    "label": "Description"
+                }
+            ]
+        },
+        {
+            "name": "image",
+            "type": "image_block",
+            "settings": [
+                {
+                    "type": "color",
+                    "id": "bg_color",
+                    "label": "Background color"
+                },
+                {
+                    "type": "checkbox",
+                    "id": "full_width",
+                    "label": "Full width?"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "feature_image",
+                    "label": "Image"
+                },
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title"
+                },
+                {
+                    "type": "checkbox",
+                    "id": "devider",
+                    "label": "Devider"
+                },
+                {
+                    "type": "richtext",
+                    "id": "desc",
+                    "label": "Description"
+                },
+                {
+                    "type": "html",
+                    "id": "list",
+                    "label": "List"
+                },
+                {
+                    "type": "select",
+                    "id": "pos",
+                    "label": "Position",
+                    "options": [
+                        {
+                            "value": "left",
+                            "label": "Left"
+                        },
+                        {
+                            "value": "right",
+                            "label": "Right"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
+{% endschema %} 

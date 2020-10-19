@@ -1,0 +1,89 @@
+.text-list{
+    background-color: #F8F6F3;
+    @include media-query('medium-down'){
+        padding: 20px 0;
+    }
+    h1{
+        padding: 100px 0;
+        text-transform: uppercase;
+        @include media-query('medium-down'){
+            line-height: 20px;
+            padding: 0;
+            padding-bottom: 15px;
+            font-size: 14px;
+        }
+    }
+    .list{
+        background-color: #C5B097;
+        padding: 50px;
+        @include media-query('medium-down'){
+            padding: 10px;
+        }
+        table{
+            border-collapse: collapse;
+            width: 100%;
+            th{
+                text-align: center;
+                font-size: 25px;
+                color: white;
+                text-transform: uppercase;
+                line-height: 35px;
+                letter-spacing: 2.5px;
+                font-family: $font-light;
+                padding: 20px 50px;
+                border-left: 1px solid white;
+                @include media-query('medium-down'){
+                    padding: 10px;
+                    font-size: 11px;
+                    line-height: 18px;
+                }
+                &:first-child{
+                    border: none;
+                    @include media-query('medium-down'){
+                        width: 30%;
+                    }
+                }
+            }
+            td{
+                text-align: center;
+                border-left: 1px solid white;
+                padding: 10px 5px;
+                p{
+                    font-size: 12px;
+                    text-transform: uppercase;
+                    font-family: $font-bold;
+                    margin: 0;
+                    @include media-query('medium-down'){
+                        font-size: 11px;
+                        font-family: $font-light;
+                        line-height: 14px;
+                    }
+                    span.circle{
+                        &::before{
+                            content: " ";
+                            background: black;
+                            border-radius: 50%;
+                            width: 13px;
+                            height: 13px;
+                            display: table;
+                            margin: auto;
+                        }
+                    }
+                }
+                &.name{
+                    text-align: left;
+                    color: white;
+                    border: none;
+                    font-size: 14px;
+                    font-family: $font-bold;
+                    @include media-query('medium-down'){
+                        font-size: 11px;
+                        font-family: $font-light;
+                        line-height: 13px;
+                        
+                    }
+                }
+            }
+        }
+    }
+}

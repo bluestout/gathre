@@ -1,0 +1,257 @@
+<div class="homepage_slideshow carousel" delay-time="{{ section.settings.delay_time }}" nav-status = "{{section.settings.nav_status}}">
+    {% for block in section.blocks %}
+        <div class="carousel-cell {% if block.type == 'video_text' %} video-carousel {% endif %}">
+            {% if block.type == 'image_text' %}
+                <img class="carousel-cell-image desktop" data-flickity-lazyload="{{ block.settings.desktop_bg_image | img_url: '2048x' }}" />
+                <img class="carousel-cell-image mobile" data-flickity-lazyload="{{ block.settings.mobile_bg_image | img_url: '2048x' }}" />
+                <div class="caption  text-{{block.settings.text_align}} {{ block.settings.caption_position }}" style="background-color: {{ block.settings.caption_bg_color }};">
+                    {% if block.settings.caption_title != blank %}
+                        <h1 class="hero uppercase" style="{{ block.settings.caption_title_color }}" >{{ block.settings.caption_title }}</h1>
+                    {% endif %}
+                    {% if block.settings.caption_text != blank %}
+                        <h2 class="light" style="{{ block.settings.caption_text_color }}">{{ block.settings.caption_text | strip_html }}</h2>
+                    {% endif %}
+                    {% if block.settings.shop_button != blank %}
+                        <a href="{{ block.settings.shop_link }}" class="button brown small mobile-only--{{ block.settings.mobile_only }}">{{ block.settings.shop_button }}</a>
+                    {% endif %}
+                </div>
+            {% elsif block.type == 'video_text' %}
+                {% include 'include_video', type: "block" %}
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>
+
+{% schema %}
+{
+    "name": "Homepage slideshow",
+    "settings": [
+        {
+            "type": "range",
+            "id": "delay_time",
+            "label": "Delay time",
+            "min": 1,
+            "max": 10,
+            "step": 1,
+            "default": 3
+        },
+        {
+            "type": "checkbox",
+            "id": "nav_status",
+            "label": "Navigation status"
+        }
+    ],
+    "blocks" : [
+        {
+            "type": "image_text",
+            "name": "slide",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "desktop_bg_image",
+                    "label": "Desktop background image"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "mobile_bg_image",
+                    "label": "Mobile background image"
+                },
+                {
+                    "type": "text",
+                    "id": "caption_title",
+                    "label": "Caption title"
+                },
+                {
+                    "type": "color",
+                    "id": "caption_title_color",
+                    "label": "Caption title color"
+                },
+                {
+                    "type": "richtext",
+                    "id": "caption_text",
+                    "label": "Caption text"
+                },
+                {
+                    "type": "color",
+                    "id": "caption_text_color",
+                    "label": "Caption text color"
+                },
+                {
+                    "type": "text",
+                    "id": "shop_button",
+                    "label": "Button label"
+                },       
+                {
+                    "type": "url",
+                    "id": "shop_link",
+                    "label": "Button link"
+                },
+                {
+                    "type": "checkbox",
+                    "id": "mobile_only",
+                    "label": "Mobile only"
+                },
+                {
+                    "type": "select",
+                    "id": "caption_position",
+                    "label": "Caption postion",
+                    "options": [
+                        {
+                            "value": "left",
+                            "label": "Left"
+                        },
+                        {
+                            "value": "right",
+                            "label": "Right"
+                        },
+                        {
+                            "value": "center",
+                            "label": "Center"
+                        }
+                    ]
+                },
+                {
+                    "type": "select",
+                    "id": "text_align",
+                    "label": "Text align",
+                    "options": [
+                        {
+                            "value": "left",
+                            "label": "Left"
+                        },
+                        {
+                            "value": "right",
+                            "label": "Right"
+                        },
+                        {
+                            "value": "center",
+                            "label": "Center"
+                        }
+                    ]
+                },
+                {
+                    "type": "color",
+                    "id": "caption_bg_color",
+                    "label": "Caption background color"
+                }
+            ]
+        },
+        {
+            "type": "video_text",
+            "name": "Video",
+            "settings": [
+                {
+                    "type": "checkbox",
+                    "id": "wide_display",
+                    "label": "Wide display",
+                    "default": true
+                },
+                {
+                    "type": "select",
+                    "id": "aspect_ratio",
+                    "label": "Aspect ratio",
+                    "options": [
+                        {
+                        "value": "16:9",
+                        "label": "16:9"
+                        },
+                        {
+                        "value": "4:3",
+                        "label": "4:3"
+                        }
+                    ],
+                    "default": "16:9"
+                },
+                {
+                    "type": "checkbox",
+                    "id": "autoplay",
+                    "label": "Autoplay video",
+                    "default": false,
+                    "info": "Limited browser support for autoplaying video. [Learn more](https:\/\/help.outofthesandbox.com\/hc\/en-us\/articles\/360000661568-Why-won-t-my-video-autoplay-)"
+                },
+                {
+                    "type": "checkbox",
+                    "id": "autoloop",
+                    "label": "Autoloop video",
+                    "default": true
+                },
+                {
+                    "type": "checkbox",
+                    "id": "mute_video",
+                    "label": "Mute video",
+                    "default": false
+                },
+                {
+                    "type": "checkbox",
+                    "id": "show_controls",
+                    "label": "Show video controls",
+                    "default": true
+                },
+                {
+                    "type": "checkbox",
+                    "id": "video_dark_overlay",
+                    "label": "Darken video"
+                },
+                {
+                    "type": "video_url",
+                    "id": "iframe_video",
+                    "label": "Video link",
+                    "accept": ["youtube", "vimeo"],
+                    "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc"
+                },
+                {
+                    "type": "text",
+                    "id": "html5_video",
+                    "label": "HTML5 MP4/OGV File URL"
+                },
+                {
+                    "type": "header",
+                    "content": "Content"
+                },
+                {
+                    "type": "checkbox",
+                    "id": "display_text_over_video",
+                    "label": "Show text when video is playing",
+                    "default": false
+                },
+                {
+                    "type": "richtext",
+                    "id": "pretext",
+                    "label": "Preheading"
+                },
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Heading"
+                },
+                {
+                    "type": "richtext",
+                    "id": "subtitle",
+                    "label": "Subheading"
+                },
+                {
+                    "type": "header",
+                    "content": "Mobile"
+                },
+                {
+                    "type": "checkbox",
+                    "id": "mobile_text_below_image",
+                    "label": "Show text below image",
+                    "default": true
+                },
+                {
+                    "type": "color",
+                    "id": "mobile_text_color",
+                    "label": "Text"
+                }
+            ]
+        }
+    ],
+    "presets": [
+      {
+        "name": "Homepage slideshow",
+        "category": "carousel"
+      }
+    ]
+}
+{% endschema %}

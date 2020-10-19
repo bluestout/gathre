@@ -1,0 +1,35 @@
+    
+<div class="header-banner">
+    {% if collection.metafields["global"]["feature-image"] != blank %}
+        <img class="medium-down--hide" src='{{ collection.metafields["global"]["feature-image"] }}'>
+        {% if collection.metafields["global"]["feature-mobile-image"] != blank %}
+            <img class="medium-down--show hide" src='{{ collection.metafields["global"]["feature-mobile-image"] }}'>
+        {% else %}
+            <img class="medium-down--show hide" src='{{ collection.metafields["global"]["feature-image"] }}'>
+        {% endif %}
+    {% elsif section.settings.banner != blank %}
+        <img class="medium-down--hide" src='{{ section.settings.banner | img_url : "2048x" }}'>
+        {% if section.settings.mobile_banner != blank %}
+            <img class="medium-down--show hide" src="{{ section.settings.mobile_banner | img_url : "768x" }}">
+        {% else %}
+            <img class="medium-down--show hide" src='{{ section.settings.banner | img_url : "2048x" }}'>
+        {% endif %}
+    {% endif %}
+    <div class="caption {{ section.settings.pos }}">
+        {% if section.settings.title_status %}
+            {% if collection.title != blank %}
+                <h1 class="extra title" style="color: {{ section.settings.title_color }}">{{ collection.title }}</h1>
+            {% else %}
+                <h1 class="extra title" style="color: {{ section.settings.title_color }}">{{ section.settings.title }}</h1>
+            {% endif %}
+        {% endif %}
+        
+        {% if section.settings.desc_status %}
+            {% if collection.description != blank %}
+                <h1 class="light medium-down--hide" style="color: {{ section.settings.desc_color }}">{{ collection.description | strip_html | truncate: 140, '...' }}</h1>
+            {% else %}
+                <h1 class="light medium-down--hide" style="color: {{ section.settings.desc_color }}">{{ section.settings.desc | strip_html }}</h1>
+            {% endif %}
+        {% endif %}
+    </div>
+</div>

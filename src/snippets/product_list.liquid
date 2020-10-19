@@ -1,0 +1,124 @@
+{% assign products_per_page = section.settings.products_per_page %}
+{% paginate collection.products by products_per_page %}
+<div class="page-width container bc-sf-filter-wrapper-page">
+  {% comment %} TOOLBAR {% endcomment %}
+  {%- comment -%}
+    <div id="bc-sf-filter-default-toolbar">
+      <div class="bc-sf-filter-default-toolbar-inner">
+        <div class="bc-sf-filter-toolbar-item">
+          <div id="bc-sf-filter-top-display-type">{% include 'bc-sf-filter-skeleton', width: 2 %}</div>
+        </div>
+        <div class="bc-sf-filter-toolbar-item bc-sf-filter-toolbar-count">
+          <span id="bc-sf-filter-total-product">{% include 'bc-sf-filter-skeleton', width: 1 %}</span>
+        </div>
+        <div class="bc-sf-filter-toolbar-item text-right bc-sf-filter-custom-sorting" id="bc-sf-filter-top-sorting">{% include 'bc-sf-filter-skeleton', width: 1 %}</div>
+      </div>
+    </div>
+  {%- endcomment -%}
+  
+  {% comment %} END TOOLBAR {% endcomment %}
+  <div id="bc-sf-filter-wrapper">
+    <div id="bc-sf-filter-tree-mobile">{% include 'bc-sf-filter-skeleton', type: 'button' %}</div>
+    <div id="bc-sf-filter-top-sorting-mobile" class="bc-sf-filter-custom-sorting">{% include 'bc-sf-filter-skeleton', type: 'button' %}</div>
+    <div class="bc-sf-filter-left-col">
+      <div id="bc-sf-filter-tree">{% include 'bc-sf-filter-tree-placeholder' %}</div>
+    </div>
+    <div class="bc-sf-filter-right-col">
+      <div id="bc-sf-filter-products" data-bc-sort="{{ collection.default_sort_by }}">
+        {% for product in collection.products %}
+          {% include 'bc-sf-filter-product-item', product: product %}
+        {% endfor %}
+      </div>
+      <div id="bc-sf-filter-bottom-pagination" class="bc-sf-filter-bottom-pagination-default">
+        {% if paginate.pages > 1 %}
+          {% include 'bc-sf-filter-pagination' %}
+        {% endif %}
+      </div>
+      <div id="bc-sf-filter-load-more"></div>
+    </div>
+  </div>
+
+  {% comment %} start-bc-most-popular-template {% endcomment %}
+    <div class="bc-sf-most-popular-products-wrapper bc-sf-widget-slider-wrapper">
+      <div class="bc-sf-most-popular-products bc-sf-widget-products owl-carousel"></div>
+    </div>
+  {% comment %} end-bc-most-popular-template {% endcomment %}
+
+  {% comment %} start-bc-recently-viewed-template {% endcomment %}
+    <div class="bc-sf-recent-products-wrapper bc-sf-widget-slider-wrapper">
+      <div class="bc-sf-recent-products bc-sf-widget-products owl-carousel"></div>
+    </div>
+  {% comment %} end-bc-recently-viewed-template {% endcomment %}
+</div>
+{% endpaginate %}
+<script>
+  // Declare bcSfFilterConfig variable
+  var bcSfFilterConfig = {
+    label: {
+      sorting: {% assign temp = 'collections.sorting.title' | t  %} {% unless temp contains 'translation missing'  %} "{{ temp }}" {% else %} "Sorting" {% endunless %},
+      sorting_best_selling: {% assign temp = 'collections.sorting.best_selling' | t %} {% unless temp contains 'translation missing'  %} "{{ temp }}" {% else %} "Best Selling" {% endunless %},
+      sorting_featured: {% assign temp = 'collections.sorting.featured' | t %} {% unless temp contains 'translation missing'  %} "{{ temp }}" {% else %} "Featured" {% endunless %},
+      sorting_title_ascending: {% assign temp = 'collections.sorting.az' | t %} {% unless temp contains 'translation missing'  %} "{{ temp }}" {% else %} "Alphabetically, A-Z" {% endunless %},
+      sorting_title_descending: {% assign temp = 'collections.sorting.za' | t %} {% unless temp contains 'translation missing'  %} "{{ temp }}" {% else %} "Alphabetically, Z-A" {% endunless %},
+      sorting_price_ascending: {% assign temp = 'collections.sorting.price_ascending' | t %} {% unless temp contains 'translation missing'  %} "{{ temp }}" {% else %} "Lowest Price" {% endunless %},
+      sorting_price_descending: {% assign temp = 'collections.sorting.price_descending' | t %} {% unless temp contains 'translation missing'  %} "{{ temp }}" {% else %} "Highest Price" {% endunless %},
+      sorting_date_ascending: {% assign temp = 'collections.sorting.date_ascending' | t %} {% unless temp contains 'translation missing'  %} "{{ temp }}" {% else %} "Date, Old to New" {% endunless %},
+      sorting_date_descending: {% assign temp = 'collections.sorting.date_descending' | t %} {% unless temp contains 'translation missing'  %} "{{ temp }}" {% else %} "Date, New to Old" {% endunless %},
+      sorting_sale_descending: {% assign temp = 'collections.sorting.sale_descending' | t %} {% unless temp contains 'translation missing'  %} "{{ temp }}" {% else %} "% Off" {% endunless %},
+      sorting_relevance: {% assign temp = 'collections.sorting.relevance' | t %} {% unless temp contains 'translation missing'  %} "{{ temp }}" {% else %} "Relevance" {% endunless %},
+      toolbar_viewas: "View As",
+      items_with_count_one: "product",
+      items_with_count_other: "Products",
+    },
+    label_basic: {
+      sale: {{ section.settings.sale_label | json }},
+      sold_out: {{ section.settings.soldout_label | json }},
+      from: {{ section.settings.from | json }},
+    },
+    custom: {
+      products_per_page: {% if products_per_page %} {{ products_per_page | json }} {% else %} 24 {% endif %},
+      products_per_row: {% if section.settings.products_per_row %} {{ section.settings.products_per_row }} {% else %} 3 {% endif %},
+      products_per_row_mobile: {% if section.settings.products_per_row_mobile %} {{ section.settings.products_per_row_mobile }} {% else %} 2 {% endif %},
+      show_vendor: {% if section.settings.show_vendor %} {{ section.settings.show_vendor | json }} {% else %} false {% endif %},
+      show_price: {% if section.settings.show_price %} {{ section.settings.show_price | json }} {% else %} false {% endif %},
+      show_sale_label: {% if section.settings.show_sale_label %} {{ section.settings.show_sale_label | json }} {% else %} false {% endif %},
+      show_sold_out_label: {% if section.settings.show_sold_out_label %} {{ section.settings.show_sold_out_label | json }} {% else %} false {% endif %},
+      active_image_swap: {% if section.settings.active_image_swap %} {{ section.settings.active_image_swap | json }} {% else %} false {% endif %},
+      show_sorting: {% if section.settings.show_sorting %} {{ section.settings.show_sorting | json }} {% else %} false {% endif %},
+    }
+  };
+
+  // Declare Templates
+  var bcSfFilterTemplate = {
+      'soldOutClass': ' sold-out',
+      'saleClass': ' on-sale',
+      'soldOutLabelHtml': {% render 'bc-sf-filter-html', layout: 'soldOutLabelHtml' %},
+      'saleLabelHtml': {% render 'bc-sf-filter-html', layout: 'saleLabelHtml' %},
+      'tagLabelHtml': {% render 'bc-sf-filter-html', layout: 'tagLabelHtml' %},
+      'vendorHtml': {% render 'bc-sf-filter-html', layout: 'vendorHtml' %},
+      // Grid Template
+      'productGridItemHtml': {% render 'bc-sf-filter-html', layout: 'productGridItemHtml' %},
+      // For List View
+      // List Template
+      'productListItemHtml': {% render 'bc-sf-filter-html', layout: 'productListItemHtml' %},
+      // End For List View
+      // Pagination Template
+      'previousActiveHtml': {% render 'bc-sf-filter-html', layout: 'previousActiveHtml' %},
+      'previousDisabledHtml': {% render 'bc-sf-filter-html', layout: 'previousDisabledHtml' %},
+      'nextActiveHtml': {% render 'bc-sf-filter-html', layout: 'nextActiveHtml' %},
+      'nextDisabledHtml': {% render 'bc-sf-filter-html', layout: 'nextDisabledHtml' %},
+      'pageItemHtml': {% render 'bc-sf-filter-html', layout: 'pageItemHtml' %},
+      'pageItemSelectedHtml': {% render 'bc-sf-filter-html', layout: 'pageItemSelectedHtml' %},
+      'pageItemRemainHtml': {% render 'bc-sf-filter-html', layout: 'pageItemRemainHtml' %},
+      'paginateHtml': {% render 'bc-sf-filter-html', layout: 'paginateHtml' %},
+      // Sorting Template
+      'sortingHtml': {% render 'bc-sf-filter-html', layout: 'sortingHtml' %},
+      // Show Limit Template
+      'showLimitHtml': {% render 'bc-sf-filter-html', layout: 'showLimitHtml' %},
+      // Breadcrumb Template
+      'breadcrumbHtml': {% render 'bc-sf-filter-html', layout: 'breadcrumbHtml' %},
+      'breadcrumbDivider': {% render 'bc-sf-filter-html', layout: 'breadcrumbDivider' %},
+      'breadcrumbItemLink': {% render 'bc-sf-filter-html', layout: 'breadcrumbItemLink' %},
+      'breadcrumbItemSelected': {% render 'bc-sf-filter-html', layout: 'breadcrumbItemSelected' %},
+  };
+</script>

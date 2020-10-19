@@ -1,0 +1,43 @@
+{% comment %} from email on March 20, 2019 @ 4:20PM {% endcomment %}
+
+{% comment %}
+<div class="zaius-list-signup-form">
+<link href="https://list-manager.zaius.com/signup/css/zaius_list_signup_1.0.css" rel="stylesheet" type="text/css">
+<label for="Email" class="h4">Join Our Newsletter</label>
+
+
+<form onSubmit="zaius.subscribe({list_id: 'conservadora_corona_leads', email: email.value}); alert('Thanks for signing up!'); return false;">
+  <p>{{ 'general.newsletter_form.newsletter_email' | t }}</p>
+<div class="form-group">
+<div class="form-label">
+<label for="email">
+Email
+<span class="zaius-list-signup-form-sublabel">
+<span class="zaius-list-signup-form-important">*</span>
+<span class="zaius-list-signup-form-label-right"><span class="zaius-list-signup-form-important">*</span>required</span>
+</span>
+</label>
+</div>
+<input class="form-control" type="email" id="email" name="email" placeholder="Enter your email">
+</div>
+<div id="z-responses" class="clear">
+<div class="response" id="z-error-response" style="display:none"></div>
+<div class="response" id="z-success-response" style="display:none"></div>
+</div>
+<input type="submit" class="btn btn-primary" value="Subscribe">
+</form>
+{% endcomment %}
+
+<link href="https://list-manager.zaius.com/signup/css/zaius_list_signup_1.0.css" rel="stylesheet" type="text/css">
+<div class="zaius-list-signup-form">
+  <form id="email_signup" action="//manage.kmail-lists.com/subscriptions/subscribe" method="POST" target="_blank">
+    <input type="hidden" name="g" value="NcF99f">
+    <div class="form-group grid__item large-up--one-half medium-down--one-whole">
+      <input class="form-control sign-up" type="email" id="k_id_email" name="email" placeholder="Enter your email">
+    </div>
+    <div class="grid__item large-up--one-half medium-down--one-whole">
+      <input type="submit" class="btn button black btn-primary" value="{{ 'contact.form.subscribe' | t }}">
+    </div>
+  </form>
+</div>
+<script type="text/javascript" src="//www.klaviyo.com/media/js/public/klaviyo_subscribe.js"></script> 

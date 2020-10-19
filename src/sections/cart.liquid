@@ -1,0 +1,152 @@
+{% if page.title != blank %}
+    {% assign pageTitle = page.title %}
+{% else %}
+    {% assign pageTitle = section.settings.title %}
+{% endif %}
+<div class="cart-section">
+    {% include 'page-banner', title: pageTitle %}
+    <div class="full-content content">
+        <div class="grid">
+            {% if cart.items.size == 0 %}
+            <p class="message text-center" >{{'cart.general.empty' | t }}</p>
+            <a href="/collections/bestsellers" class="button brown small">{{'cart.general.bestseller' | t }}</a>
+            {% else %}
+            <form action="/cart" method="post" novalidate class="cart-form">
+                <div class="grid__item large-up--two-thirds cart-items">
+                    <table>
+                        <tbody>
+                            {% for line_item in cart.items %}
+                            <tr id="{{ line_item.id }}--block" class="responsive-table-row">
+                                <td class="product">
+                                    <img src="{{ line_item.image | img_url: '120x' }}" class="fleft">
+                                    <div class="info">
+                                        {{ line_item.title | link_to: line_item.product.url }}
+                                        <p>
+                                            {% for option in line_item.options_with_values %}
+                                                {% unless forloop.index == 1 %}
+                                                    ,
+                                                {% endunless %}
+                                                <span>{{ option.name }}: {{ option.value }}</span>
+                                            {% endfor %}
+                                        </p>
+                                        <input type="number"
+                                            class="qty"
+                                            name="updates[{{line_item.id}}]"
+                                            id="updates_{{ line_item.id }}"
+                                            value="{{ line_item.quantity }}"
+                                            min="0"
+                                            aria-label="{{ 'cart.general.item_quantity' | t }}">
+                                    </div>
+                                </td>
+                                <td class="price">
+                                    <a class="remove">{% include 'icon_pack' with icon: 'close' %}</a>
+                                    <p class="bold">{{ line_item.quantity | times: line_item.price | money }}</p>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <a class="shopping_link medium-down--hide" href="{{section.settings.continue_shopping_link}}">{{ section.settings.continue_shopping_label }}</a>
+                </div>
+                <div class="grid__item large-up--one-third cart-summary">
+                    <div class="summary-content">
+                        <div class="free-shipping-progress-bar" data-limit="{{settings.free_shipping_limit}}">
+                            {% assign progress = cart.total_price | divided_by: settings.free_shipping_limit %}
+                            <div class="free-shipping-progress" style="width: {{ progress }}%"></div>
+                            {% assign left_price = settings.free_shipping_limit | times: 100 | minus: cart.total_price %}
+                            {% if left_price > 0 %}
+                                {% capture progress_text %}
+                                    {% include 'icon_pack', icon: 'free-shipping-icon' %} Only {{ left_price | money }} away from FREE SHIPPING.
+                                {% endcapture %}
+                            {% elsif left_price < 1 %}
+                                {% capture progress_text %}
+                                    {{ 'cart.general.success' | t }}
+                                {% endcapture %}
+                            {% else %}
+                                {% capture progress_text %}
+                                    {{ 'cart.general.empty' | t }}
+                                {% endcapture %}
+                            {% endif %}
+                            <span> {{ progress_text }} </span>
+                        </div>
+                        <div class="sub-total-block">
+                            <p>{{ 'cart.general.subtotal' | t }} <span class="total_price">{{cart.total_price | money}}</span></p>
+                        </div>
+                        <div class="checkout_pannel">
+                            <a class="gift_link" href="">{{ 'cart.general.gift_link_label' | t }}</a>
+                            <textarea class="checkout_description" name="note" rows="5" placeholder="{{ 'cart.general.checkout_desc' | t }}"></textarea>
+                            <a class="button black apply">{{ 'cart.general.apply' | t }}</a>
+                            <input type="submit" class="button brown checkout" value="{{ 'cart.general.checkout' | t }}">
+                        </div>
+                    </div>
+                </div>
+            </form>
+            {% endif %}
+            <div class="empty-form hide">
+                <p class="message text-center" >{{'cart.general.empty' | t }}</p>
+                <a href="/collections/bestsellers" class="button brown small">{{'cart.general.bestseller' | t }}</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% schema %}
+{
+    "name": "page section",
+    "settings": [
+        {
+            "type": "image_picker",
+            "id": "feature_image",
+            "label": "Feature image"
+        },
+        {
+            "type": "image_picker",
+            "id": "mobile_feature_image",
+            "label": "Feature image"
+        },
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "Cart"
+        },
+        {
+            "type": "color",
+            "id": "title_color",
+            "label": "Title color"
+        },
+        {
+            "type": "select",
+            "id": "pos",
+            "label": "Hero banner title postion",
+            "options": [
+                {
+                    "value": "left",
+                    "label": "Left"
+                },
+                {
+                    "value": "right",
+                    "label": "Right"
+                },
+                {
+                    "value": "center",
+                    "label": "Center"
+                }
+            ]
+        },
+        {
+            "type": "url",
+            "id": "continue_shopping_link",
+            "label": "Shopping link",
+            "default": "/collections/all"
+        },
+        {
+            "type": "text",
+            "id": "continue_shopping_label",
+            "label": "Shopping label",
+            "default": "Continue Shopping"
+        }
+    ]
+}
+{% endschema %}

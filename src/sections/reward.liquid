@@ -1,0 +1,282 @@
+{% include 'page-banner', title: section.settings.title, desc: section.settings.desc %}
+{% for block in section.blocks %}
+    
+    {% if block.type == 'image' %}
+        {% include 'image-text-basic' with type: block.settings.type %}
+    {% endif %}
+
+    {% if block.type == 'title' %}
+        {% if block.settings.type == 'text-list' %}
+            {% include 'text-list' %}
+        {% endif %}
+        
+        {% if block.settings.type == 'icon-block' %}
+            {% include 'icon_block' %}
+        {% endif %}
+        
+    {% endif %}
+
+{% endfor %}
+
+{% schema %}
+{
+    "name": "reward section",
+    "settings": [
+        {
+            "type": "image_picker",
+            "id": "feature_image",
+            "label": "Feature image"
+        },
+        {
+            "type": "image_picker",
+            "id": "mobile_feature_image",
+            "label": "Mobile feature image"
+        },
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "GATHRE Loyalty & Rewards Program"
+        },
+        {
+            "type": "color",
+            "id": "title_color",
+            "label": "Title color",
+            "default": "#030303"
+        },
+        {
+            "type": "richtext",
+            "id": "desc",
+            "label": "Description",
+            "default": "<p>Where we give back to our most loyal Gathre fam.</p>"
+        },
+        {
+            "type": "color",
+            "id": "desc_color",
+            "label": "Description color",
+            "default": "#030303"
+        },
+        {
+            "type": "url",
+            "id": "link",
+            "label": "Button link"
+        },
+        {
+            "type": "text",
+            "id": "label",
+            "label": "Button label",
+            "default": "Join Now"
+        },
+        {
+            "type": "richtext",
+            "id": "sub_link",
+            "label": "Sub link"
+        },
+        {
+            "type": "select",
+            "id": "pos",
+            "label": "Hero banner title postion",
+            "options": [
+                {
+                    "value": "left",
+                    "label": "Left"
+                },
+                {
+                    "value": "right",
+                    "label": "Right"
+                },
+                {
+                    "value": "center",
+                    "label": "Center"
+                }
+            ]
+        }
+    ],
+    "blocks":[
+        {
+            "name": "image block",
+            "type": "image",
+            "settings": [
+                {
+                    "type": "color",
+                    "id": "bg_color",
+                    "label": "Background color"
+                },
+                {
+                    "type": "checkbox",
+                    "id": "full_width",
+                    "label": "Full width?"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "feature_image",
+                    "label": "Image"
+                },
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title"
+                },
+                {
+                    "type": "checkbox",
+                    "id": "devider",
+                    "label": "Devider"
+                },
+                {
+                    "type": "richtext",
+                    "id": "desc",
+                    "label": "Description"
+                },
+                {
+                    "type": "html",
+                    "id": "list",
+                    "label": "List"
+                },
+                {
+                    "type": "select",
+                    "id": "type",
+                    "label": "Template",
+                    "options": [
+                        {
+                            "value": "style_1",
+                            "label": "Style 1"
+                        },
+                        {
+                            "value": "style_2",
+                            "label": "Style 2"
+                        },
+                        {
+                            "value": "style_3",
+                            "label": "Style 3"
+                        }
+                    ]
+                },
+                {
+                    "type": "select",
+                    "id": "pos",
+                    "label": "Position",
+                    "options": [
+                        {
+                            "value": "left",
+                            "label": "Left"
+                        },
+                        {
+                            "value": "right",
+                            "label": "Right"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "title",
+            "name": "Title",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title"
+                },
+                {
+                    "type": "select",
+                    "id": "type",
+                    "label": "Block type",
+                    "options": [
+                        {
+                            "value": "text-list",
+                            "label": "Text list"
+                        },
+                        {
+                            "value": "icon-block",
+                            "label": "Icon block"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "table",
+            "name": "Table Row",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "name",
+                    "label": "Name"
+                },
+                {
+                    "type": "richtext",
+                    "id": "bronze_tier",
+                    "label": "Bronze tier"
+                },
+                {
+                    "type": "richtext",
+                    "id": "silver_tier",
+                    "label": "Silver tier"
+                },
+                {
+                    "type": "richtext",
+                    "id": "gold_tier",
+                    "label": "Gold tier"
+                }
+            ]
+        },
+        {
+            "type": "icon",
+            "name": "Icon block",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "icon_image",
+                    "label": "Icon image"
+                },
+                {
+                    "type": "html",
+                    "id": "icon_svg",
+                    "label": "Icon svg"
+                },
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title"
+                },
+                {
+                    "type": "text",
+                    "id": "sub_title",
+                    "label": "Sub title"
+                },
+                {
+                    "type": "url",
+                    "id": "link",
+                    "label": "Block link"
+                }
+            ]
+        },
+        {
+            "type": "banner",
+            "name": "Block banner",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "Banner image"
+                },
+                {
+                    "type": "html",
+                    "id": "icon",
+                    "label": "Icon"
+                },
+                {
+                    "type": "richtext",
+                    "id": "title",
+                    "label": "Banner title"
+                },
+                {
+                    "type": "url",
+                    "id": "link",
+                    "label": "banner link"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

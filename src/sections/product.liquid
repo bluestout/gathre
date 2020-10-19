@@ -1,0 +1,229 @@
+
+{% if product.available %}
+    {% assign variant_val = product.first_available_variant %}
+{% else %}
+    {% assign variant_val = product.variants[0] %}
+{% endif %}
+{% assign variant_validator = variant_val.title %}
+
+{% for option in product.options %}
+    {% if option == 'Size' %}
+        {% assign product_size = true %}
+    {% else %}
+        {% assign product_size = false %}
+    {% endif %}
+{% endfor %}
+
+{% if product.handle contains 'swatches' %}
+    {% assign product_swatch = true %}
+{% else %}
+    {% assign product_swatch = false %}
+{% endif %}
+<div class="product-section grid">
+    <div class="product-content full-content">
+        <div class="product-image_gallery grid__item large-up--two-thirds">
+            <div class="main-images">
+                {% for variant in product.variants %}
+                    {% if variant.title == variant_validator %}
+                        {% assign count = 0 %}
+                        {% for media in product.media %}
+                            {% if media.alt == variant.title %}
+                                {% assign count = count | plus: 1 %}
+                            {% endif %}
+                        {% endfor %}
+                        {% if count > 1 %}
+                            {% assign cls_item = 'large-up--one-half' %}
+                        {% elsif count == 1 %}
+                            {% assign cls_item = 'large-up--one-whole' %}
+                        {% endif %}
+
+                        <div class="grid image-block {{ cls_nav }} active">
+                            {% if product_swatch %}
+                                <div class="grid__item fancybox print">
+                                    {% include 'responsive-image' with
+                                        image: variant.featured_image.src,
+                                        max_width: 768,
+                                        max_height: 768,
+                                        square: true,
+                                        wrapper_class: 'feature-image'
+                                    %} 
+                                    <a class="wish-icon">{% include 'icon_pack', icon: "love" %}</a>
+                                    <a class="zoom-icon" data-target=".image-block"  data-num="{{forloop.index}}">{% include 'icon_pack', icon: "search" %}</a>
+                                </div> 
+                            {% else %}
+                                
+                                {% assign i = 0 %}
+                                {% for media in product.media %}
+                                    {% if media.alt == variant.title %}
+                                        <div class="grid__item fancybox {{ cls_item }}">
+                                            {% include 'responsive-image' with
+                                                image: media.src,
+                                                max_width: 768,
+                                                max_height: 768,
+                                                square: true,
+                                                wrapper_class: 'feature-image'
+                                            %}
+                                            <a class="wish-icon">{% include 'icon_pack', icon: "love" %}</a>
+                                            <a class="zoom-icon" data-target=".image-block" data-num="{{ i }}" >{% include 'icon_pack', icon: "search" %}</a>
+                                            {% assign i = i | plus: 1 %}
+                                        </div> 
+                                    {% endif %}
+                                {% endfor %}
+                                {% if i == 0 %}
+                                    <div class="grid__item fancybox large-up--one-whole">
+                                        {% include 'responsive-image' with
+                                            image: variant.featured_image.src,
+                                            max_width: 768,
+                                            max_height: 768,
+                                            square: true,
+                                            wrapper_class: 'feature-image'
+                                        %} 
+                                        <a class="wish-icon">{% include 'icon_pack', icon: "love" %}</a>
+                                        <a class="zoom-icon" data-target=".image-block"  data-num="0">{% include 'icon_pack', icon: "search" %}</a>
+                                    </div> 
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                    
+                {% endfor %}
+                <div class="popup-container grid"></div>        
+            </div>
+        </div>
+        <div class="product-info grid__item large-up--one-third">
+            {% include 'product-info' with item: variant_val %}
+        </div>
+    </div>
+    
+    {% include 'related-collections' %}
+    <div class="container">
+        {% for block in section.blocks %}
+            {% if block.type == 'image-text' %}
+                {% include 'image-text-basic' with type: block.settings.type %}
+            {% endif %}
+        {% endfor %}
+    </div>
+    
+    <div class="grid__item">
+        {% include 'related-products' with item: product %}
+    </div>
+    
+    <div class="grid__item product-review__container">
+        <div class="review_container">
+            <div class="heading">
+                <h4 class="h2">Reviews</h4>
+                <span class="stamped-product-reviews-badge stamped-main-badge" data-id="{{ product.id }}" data-product-sku="{{ product.handle }}" style="display: inline-block;">{{ product.metafields.stamped.badge }}</span>
+            </div>
+            <div class="content">
+                <div id="stamped-main-widget" 
+                    data-widget-style="standard"
+                    data-product-id="{{ product.id }}" 
+                    data-name="{{ product.title | escape }}" 
+                    data-url="{{ shop.url }}{{ product.url }}" 
+                    data-image-url="{{ product.featured_image | product_img_url: "large" |replace: '?', '%3F' | replace: '&','%26'}}" 
+                    data-description="{{ product.description | escape }}" 
+                    data-product-sku="{{product.handle}}"> 
+                {{ product.metafields.stamped.reviews }} 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "content",
+    "settings": [
+        {
+            "type": "range",
+            "id": "delay",
+            "label": "Delay",
+            "min": 1,
+            "max": 10,
+            "step": 1,
+            "default": 5
+        },
+        {
+            "type": "richtext",
+            "id": "related_desc",
+            "label": "Collection carousel description",
+            "default": "<p>A dropcloth for life and all it’s beautiful messes</p>"
+        }
+    ],
+    "blocks": [
+        {
+            "name": "image-text",
+            "type": "image-text",
+            "settings": [
+                {
+                    "type": "select",
+                    "id": "type",
+                    "label": "Template",
+                    "options": [
+                        {
+                            "value": "style_1",
+                            "label": "Style 1"
+                        },
+                        {
+                            "value": "style_2",
+                            "label": "Style 2"
+                        }
+                    ]
+                },
+                {
+                    "type": "image_picker",
+                    "id": "feature_image",
+                    "label": "Feature image"
+                },
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title",
+                    "default": "Premium Look & Feel."
+                },
+                {
+                    "type": "richtext",
+                    "id": "desc",
+                    "label": "Description"
+                },
+                {
+                    "type": "html",
+                    "id": "list",
+                    "label": "List"
+                },
+                {
+                    "type": "select",
+                    "id": "pos",
+                    "label": "Position",
+                    "options": [
+                        {
+                            "value": "left",
+                            "label": "Left"
+                        },
+                        {
+                            "value": "right",
+                            "label": "Right"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "collection",
+            "type": "collection",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "Feature image"
+                },
+                {
+                    "type": "collection",
+                    "id": "collection",
+                    "label": "Collection"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %} 

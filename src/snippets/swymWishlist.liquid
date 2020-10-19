@@ -1,0 +1,11 @@
+<script>
+  $('.wish-icon').click(function (e) {
+    e.preventDefault();
+    if(SwymPageData){
+      SwymPageData.et = 4;  // et 4 stands for wishlist event type  
+      _swat.addToWishList(SwymPageData, function(e){
+        $('.wish-icon').addClass('active'); 
+      });
+    }
+  });
+</script>

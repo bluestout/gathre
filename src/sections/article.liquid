@@ -1,0 +1,137 @@
+<div class="feature-banner">
+    {% include 'responsive-image' with 
+        image: article.image,
+        max_width: 2048,
+        max_height: 768,
+        wrapper_class: "feature-image"
+    %}
+</div>
+<div class="full-content content">
+    <div class="heading">
+        <span class="uppercase brown">{{ article.created_at }}</span>
+        {%- assign social_accounts = 'facebook, twitter, pinterest, instagram, snapchat, ticktok, youTube' | split: ', ' -%}
+        <ul class="social_link-content">
+        {% for social in social_accounts %}
+            {%- assign social_handle = social | handleize -%}
+            {% capture social_link %}social_{{ social_handle }}_link{% endcapture %}
+            {% if settings[social_link] != blank %}
+            <li>
+                <a target="_blank" href="{{ settings[social_link] }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: social }}">
+                {% include 'icon_pack' with icon: social %}
+                <span class="icon-fallback-text">{{ social }}</span>
+                </a>
+            </li>
+            {% endif %}
+        {% endfor %}
+        </ul>
+    </div>
+    <h1 class="extra uppercase ">{{ article.title }}</h1>
+    <div class="description">
+        {{ article.content }}
+    </div>
+</div>
+
+<div class="comments-section full-content">
+    {% if blog.comments_enabled? %}
+        {% if number_of_comments > 0 %}
+            <hr>
+            <div class="grid">
+                <div class="grid__item">
+                    <h2 class="h3">{{ 'blogs.comments.comments_with_count' | t: count: number_of_comments }}</h2>
+
+                    {% paginate article.comments by 5 %}
+
+                        {% comment %}
+                        #comments is required, it is used as an anchor link by Shopify.
+                        {% endcomment %}
+                        <div id="comments">
+
+                        {% if comment and comment.created_at %}
+                            <p class="note form-success">
+                            {% if blog.moderated? %}
+                                {{ 'blogs.comments.success_moderated' | t }}
+                            {% else %}
+                                {{ 'blogs.comments.success' | t }}
+                            {% endif %}
+                            </p>
+                        {% endif %}
+
+                        <ul class="comments">
+                            {% comment %}
+                            If a comment was just submitted with no blank field, show it.
+                            {% endcomment %}
+                            {% if comment and comment.created_at %}
+                            <li id="{{ comment.id }}" class="comment">
+                                {% include 'comment' %}
+                            </li>
+                            {% endif %}
+
+                            {% for comment in article.comments %}
+                            <li id="{{ comment.id }}" class="comment">
+                                {% include 'comment' %}
+                            </li>
+                            {% endfor %}
+                        </ul>
+
+                        {% if paginate.pages > 1 %}
+                            {% include 'pagination' %}
+                        {% endif %}
+
+                        </div>
+                    {% endpaginate %}
+                </div>
+            </div>
+        {% endif %}
+        <div class="grid">
+            <div class="grid__item one-whole">
+                <div class="form-vertical">
+                    {% form 'new_comment', article %}
+                    
+                    <h4 class="text-center devider devider-center">{{ 'blogs.comments.title' | t }}</h4>
+
+                    {% if form.posted_successfully? %}
+                        <p class="form-success text-center">
+                            {{ 'blogs.comments.success_moderated' | t }}
+                        </p>
+                    {% else %}
+                        {{ form.errors | default_errors }}
+                    {% endif %}
+
+                    <div class="grid">
+
+                        <div class="grid__item one-half">
+                        <input type="text" placeholder="{{ 'blogs.comments.name' | t }}" name="comment[author]" id="CommentAuthor" class="input-full{% if form.errors contains 'author' %} input--error{% endif %}" value="{{ form.author }}">
+                        </div>
+
+                        <div class="grid__item one-half">
+                        <input type="email" placeholder="{{ 'blogs.comments.email' | t }}" name="comment[email]" id="CommentEmail" class="input-full{% if form.errors contains 'email' %} input--error{% endif %}" value="{{ form.email }}" autocorrect="off" autocapitalize="off">
+                        </div>
+
+                        <div class="grid__item one-whole">
+                        <textarea name="comment[body]" placeholder="{{ 'blogs.comments.message' | t }}" id="CommentBody" class="input-full{% if form.errors contains 'body' %} input--error{% endif %}">{{ form.body }}</textarea>
+                        </div>
+
+                    </div>
+
+                    {% if blog.moderated? %}
+                        <p class="fine-print">{{ 'blogs.comments.moderated' | t }}</p>
+                    {% endif %}
+
+                    <input type="submit" class="button brown small" value="{{ 'blogs.comments.post' | t }}">
+                    {% endform %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="return-link-wrapper">
+        <a href="/pages/total-blogs?blog_title=#{{blog.title | remove: '#' | handlize }}" class="btn btn--secondary btn--has-icon-before return-link">
+            {% include 'icon_pack', icon: 'arrow-left' %}
+            {{ 'blogs.article.back_to_blog' | t: title: blog.title }}
+        </a>
+    </div>
+    <div class="category-field">
+        <span>{{'blogs.general.categories' | t }} : </span>
+        <a href="/pages/total-blogs?blog_title=#{{blog.title | remove: '#' | handlize }}">{{ blog.title }}</a>
+    </div>
+</div>

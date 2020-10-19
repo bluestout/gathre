@@ -1,0 +1,106 @@
+.featured-collection {
+  max-width: $grid-max-width;
+  margin: auto;
+  min-height: 400px;
+
+  @include media-query('medium-down'){
+    padding: 0 15px;
+  }
+  .grid__item{
+    float: right;
+    margin-top: 20px;
+    @include media-query('medium-down'){
+      margin-top: 5px!important;
+    }
+    &.title-content{
+      padding: 50px;
+      margin-top: 100px;
+      @include media-query('medium-down'){
+        text-align: center;
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+      h2:after{
+        content: " ";
+        width: 75px;
+        border-bottom: 2px solid $brown;
+        height: 1px;
+        display: block;
+        margin: 15px 5px 0;
+        @include media-query('medium-down'){
+          display: table;
+          margin: 15px auto;
+        }
+      }
+    }
+    &.first{
+      @include media-query('medium-down'){
+            .caption{
+              width: auto;
+              margin: auto;
+              top: -46px;
+              display: table;
+              float: none;
+            }
+      }
+    }
+    &.second{
+      margin-top: 100px;
+    }
+    &.third{
+      margin-top: 200px;
+      
+    }
+    .collection-feature__image{
+      position: relative;
+      .product-image{
+        position: absolute;
+        display: none;
+      }
+      &:hover{
+        .product-image{
+          display: block;
+        }
+      }
+    }
+    .responsive-image__wrapper {
+      float: left;
+    }
+    .caption{
+      float: left;
+      padding: 0 20px;
+      margin-top: -60px;
+      z-index: 5;
+      background: $brown;
+      position: relative;
+      color: white;
+      font-size: $h3_size;
+      text-transform: uppercase;
+      font-family: $font_hero;
+      @include media-query('medium-down'){
+        width: 100%;
+        margin-top: -36px;
+        p{
+          margin: 5px 0;
+          font-family: $font_light;
+          font-size: 13px;
+        }
+      }
+    }
+  }
+  
+}
+
+.featured-collection-item {
+  flex: 1 1 percentage(1 / 3);
+  height: 100%;
+  text-align: center;
+}
+
+.featured-collection__image {
+  min-width: 320px;
+}
+
+.featured-collection__title {
+  flex-basis: 100%;
+}

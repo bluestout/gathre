@@ -1,0 +1,41 @@
+.about_us-section{
+    .page-header{
+        .caption{
+            h1{
+                font-size: $collection_hero_size;
+            }
+        }
+    }
+    .full-content{
+        @include media-query('medium-down'){
+            padding: 0;
+            .image-text-basic-section{
+                &.style_2{
+                    margin-bottom: 20px;
+                    .feature-image{
+                        display: block;
+                        padding-bottom: 30px;
+                    }
+                    .feature-text{
+                        width: 80%;
+                        .content{
+                            padding: 0;
+                        }
+                    }
+                }
+                .feature-text{
+                    h1{
+                        text-align: left;
+                        &::after{
+                            margin: 20px 0;
+                        }
+                    }
+                    p{
+                    
+                        font-size: $h4_size;
+                    }
+                }
+            }
+        }
+    }
+}

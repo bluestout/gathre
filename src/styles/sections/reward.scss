@@ -1,0 +1,150 @@
+#shopify-section-reward{
+    .page-header{
+        margin-bottom: 100px;
+        @include media-query('medium-down'){
+            margin-bottom: 0;
+        }
+        .caption{
+            max-width: 450px;
+            @include media-query('medium-down'){
+                padding: 20px 30px;
+                position: relative;
+                transform: none;
+                left: 0;
+                top: 0;
+            }       
+            h1{
+                text-align: left;
+                @include media-query('medium-down'){
+                    text-align: center;
+                    line-height: 22px;
+                    font-size: 14px;
+                }
+                &.banner-title{
+                    font-size: $banner_title;
+                    font-family: $font-hero;
+                    line-height: 44px;
+                    letter-spacing: 2.5px;
+                    @include media-query('medium-down'){
+                        font-size: $mobile_title_size;
+                        line-height: 26px;
+                        text-align: center;
+                    }
+                }
+            }
+            a.button{
+                width: 240px;
+                @include media-query('medium-down'){
+                    width: 100%;
+                }
+            }
+            h4{
+                @include media-query('medium-down'){
+                    text-align: center;
+                }
+                p{
+                    font-size: 14px;
+                    a{
+                        font-size: 12px;
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+    }
+    .image-text-section{
+        @include media-query('medium-down'){
+            padding: 0;
+        }
+        
+        .image-text-basic-section{
+            margin-bottom: 100px;
+            @include media-query('medium-down'){
+                margin-bottom: 0;
+            }
+            &.style_3{
+                .content{
+                    @include media-query('medium-down'){
+                        padding: 20px 40px!important;
+                    }
+                }
+                h1.hero{
+                    @include media-query('medium-down'){
+                        text-align: left!important;
+                        &::after{
+                            margin-left: 0!important;
+                            margin-top: 15px!important;
+                        }
+                    }
+                }
+                p{
+                    @include media-query('medium-down'){
+                        font-size: 14px;
+                    }
+                }
+            }
+            .feature-text{
+                @include media-query('medium-down'){
+                    .content{
+                        display: block;
+                        padding: 20px;
+                        h1.hero{
+                            text-align: center;
+                            width: 100%;
+                            font-size: 14px;
+                            @include media-query('medium-down'){
+                                text-align: center;
+                            }
+                            &:after{
+                                content: " ";
+                                width: 50px;
+                                border-bottom: 2px solid #C5B097;
+                                height: 1px;
+                                display: block;
+                                margin: 5px auto 0;
+                                @include media-query('medium-down'){
+                                    width: 50px;
+                                }
+                            }
+                        }
+                        ul{
+                            width: 100%;
+                            li{
+                                margin-bottom: 30px;
+                                svg{
+                                    width: 40px;
+                                    height: 40px;
+                                }
+                                h1.title{
+                                    text-align: left;
+                                    font-size: 16px;
+                                    margin-bottom: 0;
+                                }
+                            }
+                        }
+                    }
+                }
+                h1.hero{
+                    font-size: 25px;
+                }
+                ul{
+                    li{
+                        h1.title{
+                            width: calc(100% - 94px);
+                            margin: 0;
+                            margin-bottom: 10px;
+                            text-transform: uppercase;
+                        }
+                        h4{
+                            float: left;
+                            width: calc(100% - 100px);
+                            margin: 0;
+                            font-size: 14px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+}

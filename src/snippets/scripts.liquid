@@ -1,0 +1,45 @@
+<script type="text/javascript">
+  var productVariant = [], swatchs = {}, relatedProduct = [], currencyType = '{{ cart.currency.symbol }}', freeShippingLimit = {{ settings.free_shipping_limit | times: 100 }};
+  {% if template contains "product" %}
+  
+    // product variant
+    var options = [];
+      var compare_at_price = 0;
+      {% for variant in product.variants %}
+        options = [];
+      {% for option in variant.options %}
+        options.push("{{ option | downcase | remove: ' ' | remove: '/' }}");
+      {% endfor %}
+  
+      {% if variant.compare_at_price != blank %}
+          compare_at_price = {{variant.compare_at_price}};
+      {% else %}
+          compare_at_price = 0;
+      {% endif %}
+  
+          var variant = {
+              id: {{ variant.id }},
+              available: "{{ variant.available }}",
+              options: options,
+              price: {{ variant.price }},
+              price_money: "{{ variant.price | money }}",
+              compare_at_price: compare_at_price,
+              compare_at_price_money: "{{ variant.compare_at_price | moeny }}",
+              title: "{{ product.title }} - {{ variant.title }}"
+          };
+          productVariant.push(variant);
+    {% endfor %} 
+  {% endif %}
+  
+  document.documentElement.className = document.documentElement.className.replace('no-js', '');
+
+  window.theme = {
+    strings: {
+      addToCart: {{ 'products.product.add_to_cart' | t | json }},
+      soldOut: {{ 'products.product.sold_out' | t | json }},
+      unavailable: {{ 'products.product.unavailable' | t | json }}
+    },
+    moneyFormat: {{ shop.money_format | json }}
+  };
+
+</script>

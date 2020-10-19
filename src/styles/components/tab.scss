@@ -1,0 +1,121 @@
+.tab{
+  margin: 30px auto;
+  max-width: 1440px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  li{
+      display: table;
+      float: left;
+      border: 1px solid $light-brown;
+      margin-right: 30px;      
+      margin-bottom: 15px;
+      min-width: 165px;
+      &.active{
+          a{
+              color: $brown;
+          }
+          border-color: $brown;
+          
+      }
+      &:last-child{
+          margin-right: 0;
+      }
+      a{
+          font-size: $h4_size;
+          font-family: $font-bold;
+          text-transform: uppercase;
+          width: 100%;
+          display: block;
+          padding: 10px;
+          text-align: center;
+      }
+  }
+  
+}
+
+.tab-content{
+  .pannel{
+    display: none;
+    margin: auto;
+    margin-top: $grid-gutter * 5;
+    &.active{
+        display: block;
+        outline: none;
+    }
+  }
+}
+
+
+ul.select-box-menu{
+  margin-bottom: 20px;
+  @include media-query('medium-down'){
+    background-color: $white;
+    width: 100%;
+    position: relative;
+    padding-top: 43px;
+    display: table;
+    .active{
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
+  }
+  li{
+      @include media-query('medium-down'){
+          display: none;
+          padding: 0 10px;
+          margin: 0;
+          width: 100%;
+          border: none;
+          border-bottom: 1px solid $light-grey;
+      }
+      a{
+          font-size: $h4_size;
+          padding: 10px;
+          display: block;
+          font-family: $font-light;
+          @include media-query('medium-down'){
+            text-align: left;
+          }
+      }
+      &.active{
+          @include media-query('medium-down'){
+              border: 1px solid $brown;
+              display: block!important;
+            &::after{
+                content: " ";
+                position: absolute;
+                top: 50%;
+                right: 10px;
+                font-family: monospace;
+                transform: rotate(45deg) translate(-50%, -50%);
+                color: $brown;
+                width: 8px;
+                height: 8px;
+                border: 2px solid $black;
+                border-top: 0;
+                border-left: 0;
+            }
+            &.show{
+                &::after{
+                    transform: rotate(-135deg) translate(50%, 50%);
+                    top: 50%;
+                }
+            }
+          }
+          a{
+              font-family: $font-bold;
+              color: $brown;
+              text-align: center;
+              @include media-query('medium-down'){
+                  display: table;
+                  margin: auto;
+                  width: auto;
+              }
+          }
+          
+      }
+  }
+}

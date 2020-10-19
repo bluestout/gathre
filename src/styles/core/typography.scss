@@ -1,0 +1,148 @@
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: $font-light;
+  font-size: $body-size;
+  line-height: 28px;
+  letter-spacing: 1.5px;
+  color: $color-body-text;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $font-bold;
+  color: #030303;
+}
+
+body,
+input,
+textarea,
+button,
+select {
+  -webkit-font-smoothing: antialiased;
+  text-size-adjust: 100%;
+}
+
+a:focus {
+  color: inherit;
+}
+
+a{
+  color: $black;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+h1{
+  font-size: $h1_size;
+  line-height: $h1_line_height;
+  letter-spacing: $h1_letter_spacing;
+  font-weight: normal;
+  @include media-query('medium-down'){
+    font-size: 20px;
+    line-height: 29px;
+    letter-spacing: 0.54px;
+  }
+}
+
+h2{
+  font-size: $h2_size;
+  line-height: $h2_line_height;
+  font-weight: normal;
+  letter-spacing: $h2_letter_spacing;
+  @include media-query('medium-down'){
+    font-size: 0.875em;
+    line-height: 0.875em;
+  }
+}
+
+h3{
+  font-size: $h3_size;
+  line-height: $h3_line_height;
+  font-weight: normal;
+  letter-spacing: $h3_letter_spacing;
+}
+
+h4{
+  font-size: $h4_size;
+  line-height: $h4_line_height;
+  font-weight: normal;
+  letter-spacing: $h4_letter_spacing;
+}
+
+h5{
+  font-size: $h5_size;
+  line-height: $h5_line_height;
+  font-weight: normal;
+  letter-spacing: $h5_letter_spacing;
+}
+
+p{
+  font-size: $p_size;
+  line-height: $p_line_height;
+  letter-spacing: $p_letter_spacing;
+}
+
+li{
+  * {
+    font-size: $li_size;
+    line-height: $li_line_height;
+    letter-spacing: $li_letter_spacing;
+  }
+}
+
+span, i{
+  font-size: $span_size;
+  line-height: $span_line_height;
+  letter-spacing: $span_letter_spacing;
+}
+
+
+.hero{
+  font-family: $font-hero;
+  font-size: 36px;
+  line-height: 44px;
+  letter-spacing: 3.5px;
+  font-weight: normal;
+  @include media-query('medium-down'){
+    font-size: 1.05em;
+    line-height: 1.1em;
+    letter-spacing: 1.5px;
+  }
+}
+
+.title{
+  font-size: $title_size;
+  line-height: 21px;
+  letter-spacing: 2.57px;
+  font-family: $font-bold;
+}
+
+.banner_title{
+  font-size: $banner_title;
+  font-family: $font-hero;
+  line-height: 44px;
+  letter-spacing: 2.5px;
+}
+.extra{
+  font-family: $font-hero;
+}
+
+.bold{
+  font-family: $font-bold;
+}
+
+.light{
+  font-family: $font-light;
+  font-weight: normal;
+}
+
+.italic{
+  font-family: $font-italic;
+}

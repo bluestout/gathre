@@ -1,0 +1,105 @@
+.homepage_slideshow{
+    margin-left: 100px;
+    @include media-query('large'){
+        margin-left: $grid-gutter * 8 ;
+    }
+    @include media-query('medium-down'){
+        margin: 0;
+    }
+    .carousel-cell {
+        width: 100%;
+        margin-right: 10px;
+        /* center images in cells with flexbox */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        @include media-query('medium-down'){
+            display: block;
+        }
+        &.video-carousel{
+            height: 100%;
+            display: table;
+            .video-section{
+                width: 100%;
+                position: relative;
+
+                &::before{
+                    padding-top: 43.5%!important;
+                    display: table;
+                }
+                @include media-query('medium-down'){
+                    &::before{
+                        padding-top: 54.5%;
+                        display: table;
+                    }
+                }
+                .video-wrapper{
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    height: 100%;
+                    width: 100%;
+                }
+            }
+            .plyr__video-wrapper.plyr__video-embed{
+                padding-bottom: 43.5%!important;
+                @include media-query('medium-down'){
+                    padding-bottom: unset;
+                }
+            }
+        }
+    }
+    .carousel.is-fullscreen .carousel-cell {
+        height: 100%;
+    }
+    
+    .carousel-cell-image {
+        max-height: 100%;
+        width: 100%;
+        &.mobile{
+            display: none;
+            @include media-query('medium-down'){
+                display: block;
+            }
+        }
+        &.desktop{
+            display: block;
+            @include media-query('medium-down'){
+                display: none;
+            }
+        }
+    }
+    .caption{
+        position: absolute;
+        padding: 60px;
+        @include media-query('medium-down'){
+            position: static;
+            display: block;
+            margin: 0;
+            padding: $grid-gutter * 3 $grid-gutter * 2;
+            background-color: #FBF9F8!important;
+            width: 100%;
+        }
+        &.left{
+            left: 150px;
+        }
+        &.right{
+            right: 150px;
+        }
+        h1, h2 {
+            max-width: 420px;
+            margin: 15px auto;
+            @include media-query('medium-down'){
+                max-width: initial;
+                width: 100%;
+                text-align: center!important;
+            }
+        }
+    }
+    .carousel.is-fullscreen .carousel-cell-image {
+    max-width: 100%;
+    }
+    .flickity-viewport {
+        transition: height 0.2s;
+    }
+}

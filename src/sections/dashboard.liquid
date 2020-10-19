@@ -1,0 +1,111 @@
+{% assign heading_title = 'customer.account.title' | t %}
+
+{% include 'page-banner', title: heading_title %}
+<div class="container">
+  <div class="full-content grid">
+    <div class="menu grid__item large-up--one-third">
+      <ul class="select-box-menu">
+        <li class="uppercase active">{{ 'customer.menu.dashboard' | t | link_to : "/account" }}</li>
+        <li class="uppercase">{{ 'customer.menu.account_detail' | t | link_to: "/account/addresses" }}</li>
+        <li class="uppercase"><a href="#swym-wishlist" class="swym-wishlist"> {{ 'customer.menu.wishlist' | t }}</a></li>
+        <li class="uppercase">{{ 'customer.menu.rewards' | t | link_to: "pages/gathred" }}</li>
+        <li class="uppercase">{{ 'customer.menu.log_out' | t | link_to: "/account/logout" }}</li>
+      </ul>
+    </div>
+    <div class="content  account-dashborad grid__item large-up--two-thirds">
+      <div>
+        <h2 class="title collapse active light uppercase"><a class="heading">{{ 'customer.orders.title' | t }}</a></h2>
+        <div class="content-field">
+          {% paginate customer.orders by 20 %}
+            {% if customer.orders.size != 0 %}
+              <table class="responsive-table">
+                <thead>
+                  <tr>
+                    <th>{{ 'customer.orders.order_number' | t }}</th>
+                    <th>{{ 'customer.orders.date' | t }}</th>
+                    <th>{{ 'customer.orders.payment_status' | t }}</th>
+                    <th>{{ 'customer.orders.fulfillment_status' | t }}</th>
+                    <th>{{ 'customer.orders.total' | t }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for order in customer.orders %}
+                    <tr class="responsive-table-row">
+                      <td data-label="{{ 'customer.orders.order_number' | t }}">{{ order.name | link_to: order.customer_url }}</td>
+                      <td data-label="{{ 'customer.orders.date' | t }}">{{ order.created_at | date: format: 'month_day_year' }}</td>
+                      <td data-label="{{ 'customer.orders.payment_status' | t }}">{{ order.financial_status_label }}</td>
+                      <td data-label="{{ 'customer.orders.fulfillment_status' | t }}">{{ order.fulfillment_status_label }}</td>
+                      <td data-label="{{ 'customer.orders.total' | t }}">{{ order.total_price | money }}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            {% else %}
+              <p>{{ 'customer.orders.none' | t }}</p>
+            {% endif %}
+  
+            {% if paginate.pages > 1 %}
+              {% include 'pagination' %}
+            {% endif %}
+  
+          {% endpaginate %}
+        </div>
+      </div>
+      <div>
+        <h2 class="title light active uppercase"><a class="heading">{{ 'customer.account.details' | t }}</a></h2>
+        <div class="content-field">
+          {{ customer.default_address | format_address }}
+  
+          <a href="/account/addresses">{{ 'customer.account.view_addresses' | t }} ({{ customer.addresses_count }})</a>
+        </div>
+        
+      </div>
+      
+  
+    </div>
+  </div>
+</div>
+
+
+{% schema %}
+{
+    "name": "dashboard section",
+    "settings": [
+        {
+          "type": "image_picker",
+          "id": "feature_image",
+          "label": "Feature image"
+        },
+        {
+          "type": "image_picker",
+          "id": "mobile_feature_image",
+          "label": "Mobile feature image"
+        },
+        {
+          "type": "color",
+          "id": "title_color",
+          "label": "Title color",
+          "default": "#030303"
+      },
+      {
+        "type": "select",
+        "id": "pos",
+        "label": "Hero banner title postion",
+        "options": [
+            {
+                "value": "left",
+                "label": "Left"
+            },
+            {
+                "value": "right",
+                "label": "Right"
+            },
+            {
+                "value": "center",
+                "label": "Center"
+            }
+        ]
+      }
+    ]
+}
+{% endschema %}

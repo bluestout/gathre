@@ -1,0 +1,99 @@
+<div class="contact-section">
+    <div class="grid">
+        <div class="grid__item feature_banner large-up--seven-twelfths">
+            <div class="bg-grey one-half medium-down--hide"></div>
+            <div class="full-content">
+                {% include 'responsive-image' with 
+                    image: section.settings.image,
+                    max_width: 768,
+                    max_height:768,
+                    wrapper_class: "medium-down--hide"
+                %}
+                {% include 'responsive-image' with 
+                    image: section.settings.mobile_image,
+                    max_width: 768,
+                    max_height:768,
+                    wrapper_class: "large-up--hide"
+                %}
+            </div>
+        </div>
+        <div class="grid__item contact-pannel large-up--five-twelfths">
+            <div class="form-content">
+                <h1 class="devider">{{ section.settings.title }}</h1>
+                <div class="content">
+                    {{ section.settings.desc }}
+                    <div class="contact-form">
+                        {% form 'contact' %}
+    
+                            {% if form.posted_successfully? %}
+                                <p class="form-success">
+                                    {{ 'contact.form.post_success' | t }}
+                                </p>
+                            {% endif %}
+                        
+                            {{ form.errors | default_errors }}
+                        
+                            <input type="text"
+                            name="contact[name]"
+                            id="ContactFormName"
+                            placeholder="{{ 'contact.form.name' | t }}"
+                            value="{% if form[name] %}{{ form[name] }}{% elsif customer %}{{ customer.name }}{% endif %}">
+                            
+                            <input type="email"
+                            name="contact[email]"
+                            id="ContactFormEmail"
+                            placeholder="{{ 'contact.form.email' | t }}"
+                            value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                            spellcheck="false"
+                            autocomplete="off"
+                            autocapitalize="off">
+    
+                            <textarea rows="5"
+                            name="contact[body]"
+                            id="ContactFormMessage"
+                            placeholder="{{ 'contact.form.message' | t }}">
+                            {%- if form.body -%}
+                                {{- form.body -}}
+                            {%- endif -%}
+                            </textarea>
+                        
+                            <input type="submit" class="button brown" value="{{ 'contact.form.send' | t }}">
+                        
+                        {% endform %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+</div>
+{% schema %}
+{
+    "name": "contact",
+    "settings": [
+        {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Feature image"
+        },
+        {
+            "type": "image_picker",
+            "id": "mobile_image",
+            "label": "Mobile feature image"
+        },
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "Contact us"
+        },
+        {
+            "type": "richtext",
+            "id": "desc",
+            "label": "Description",
+            "default": "<p>We're glad you came by and would love to get in touch with you. </p><p>Email us at hello@gathre.com or fill out the form below. Thanks for reaching out.</p>"
+        }
+    ]
+}
+{% endschema %}

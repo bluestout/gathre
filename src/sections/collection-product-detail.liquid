@@ -1,0 +1,82 @@
+<div class="product-detail full-content" style="background:{{section.settings.bg_color}}">
+  <div class="container">
+    <div class="heading">
+      <h1 class="uppercase text-center">{{section.settings.title}}</h1>
+    </div>
+    <div class="tab-content  max-width-900">
+      <ul class="tab select-box-menu">
+        {% for block in section.blocks %}
+            {% if forloop.index == 1 %}
+                {% assign cls = 'active' %}
+            {% else %}
+                {% assign cls = '' %}
+            {% endif %}
+            <li class="{{ cls }}">
+                <a href="#{{block.settings.title | remove: '#' | handleize }}">{{ block.settings.title }}</a>
+            </li>
+        {% endfor %}
+      </ul>
+      {% for block in section.blocks %}
+          {% if forloop.index == 1 %}
+              {% assign cls = 'active' %}
+          {% else %}
+              {% assign cls = '' %}
+          {% endif %}
+          <div class="grid animated fadeIn articles {{ cls }} pannel" id="{{block.settings.title | remove: '#' | handleize }}">
+            {% if block.settings.image %}
+              {% include 'responsive-image' with 
+                  image: block.settings.image,
+                  max_width: 1024,
+                  max_height: 1024
+              %}
+            {% endif %}
+            {{ block.settings.desc }}
+          </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product detail section",
+  "class": "product-detail-section",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#f0f0f0"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Product details"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Product block",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "richtext",
+          "id": "desc",
+          "label": "Description"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

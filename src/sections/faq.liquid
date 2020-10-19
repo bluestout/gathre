@@ -1,0 +1,134 @@
+<div class="faq-section tab-content">
+    <div class="faq-header full-content">
+        <h1 class="uppercase extra text-center">{{ page.title }}</h1>
+        <ul class="select-box-menu tab">
+            {% for block in section.blocks %}
+                {% if block.type == 'filter' %}
+                    {% if forloop.index == 1 %}
+                        {% assign cls = 'active' %}
+                    {% else %}
+                        {% assign cls = '' %}
+                    {% endif %}
+                    <li class="{{ cls }}">
+                        <a href="#{{ block.settings.filter_name | handleize }}">{{ block.settings.filter_name }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="content">
+        <div class="faq-list"> 
+            {% for block in section.blocks %}
+                {% if block.type == 'filter' %}
+                    {% if forloop.index == 1 %}
+                        {% assign cls = 'active' %}
+                    {% else %}
+                        {% assign cls = '' %}
+                    {% endif %}
+                    {% assign filter = block.settings.filter_name | handleize %}
+                    <div id="{{ block.settings.filter_name | handleize }}" class="grid animated fadeIn {{ cls }} pannel">
+                        {% for faq in section.blocks %}
+                            {% assign category = faq.settings.category | handleize %}
+                            {% if category == filter and faq.settings.content != blank %}
+                                <div class="link-list grid__item one-whole">
+                                    <a class="uppercase slide_btn"><span>{{ faq.settings.title }}</span>
+                                    {% include 'icon_pack' with icon: "plus", class: "plus" %}
+                                    {% include 'icon_pack' with icon: "minus", class: "minus" %}
+                                    </a>
+                                    <div class="slide_content">
+                                        {{ faq.settings.content }}
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<div class="contact-section full-content">
+    <div class="contact-form">
+        <h1 class="extra uppercase text-center devider devider-center">{{ 'contact.form.title' | t }}</h1>
+        <h4 class="light uppercase text-center">{{ 'contact.form.sub_title' | t }}</h4>
+        {% form 'contact' %}
+
+            {% if form.posted_successfully? %}
+                <p class="form-success">
+                    {{ 'contact.form.post_success' | t }}
+                </p>
+            {% endif %}
+        
+            {{ form.errors | default_errors }}
+        
+            <input type="text"
+            name="contact[name]"
+            id="ContactFormName"
+            placeholder="{{ 'contact.form.name' | t }}"
+            value="{% if form[name] %}{{ form[name] }}{% elsif customer %}{{ customer.name }}{% endif %}">
+            
+            <input type="email"
+            name="contact[email]"
+            id="ContactFormEmail"
+            placeholder="{{ 'contact.form.email' | t }}"
+            value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+            spellcheck="false"
+            autocomplete="off"
+            autocapitalize="off">
+
+            <textarea rows="5"
+            name="contact[body]"
+            id="ContactFormMessage"
+            placeholder="{{ 'contact.form.message' | t }}">
+            {%- if form.body -%}
+                {{- form.body -}}
+            {%- endif -%}
+            </textarea>
+        
+            <input type="submit" class="button brown" value="{{ 'contact.form.send' | t }}">
+        
+        {% endform %}
+    </div>
+</div>
+{% schema %}
+{
+    "name": "faq section",
+    "settings": [
+        
+    ],
+    "blocks":[
+        {
+            "name": "filter",
+            "type": "filter",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "filter_name",
+                    "label": "Filter name"
+                }
+            ]
+        },
+        {
+            "name": "Faq-row",
+            "type": "content",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title"
+                },
+                {
+                    "type": "text",
+                    "id": "category",
+                    "label": "Category"
+                },
+                {
+                    "type": "richtext",
+                    "id": "content",
+                    "label": "Content"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

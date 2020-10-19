@@ -1,0 +1,270 @@
+
+<section class="featured-collection">
+  <div class="grid animated fadeInUp slideanim">
+    <div class="grid__item medium-down--one-whole large-up--one-third large-up--hide">
+      <div class="grid">
+        <div class="grid__item large-up--one-whole title-content">
+          {% if section.settings.title != blank %}
+            <h2 class="hero uppercase">{{ section.settings.title | escape }}</h2>
+          {% endif %}
+          {{ section.settings.desc }}
+        </div>
+      </div>
+    </div>
+    <div class="grid__item medium-down--one-whole large-up--one-third third">
+      <div class="grid">
+        {% for block in section.blocks %}
+          {%- assign collection = collections[block.settings.collection] -%}
+          {% assign product = collections[block.settings.collection].products[0] %}
+          {% assign modulo_val = forloop.index | modulo : 3 %}
+          {% if modulo_val == 2 %}
+            {% if block.settings.collection != blank %}
+              <div class="grid__item large-up--one-whole medium-down--one-half">
+                <a href="{{ collection.url }}" class="featured-collection-item">
+                  <div class="collection-feature__image">
+                    {% if block.settings.image != blank %}
+                      {% include 'responsive-image' with
+                        image: block.settings.image,
+                        max_width: 768,
+                        max_height: 768,
+                        wrapper_class: "medium-down--hide collection-image"
+                      %}
+                    {% endif %}
+                    {% if block.settings.mobile_image != blank %}
+                      {% include 'responsive-image' with
+                        image: block.settings.mobile_image,
+                        max_width: 768,
+                        max_height: 768,
+                        wrapper_class: "large-up--hide  collection-image"
+                      %}
+                    {% else %}
+                      {% include 'responsive-image' with
+                        image: block.settings.image,
+                        max_width: 768,
+                        max_height: 768,
+                        wrapper_class: "large-up--hide  collection-image"
+                      %}
+                    {% endif %}
+                    {% if block.settings.second_image != blank %}
+                        {% assign second_image = block.settings.second_image %}
+                    {% else %}
+                        {% assign second_image = product.featured_image %}      
+                    {% endif %}
+                    {% include 'responsive-image' with
+                        image: second_image,
+                        max_width: 768,
+                        max_height: 768,
+                        wrapper_class: "medium-down--hide product-image animated fadeIn"
+                      %}
+                  </div>
+                  <div class="caption">
+                    <p>{{ collection.title }}</p>
+                  </div>
+                </a>
+              </div>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+    <div class="grid__item medium-down--one-whole large-up--one-third second">
+      <div class="grid">
+        {% for block in section.blocks %}
+          {%- assign collection = collections[block.settings.collection] -%}
+          {% assign modulo_val = forloop.index | modulo : 3 %}
+          {% if modulo_val == 1 %}
+            {% if block.settings.collection != blank %}
+              <div class="grid__item large-up--one-whole medium-down--one-half">
+                <a href="{{ collection.url }}" class="featured-collection-item">
+                  <div class="collection-feature__image">
+                    {% if block.settings.image != blank %}
+                      {% include 'responsive-image' with
+                        image: block.settings.image,
+                        max_width: 768,
+                        max_height: 768,
+                        wrapper_class: "medium-down--hide collection-image"
+                      %}
+                    {% endif %}
+                    {% if block.settings.mobile_image != blank %}
+                      {% include 'responsive-image' with
+                        image: block.settings.mobile_image,
+                        max_width: 768,
+                        max_height: 768,
+                        wrapper_class: "large-up--hide collection-image"
+                      %}
+                    {% else %}
+                      {% include 'responsive-image' with
+                        image: block.settings.image,
+                        max_width: 768,
+                        max_height: 768,
+                        wrapper_class: "large-up--hide collection-image"
+                      %}
+                    {% endif %}
+                    {% if block.settings.second_image != blank %}
+                        {% assign second_image = block.settings.second_image %}
+                    {% else %}
+                        {% assign second_image = product.featured_image %}      
+                    {% endif %}
+                    {% include 'responsive-image' with
+                        image: second_image,
+                        max_width: 768,
+                        max_height: 768,
+                        wrapper_class: "medium-down--hide product-image animated fadeIn"
+                      %}
+                  </div>
+                  <div class="caption">
+                    <p>{{ collection.title }}</p>
+                  </div>
+                </a>
+              </div>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+    <div class="grid__item medium-down--one-whole large-up--one-third first">
+      <div class="grid">
+        {% for block in section.blocks %}
+          {%- assign collection = collections[block.settings.collection] -%}
+          {% assign modulo_val = forloop.index | modulo : 3 %}
+          {% if forloop.index == 1 %}
+            <div class="grid__item large-up--one-whole title-content medium-down--hide">
+              {% if section.settings.title != blank %}
+                <h2 class="hero uppercase">{{ section.settings.title | escape }}</h2>
+              {% endif %}
+              {{ section.settings.desc }}
+            </div>
+          {% elsif modulo_val == 0 %}
+            {% if block.settings.collection != blank %}
+              <div class="grid__item large-up--one-whole medium-down--one-whole">
+                <a href="{{ collection.url }}" class="featured-collection-item">
+                  <div class="collection-feature__image">
+                    {% if block.settings.image != blank %}
+                      {% include 'responsive-image' with
+                        image: block.settings.image,
+                        max_width: 768,
+                        max_height: 768,
+                        wrapper_class: "medium-down--hide"
+                      %}
+                    {% endif %}
+                    {% if block.settings.mobile_image != blank %}
+                      {% include 'responsive-image' with
+                        image: block.settings.mobile_image,
+                        max_width: 768,
+                        max_height: 768,
+                        wrapper_class: "large-up--hide"
+                      %}
+                    {% else %}
+                      {% include 'responsive-image' with
+                        image: block.settings.image,
+                        max_width: 768,
+                        max_height: 768,
+                        wrapper_class: "large-up--hide"
+                      %}
+                    {% endif %}
+                    {% if block.settings.second_image != blank %}
+                        {% assign second_image = block.settings.second_image %}
+                    {% else %}
+                        {% assign second_image = product.featured_image %}      
+                    {% endif %}
+                    {% include 'responsive-image' with
+                        image: second_image,
+                        max_width: 768,
+                        max_height: 768,
+                        wrapper_class: "medium-down--hide product-image animated fadeIn"
+                      %}
+                  </div>
+                  <div class="caption">
+                    <p>{{ collection.title }}</p>
+                  </div>
+                </a>
+              </div>
+            {% else %}
+              <div class="grid__item medium-up--one-third">
+                <a href="#" class="featured-collection-item">
+                  {{ 'product-' | append: 1 | placeholder_svg_tag: 'placeholder-svg placeholder-svg--small' }}
+                  <div class="caption">
+                    <p>{{ 'homepage.onboarding.collection_title' | t }}</p>
+                  </div>
+                </a>
+              </div>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Featured collection",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Collections"
+      },
+      {
+        "type": "richtext",
+        "id": "desc",
+        "label": "Description",
+        "default": "<p>All-purpose, which means there's no wrong way to use it.</p>"
+      }
+    ],
+    "blocks": [
+      {
+        "name": "collection",
+        "type": "collection_block",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Feature image"
+          },
+          {
+            "type": "image_picker",
+            "id": "mobile_image",
+            "label": "Mobile feature image"
+          },
+          {
+            "type": "image_picker",
+            "id": "second_image",
+            "label": "Second image"
+          },
+          {
+            "type": "select",
+            "id": "label_type",
+            "label": "Label type",
+            "options": [
+              {
+                "value": "black",
+                "label": "Black"
+              },
+              {
+                "value": "brown",
+                "label": "Brown"
+              },
+              {
+                "value": "white",
+                "label": "White"
+              }
+            ]
+          },
+          {
+            "type": "collection",
+            "id": "collection",
+            "label": "Collection"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Feature",
+        "category": "Collection"
+      }
+    ]
+  }
+{% endschema %}

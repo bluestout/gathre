@@ -1,0 +1,83 @@
+<section class="feature-product  mobile-only--{{section.settings.mobile_only}}">
+  <div class="heading-caption">
+    <h2 class="extra">{{ section.settings.title }}</h2>
+  </div>
+  
+  <div class="content">
+    <div class="feature-products carousel">
+      {% for block in section.blocks %}
+        <div class="carousel-cell">
+          <img class="carousel-cell-image" data-flickity-lazyload="{{ block.settings.image | img_url: 'original' }}" />
+          <div class="caption">
+            <h1 class="extra">{{ block.settings.title }}</h1>
+            <div class="medium-down--hide">{{ block.settings.normal_desc }}</div>
+            <div class="large-up--hide">{{ block.settings.mobile_desc }}</div>
+            <a href="{{ collections[block.settings.product].url}}" class="button small black">{{ block.settings.label }}</a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "feature products",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "mobile_only",
+      "label": "Mobile show"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading title"
+    }
+  ],
+  "blocks" : [
+    {
+      "name": "Feature product",
+      "type": "feature_product",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Feature image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "richtext",
+          "id": "normal_desc",
+          "label": "Normal Description"
+        },
+        {
+          "type": "richtext",
+          "id": "mobile_desc",
+          "label": "Mobile Description"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Button label"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "category": "Feature",
+      "name":"Feature product"
+    }
+  ]
+}
+{% endschema %}

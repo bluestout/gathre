@@ -1,0 +1,85 @@
+.swatch-studio{
+  .select-pannel{
+    h2{
+      text-align: center;
+      text-transform: uppercase;
+    }
+    select{
+      width: 400px;
+      margin: 20px auto 50px;
+      float: none;
+      display: table;
+    }
+  }
+  .swatch-container{
+    margin-top: 20px;
+    position: relative;
+    .swatch-wrapper{
+      margin-bottom: 20px;
+      .swatch-image{
+        width: 100%;
+        max-width: 160px;
+        display: table;
+        margin: auto;
+        margin-bottom: 10px;
+        &::before{
+          content: " ";
+          padding-top: 100%;
+          display: table;
+        }
+      }
+    }
+    #followme{
+      width: 100%;
+      max-width: 500px;
+      position: fixed;
+      top: 200px;
+      background: white;
+      right: -500px;
+      padding: 50px 20px;
+      border: 1px solid $brown;
+      border-right: 0;
+      &.active{
+        right: 0;
+      }
+      .close_open_btn{
+        left: -53px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        padding: 20px 10px;
+        background: $brown;
+        color: $white;
+        font-size: 36px;
+        cursor: pointer;
+      }
+      .swatch-wrapper{
+        width: 100%;
+        max-width: 110px;
+        display: table;
+        margin: auto;
+        background-color: $light-grey;
+        margin-bottom: 30px;
+        position: relative;
+        &.active{
+          &::after{
+            content: none;
+          }
+        }
+        &::before{
+          content: " ";
+          padding-top: 100%;
+          display: table;
+        }
+        &::after{
+          content: "+";
+          position: absolute;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          font-size: 43px;
+          color: $brown;
+        }
+      }
+    }
+  }
+}

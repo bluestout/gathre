@@ -1,0 +1,21 @@
+    
+<div class="header-banner">
+    {% if collection.image != blank %}
+        <img class="medium-down--hide" src='{{ collection.image | img_url: '2048x' }}'>
+    {% elsif section.settings.banner != blank %}
+        <img class="medium-down--hide" src='{{ section.settings.banner | img_url : "2048x" }}'>
+        {% if section.settings.mobile_banner != blank %}
+            <img class="medium-down--show hide" src="{{ section.settings.mobile_banner | img_url : "768x" }}">
+        {% else %}
+            <img class="medium-down--show hide" src='{{ section.settings.banner | img_url : "2048x" }}'>
+        {% endif %}
+    {% endif %}
+    <div class="caption {{ section.settings.pos }}">
+        {% if collection.title != blank %}
+            <h1 class="extra title" style="color: {{ section.settings.title_color }}">{{ section.settings.title }}</h1>
+        {% endif %}
+        {% if collection.description != blank %}
+            <h1 class="light medium-down--hide" style="color: {{ section.settings.desc_color }}">{{ section.settings.description | strip_html | truncate: 140, '...' }}</h1>
+        {% endif %}
+    </div>
+</div> 

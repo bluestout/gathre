@@ -1,0 +1,7 @@
+{% if product.handle == 'gift-card' %}
+    {% section 'product-gift' %}
+    {% section 'instagram' %}
+    <div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div>
+{% else %}
+    {% section 'product' %}
+{% endif %}

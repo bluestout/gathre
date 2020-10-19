@@ -1,0 +1,82 @@
+.icon-block{
+    @include media-query('medium-down'){
+        padding: 20px 10px;
+        display: table;
+    }
+    h1{
+        padding: 50px 0;
+        margin-top: 100px;
+        text-transform: uppercase;
+        @include media-query('medium-down'){
+            margin-top: 0;
+            padding: 10px 0;
+            line-height: 18px;
+            font-size: 14px;
+        }
+    }
+    .icon-list{
+        max-width: 1010px;
+        margin: auto;
+        .icon{
+            width: calc(25% - 20px);
+            float: left;
+            margin: 10px;
+            padding: 53px 20px;
+            display: table;
+            background-color: $light-red;
+            @include media-query('medium-down'){
+                width: calc(50% - 10px);
+                padding: 20px 0;
+                margin: 5px;
+            }
+            img, svg{
+                height: 50px;
+                margin: auto;
+                display: block;
+                @include media-query('medium-down'){
+                    height: 35px;
+                }
+            }
+            span{
+                display: table;
+                width: 100%;
+            }
+        }   
+        .banner-block{
+            position: relative;
+            float: left;
+            width: calc(50% - 20px);
+            margin: 10px;
+            @include media-query('medium-down'){
+                width: 100%;
+                margin: 5px 0;
+                padding: 0 5px;
+            }
+            .caption{
+                padding: 10px 50px;
+                width: auto;
+                display: table;
+                background: white;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                @include media-query('medium-down'){
+                    padding: 10px;
+                }
+                a{
+                    display: flex;
+                    svg{
+                        display: table;
+                        margin: auto;
+                    }
+                    p{
+                        white-space: nowrap;
+                        margin-left: 20px;
+                    }
+                }
+                
+            }
+        }
+    }
+}

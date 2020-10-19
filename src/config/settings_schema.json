@@ -1,0 +1,243 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Starter theme",
+    "theme_version": "1.0.0",
+    "theme_author": "Shopify",
+    "theme_documentation_url": "https://github.com/Shopify/starter-theme",
+    "theme_support_url": "https://github.com/Shopify/starter-theme/issues"
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Accent",
+        "default": "#c4cdd5",
+        "info": "Buttons and special ornaments"
+      },
+      {
+        "type": "color",
+        "id": "color_body_text",
+        "label": "Text",
+        "default": "#161d25"
+      },
+      {
+        "type": "color",
+        "id": "color_main_bg",
+        "label": "Background",
+        "default": "#fff"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "font_heading",
+        "default": "helvetica_n4",
+        "label": "Headings"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_body",
+        "default": "helvetica_n4",
+        "label": "Body text"
+      }
+    ]
+  },
+  {
+    "name": "Social media",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Social sharing image"
+      },
+      {
+        "type": "image_picker",
+        "id": "share_image",
+        "label": "Image",
+        "info": "Shown when sharing a link on social media. [Learn more](https://help.shopify.com/manual/using-themes/troubleshooting/showing-social-media-thumbnail-images/) about image thumbnails."
+      },
+      {
+        "type": "header",
+        "content": "Social sharing options"
+      },
+      {
+        "type": "checkbox",
+        "id": "social_sharing_blog",
+        "label": "Enable sharing for blog articles",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "share_facebook",
+        "label": "Share on Facebook",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "share_twitter",
+        "label": "Tweet on Twitter",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "share_pinterest",
+        "label": "Pin on Pinterest",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Sharing links"
+      },
+      {
+        "type": "text",
+        "id": "social_twitter_link",
+        "label": "Twitter link"
+      },
+      {
+        "type": "text",
+        "id": "social_facebook_link",
+        "label": "Facebook link"
+      },
+      {
+        "type": "text",
+        "id": "social_pinterest_link",
+        "label": "Pinterest link"
+      },
+      {
+        "type": "text",
+        "id": "social_instagram_link",
+        "label": "Instagram link"
+      },
+      {
+        "type": "text",
+        "id": "social_snapchat_link",
+        "label": "Snapchat link"
+      },
+      {
+        "type": "text",
+        "id": "social_tumblr_link",
+        "label": "Tumblr link"
+      },
+      {
+        "type": "text",
+        "id": "social_youtube_link",
+        "label": "Youtube link"
+      },
+      {
+        "type": "text",
+        "id": "social_vimeo_link",
+        "label": "Vimeo link"
+      }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "cart_notes_enable",
+        "label": "Enable cart notes",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon image",
+        "info": "Will be scaled down to 32 x 32px"
+      }
+    ]
+  },
+  {
+    "name": "Icons",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "cart_icon_png",
+        "label": "Cart icon"
+      },
+      {
+        "type": "html",
+        "id": "cart_icon_svg",
+        "label": "cart icon"
+      },
+      {
+        "type": "image_picker",
+        "id": "user_icon_png",
+        "label": "User icon"
+      },
+      {
+        "type": "html",
+        "id": "user_icon_svg",
+        "label": "User icon"
+      },
+      {
+        "type": "image_picker",
+        "id": "search_icon_png",
+        "label": "Search icon"
+      },
+      {
+        "type": "html",
+        "id": "search_icon_svg",
+        "label": "Search icon"
+      }
+    ]
+  },
+  {
+    "name": "Mini cart",
+    "settings": [
+      {
+        "type": "range",
+        "id": "free_shipping_limit",
+        "label": "Free shipping limit",
+        "unit": "$",
+        "min": 0,
+        "max": 500,
+        "step": 50,
+        "default": 200
+      },
+      {
+          "type": "text",
+          "id": "empty_msg",
+          "label": "Empty message",
+          "default": "You Don’t have any items in your cart."
+      },
+      {
+        "type": "text",
+        "id": "free_shipping_msg",
+        "label": "Free shipping message",
+        "default": "Only # away from FREE shipping!"
+      },
+      {
+        "type": "text",
+        "id": "empty_product_title",
+        "label": "Empty product title",
+        "default": "Not sure where to start?"
+      },
+      {
+        "type": "product",
+        "id": "empty_product_1",
+        "label": "Empty product"
+      },
+      {
+        "type": "product",
+        "id": "empty_product_2",
+        "label": "Empty product"
+      },
+      {
+        "type": "product",
+        "id": "related_product",
+        "label": "Related product"
+      }
+    ]
+  }
+]

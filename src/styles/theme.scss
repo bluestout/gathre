@@ -1,0 +1,82 @@
+@charset 'UTF-8';
+
+/**
+ * [replace with theme name] | Built with Slate
+ */
+@import '~normalize.css/normalize';
+
+// Settings
+@import './variables';
+
+// Tools
+@import './tools/mixins';
+@import './tools/functions';
+
+// Core
+@import './core/grid';
+@import './core/forms';
+@import './core/helpers';
+@import './core/layout';
+@import './core/media';
+@import './core/responsive-tables';
+@import './core/rte';
+@import './core/typography';
+@import './core/animation';
+
+// Components
+@import './components/buttons';
+@import './components/carousel';
+@import './components/hero-banner';
+@import './components/icons';
+@import './components/placeholders';
+@import './components/responsive-images';
+@import './components/address-forms';
+@import './components/product-item';
+@import './components/image-text-origin';
+@import './components/image-text-grid';
+@import './components/image-text-basic';
+@import './components/banner';
+@import './components/icon-bar';
+@import './components/related-product.scss';
+@import './components/mega-menu';
+@import './components/mini-cart';
+@import './components/text-block';
+@import './components/video';
+@import './components/text-list';
+@import './components/icon-block';
+@import './components/tab';
+@import './components/modal';
+
+// Sections
+@import './sections/header';
+@import './sections/slideshow';
+@import './sections/featured-collection';
+@import './sections/feature-products';
+@import './sections/premium';
+@import './sections/best-seller';
+@import './sections/banner-carousel';
+@import './sections/instagram';
+@import './sections/news_letter';
+@import './sections/footer';
+@import './sections/collection';
+@import './sections/product';
+@import './sections/login';
+@import './sections/blog';
+@import './sections/dashboard';
+@import './sections/article';
+@import './sections/contact';
+@import './sections/faq';
+@import './sections/not_found';
+@import './sections/page';
+@import './sections/work-with-us';
+@import './sections/sitemap';
+@import './sections/reviews';
+@import './sections/about';
+@import './sections/cart';
+@import './sections/reward';
+@import './sections/swatch-studio';
+@import './sections/search';
+
+// Templates
+@import './templates/gift_card';
+@import './templates/product';

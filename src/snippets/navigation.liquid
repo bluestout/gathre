@@ -1,0 +1,145 @@
+<ul class="menu medium-down--hide">
+    {% for top_menu in linklists[section.settings.menu].links  %}
+        <li>
+            <a href="{{ top_menu.url }}" class="uppercase">{{ top_menu.title }}</a>
+            {% if top_menu.links.size > 0 %}
+                <div class="mega_menu grid">
+                    {% if top_menu.title == 'Mats' %}
+                        {% assign cls = 'large-up--eight-twelfths' %}
+                        {% assign child_cls = 'large-up--one-quarter' %}
+                    {% else %}
+                        {% assign cls = 'large-up--three-twelfths' %}
+                        {% assign child_cls = 'large-up--one-whole' %}
+                    {% endif %}
+                    <div class="grid__item links {{ cls }}">
+                        {% for child_link in top_menu.links %}
+                            <div class="child_link {{ child_cls }}">
+                                
+                                {% if child_link.links.size > 0 %}
+                                    <a href="{{ child_link.url }}" class="title uppercase">{{ child_link.title }}</a>
+                                    <ul>
+                                        {% for gchild_link in child_link.links %}
+
+                                            {% assign cls_target = child_link.object.handle | append: '-' | append : gchild_link.object.handle | append: '-' | append: gchild_link.title | handleize %}
+                                            <li data-target="{{ cls_target }}"><a href="{{ gchild_link.url }}" class="capitalize">{{ gchild_link.title }}</a></li>
+                                        {% endfor %}
+                                    </ul>
+                                {% else %}
+                                    <a href="{{ child_link.url }}" class="uppercase">{{ child_link.title }}</a>
+                                {% endif %}
+                                
+                            </div>
+                        {% endfor %}
+                    </div>
+                    {% if top_menu.title == 'Mats' %}
+                        {% assign cls = 'large-up--four-twelfths' %}
+                    {% else %}
+                        {% assign cls = 'large-up--nine-twelfths' %}
+                    {% endif %}
+                    <div class="grid__item banner {{ cls }}">
+                        {% if top_menu.title == 'Mats' %}
+                            {% for child_link in top_menu.links %}
+                                {% for gchild_link in child_link.links %}
+                                    {% assign cls = child_link.object.handle | append: '-' | append : gchild_link.object.handle | append: '-' | append: gchild_link.title | handleize %}
+
+                                    <div class="{{ cls }} feature-image animated fadeIn">   
+                                        {% if gchild_link.object.image != blank %}
+                                            <img src="{{ gchild_link.object.image | img_url: '1024x' }}" alt="{{ gchildlink.object.image.alt }}">
+                                        {% elsif gchild_link.object.featured_image != blank %}
+                                            <img src="{{ gchild_link.object.featured_image | img_url: '1024x' }}" alt="{{ gchildlink.object.title }}">
+                                        {% else %}
+                                            <img src="{{ section.settings.default_banner | img_url: '1024x' }}" alt="{{ 'general.mega_menu.best_seller' | t }}">
+                                        {% endif %}
+                                        <p class="title extra text-center uppercase">{{ 'general.mega_menu.best_seller' | t }}</p>
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                        {% elsif top_menu.title == 'HOME Goods' %}
+                            <div class="grid__item large-up--one-third" >
+                                <a href="{{ section.settings.top_rated_url }}">
+                                    <img src="{{ section.settings.top_rated_image | img_url: '1024x' }}">
+                                    <p class="title extra text-center uppercase">{{ section.settings.top_rated_title }}</p>
+                                </a>
+                            </div>
+                            <div class="grid__item large-up--one-third">
+                                <a href="{{ section.settings.new_arrival_url }}">
+                                    <img src="{{ section.settings.new_arrival_image | img_url: '1024x' }}">
+                                    <p class="title extra text-center uppercase">{{ section.settings.new_arrival_title }}</p>
+                                </a>
+                            </div>
+                            <div class="grid__item large-up--one-third">
+                                <a href="{{ section.settings.bestsellers_url }}">
+                                    <img src="{{ section.settings.bestsellers_image | img_url: '1024x' }}">
+                                    <p class="title extra text-center uppercase">{{ section.settings.bestsellers_title }}</p>
+                                </a>
+                            </div>
+                        {% elsif top_menu.title == 'Baby' %}
+                            <div class="grid__item large-up--one-third">
+                                <a href="{{ all_products[section.settings.feature_product_1].url }}">
+                                    <img src="{{  all_products[section.settings.feature_product_1].featured_image | img_url: '1024x' }}">
+                                    <p class="title extra text-center uppercase">{{ all_products[section.settings.feature_product_1].title }}</p>
+                                </a>
+                            </div>
+                            <div class="grid__item large-up--one-third">
+                                <a href="{{ all_products[section.settings.feature_product_2].url }}">
+                                    <img src="{{ all_products[section.settings.feature_product_2].featured_image | img_url: '1024x' }}">
+                                    <p class="title extra text-center uppercase">{{ all_products[section.settings.feature_product_2].title }}</p>
+                                </a>
+                            </div>
+                            <div class="grid__item large-up--one-third">
+                                <a href="{{ all_products[section.settings.feature_product_3].url }}">
+                                    <img src="{{ all_products[section.settings.feature_product_3].featured_image | img_url: '1024x' }}">
+                                    <p class="title extra text-center uppercase">{{ all_products[section.settings.feature_product_3].title }}</p>
+                                </a>
+                            </div>
+                        {% elsif  top_menu.title == 'sale' %}
+                            <div class="grid__item large-up--one-third">
+                                <a href="{{ section.settings.rewards_url }}">
+                                    <img src="{{ section.settings.rewards_image | img_url: '1024x' }}">
+                                    <p class="title extra text-center uppercase">{{ section.settings.rewards_title }}</p>
+                                </a>
+                            </div>
+                            <div class="grid__item large-up--one-third">
+                                <a href="{{ section.settings.holiday_deals_url }}">
+                                    <img src="{{ section.settings.holiday_deals_image | img_url: '1024x' }}">
+                                    <p class="title extra text-center uppercase">{{ section.settings.holiday_deals_title }}</p>
+                                </a>
+                            </div>
+                            <div class="grid__item large-up--one-third">
+                                <a href="{{ section.settings.gift_card_url }}">
+                                    <img src="{{ section.settings.gift_card_image | img_url: '1024x' }}">
+                                    <p class="title extra text-center uppercase">{{ section.settings.gift_card_title }}</p>
+                                </a>
+                            </div>
+                        {% endif %}
+
+                    </div>
+                </div>
+            {% endif %}
+            
+        </li>
+    {% endfor %}
+</ul>
+<ul class="mobile_menu large-up--hide">
+    <div class="menus">
+        {% for top_menu in linklists[section.settings.menu].links  %}
+            <div class="links">
+                <a class="extra uppercase menu-link">{{top_menu.title}}</a>
+                <div class="child-link animated fadeIn">
+                    {% for link in top_menu.links %}
+                        <a class="capitalize light child-link-menu" >{{ link.title }}</a>
+                        <div class="gchild-link animated fadeIn">
+                            {% for child_link in link.links %}
+                                <a href="{{ child_link.url }}" class="capitalize light gchild-link-menu">{{ child_link.title }}</a>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="account">
+        <a href="/account/login" class="uppercase extra">{{ 'layout.customer.log_in' | t }}</a>
+        <a href="/account/register" class="uppercase extra">{{ 'customer.register.submit' | t }}</a>
+    </div>
+</ul>

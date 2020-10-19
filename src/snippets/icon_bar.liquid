@@ -1,0 +1,57 @@
+{% assign block_count = 0 %}
+{% for block in section.blocks %}
+    {% if block.type == 'icon_block' %}
+        {% assign block_count = block_count | plus: 1 %}
+    {% endif %}
+{% endfor %}
+{% if block_count == 5 %}
+    {% assign cls = 'large-up--one-fifth' %}
+{% elsif block_count == 4 %}
+    {% assign cls = 'large-up--one-quarter' %}
+{% elsif block_count == 3 %}
+    {% assign cls = 'large-up--one-third' %}
+{% elsif block_count == 2 %}
+    {% assign cls = 'large-up--one-half' %}
+{% elsif block_count == 1 %}
+    {% assign cls = 'large-up--one-whole' %}
+{% endif %}
+
+<div class="icon-bar" style="background: {{ section.settings.icon_bar_color }};">
+    <div class="icons grid">
+        {% for item in section.blocks %}
+            {% if item.type == 'icon_block' %}
+                {% assign modulo_val = forloop.index | modulo: 2 %}
+                {% if forloop.index == block_count and modulo_val != 0 %}
+                    {% assign cls_mobile = 'medium-down--one-whole' %}
+                {% else %}
+                    {% assign cls_mobile = 'medium-down--one-half' %}
+                {% endif %}
+                <div class="grid__item {{ cls }} {{ cls_mobile }}">
+                    <div class="icon-block">
+                        {% if item.settings.icon_svg != blank or item.settings.icon_img != blank %}
+                        <div class="icon medium-down--hide">
+                            {% if item.settings.icon_svg != blank %}
+                                {{ item.settings.icon_svg }}
+                            {% elsif item.settings.icon_img != blank %}
+                                <img src="{{ item.settings.icon_img | img_url: 'original' }}">
+                            {% endif %}
+                        </div>
+                        {% endif %}
+                        <h5 class="bold text-center medium-down--hide">{{ item.settings.title }}</h5>
+                        {% if item.settings.mobile_icon_svg != blank or item.settings.mobile_icon_img != blank %}
+                            <div class="icon medium-down--show hide">
+                                {% if item.settings.mobile_icon_svg != blank %}
+                                    {{ item.settings.mobile_icon_svg }}
+                                {% elsif item.settings.mobile_icon_img != blank %}
+                                    <img src="{{ item.settings.mobile_icon_img | img_url: 'original' }}">
+                                {% endif %}
+                            </div>
+                            <h5 class="bold text-center medium-down--show hide ">{{ item.settings.title }}</h5>
+                        {% endif %}
+                        
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>

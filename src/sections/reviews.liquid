@@ -1,0 +1,49 @@
+<div class="reviews-section">
+    {% include 'page-banner', title: page.title %}
+    <div class="full-content">
+        <div class="content">
+            {{ page.content }}
+        </div>
+    </div>
+</div>
+{% schema %}
+{
+    "name": "page section",
+    "settings": [
+        {
+            "type": "image_picker",
+            "id": "feature_image",
+            "label": "Feature image"
+        },
+        {
+            "type": "image_picker",
+            "id": "mobile_feature_image",
+            "label": "Feature image"
+        },
+        {
+            "type": "color",
+            "id": "title_color",
+            "label": "Title color"
+        },
+        {
+            "type": "select",
+            "id": "pos",
+            "label": "Hero banner title postion",
+            "options": [
+                {
+                    "value": "left",
+                    "label": "Left"
+                },
+                {
+                    "value": "right",
+                    "label": "Right"
+                },
+                {
+                    "value": "center",
+                    "label": "Center"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

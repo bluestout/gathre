@@ -1,0 +1,60 @@
+.news_letter_section{
+    padding-top: 0;
+    padding-bottom: 0;
+    
+    .content{
+        background-color: $brown;
+        padding: 20px 50px;
+        @include media-query('medium-down'){
+            padding: 15px;
+        }
+        .title-content{
+            max-width: 500px;
+            @include media-query('medium-down'){
+                text-align: center;
+            }
+            p{
+                font-family: $font_light;
+                
+            }
+        }
+        .form-content{
+            display: table;
+            width: 100%;
+            margin-top: 30px;
+            @include media-query('medium-down'){
+                margin-top: 0;
+            }
+            .grid__item{
+                @include media-query('medium-down'){
+                    padding-left: 0;
+                }
+            }
+            .zaius-list-signup-form{
+                #email_signup{
+                    input{
+                        @include media-query('medium-down'){
+                            width: 100%;
+                            margin-bottom: 10px;
+                        }
+                        &.sign-up{
+                            border: 1px solid #C5B097;
+                            box-shadow: none;
+                            border-radius: 0;
+                            height: 50px;
+                            line-height: 38px;
+                        }
+                        &.button{
+                            width: 100%;
+                            color: white;
+                            font-size: 16px;
+                            border-color: black;
+                            border-radius: 0;
+                        }
+                    }
+                    
+                }
+            }
+        }
+    }
+}

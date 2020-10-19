@@ -1,0 +1,144 @@
+<div class="mini-cart animated fadeInRight">
+    <div class="loading"><div class="loading_mark"></div></div>
+    <div class="content">
+        <div class="cart-heading">
+            <a href="/cart" class="heading-title">{{ 'cart.general.title' | t }}</a>
+            <a class="close fright">{% include 'icon_pack' with icon: 'close' %}{{ 'cart.general.close' | t }}</a>
+        </div>
+        <div class="cart-message">
+            {% assign exclude_price = 0 %}
+            {% for item in cart.items %}
+                
+                {% assign product = item.product %}
+                {% assign handle = item.title | handleize %}
+                {% if product.tags contains 'nofreeship' %}
+                    {% assign price_item = item.price | times: item.quantity %}
+                    {% assign exclude_price = exclude_price | plus: price_item %}
+                {% endif %}
+            {% endfor %}
+            {% assign total_price = cart.total_price | minus: exclude_price %}
+            {% assign left_price = settings.free_shipping_limit | times: 100 | minus: total_price %}
+            {% if cart.item_count > 0 %}
+                {% if left_price > 0 %}
+                    {% capture progress_text %}
+                        Only {{ left_price | money }} away from Free shipping.
+                    {% endcapture %}
+                {% elsif left_price < 1 %}
+                    {% capture progress_text %}
+                        {{ 'cart.general.success' | t }}
+                    {% endcapture %}
+                {% endif %}
+            {% else %}
+                {% capture progress_text %}
+                    {{ 'cart.general.empty' | t }}
+                {% endcapture %}
+            {% endif %}
+
+            <h5 class="bold uppercase danger">{{ progress_text }}</h5>
+        </div>
+        {% if cart.item_count <= 0 %}
+            {% assign cls = 'hide' %}
+        {% else %}
+            {% assign cls = '' %}
+        {% endif %}
+        <form action="/cart" method="post" novalidate class="cart-form">
+            <div class="cart-content {{ cls }}">
+                <div class="item-field">
+                    <div class="items">
+                        {% for item in cart.items %}
+                            <div class="item">
+                                <a class="remove">{% include 'icon_pack' with icon: 'close' %}</a>
+                                <img class="fleft" src="{{item.image | img_url: '100x'}}">
+                                <div class="info fleft" data-url="{{item.url}}">
+                                    <p class="name">{{ item.title }}</p>
+                                    <p class="price">{{ item.quantity }} X {{ item.original_price | money }}</p>
+                                    <input type="hidden" class="line-id" value="{{ forloop.index }}">
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="related-product">
+                        {% assign product = all_products[settings.related_product] %}
+                        {% assign variant = product.first_available_variant %}
+                        <script>
+                            relatedProduct = {{ product | json }};
+                        </script>
+
+                        <img class="fleft" src="{{product.featured_image | img_url: 'original'}}">
+                        <div class="info fleft">
+                            <p class="danger">{{ 'cart.general.note' | t }}</p>
+                            <p class="name">{{ product.title }}</p>
+                            <p class="price">1 X {{ product.price | money }}</p>
+                        </div>
+                        <div class="item-panel">
+                            <div class="swatch">
+                                <a class="swatch-button">
+                                    <span class="color"><img src=""></span>
+                                    <span class="uppercase bold text"></span>
+                                </a>
+                                <div class="swatch-pannel">
+                                </div>
+                            </div>
+                            <div class="add-cart-from">
+                                <form class="product_form">
+                                    <input type="hidden" name="id" class="variant" value="{{variant.id}}">
+                                    <input type="hidden" name="type" class="type" value="product">
+                                    <input type="hidden" name="quantity" class="quantity" value="1">
+                                    {% if product.available %}
+                                        {% assign cls = '' %}
+                                    {% else %}
+                                        {% assign cls = 'disable' %}
+                                    {% endif %}
+                                    <button class="ajax-submit add_cart brown {{ cls }} button">
+                                        <span class="text">{{ 'cart.general.add_cart' | t }}</span>
+                                        <svg x="0px" y="0px" width="32px" height="32px" viewBox="0 0 32 32" class="checkmark">
+                                            <path fill="none" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" d="M9,17l3.9,3.9c0.1,0.1,0.2,0.1,0.3,0L23,11"/>
+                                        </svg>
+                                    </button>
+                                    <div class="alert danger animate bounceIn">
+                                        <p></p>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="checkout-field">
+                    <div class="gift-desc">
+                        <a class="text-center gift_link">{{ 'cart.mini_cart.gift_link' | t }}</a>
+                        <textarea class="checkout_description" name="note" rows="5" placeholder="{{ 'cart.general.checkout_desc' | t }}">{{cart.note}}</textarea>
+                    </div>
+                    <div class="sub-total">
+                        <h4 class="uppercase bold fleft">{{ 'cart.general.subtotal' | t }}</h4>
+                        <h4 class="bold fright price">{{ cart.total_price | money }}</h4>
+                    </div>
+                    <div class="checkout">
+                        <a href="/checkout" class="button brown checkout">{{ 'cart.general.checkout' | t }}</a>
+                    </div>
+                    <div class="description">
+                        <span class="text-center">{{ 'cart.mini_cart.free_shipping_label' | t }}</span>
+                    </div>
+                </div>
+            </div>
+        </form>
+        {% if cart.item_count > 0 %}
+            {% assign cls = 'hide' %}
+        {% else %}
+            {% assign cls = '' %}
+        {% endif %}
+        <div class="empty-product grid {{ cls }}">
+            <p class="uppercase extra text-center">{{ settings.empty_product_title }}</p>
+            <div class="grid__item one-half">
+                {% assign product = all_products[settings.empty_product_1] %}
+                {% include 'product-item' %}
+            </div>
+            <div class="grid__item one-half">
+                {% assign product = all_products[settings.empty_product_2] %}
+                {% include 'product-item' %}
+            </div>
+            <div class="grid__item one-whole">
+                <a href="/collections/bestsellers" class="button brown small">{{ 'cart.general.bestseller' | t }}</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+.modal{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: #00000024;
+  top: 0;
+  left: 0;
+  display: none;
+  z-index: 1000;
+  .modal-body{
+    position: relative;
+    background: white;
+    max-width: 800px;
+    display: table;
+    margin: auto;
+    width: 100%;
+    height: 750px;
+    padding: 70px;
+    padding-bottom: 0;
+    iframe{
+      min-height: 700px!important;
+    }
+    .close{
+      position: absolute;
+      right: 20px;
+      top: 20px;
+    }
+  }
+}

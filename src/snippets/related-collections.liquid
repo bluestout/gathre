@@ -1,0 +1,19 @@
+<div class="grid__item large-up--one-whole full-content full related-collection-section">
+    <div class="carousel" delay-time="{{ section.settings.delay }}" >
+        {% for block in product.collections %}
+            {% if block.image != blank %}
+                <div class="carousel-cell">
+                    {% include 'responsive-image' with 
+                        image: block.image,
+                        max_width: 768,
+                        max_height: 768,
+                        square: true
+                    %}
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <div class="caption">
+        {{ section.settings.related_desc }}
+    </div>
+</div>

@@ -1,0 +1,97 @@
+.image_text_grid_section{
+    padding: $grid-gutter * 10 0;
+    @include media-query('medium-down'){
+        padding: $grid-gutter 0;
+        background-color: #F8F6F3;
+        margin-top: $grid-gutter;
+    }
+    .image_text_block{
+        h4{
+            margin-bottom: 0;
+        }
+        .image-field{
+            .grid__item{
+                margin-top: $grid-gutter;
+                .image-item {
+                    cursor: pointer;
+                    position: relative;
+                    overflow: hidden;
+                    .second{
+                        position: absolute;
+                        display: none;
+                        top: 0;
+                    }
+                    &:hover{
+                        .second{
+                            display: block;
+                        }
+                    }
+                }
+            }
+            .two{
+                margin-top: -$grid-gutter * 10;
+                padding-left: 0;
+            }
+        }
+        .text-field{
+            .title-content{
+                padding: $grid-gutter * 5 $grid-gutter * 10;
+                .content{
+                    max-width: $grid-gutter * 50;
+                }
+            }
+            .icon-content{
+                padding: $grid-gutter * 5 $grid-gutter * 10;
+                padding-right: 0;
+                @include media-query('medium-down'){
+                    
+                    padding: 15px;
+                    padding-left: 25px;
+
+                }
+                .content{
+                    .icon_block{
+                        display: table;
+                        float: left;
+                        width: 33.3%;
+                        padding: $grid-gutter;
+                        svg, img{
+                            width: $grid-gutter * 5;
+                            height: $grid-gutter * 4;
+                            margin-bottom: $grid-gutter * 2;
+                            g,ellipse{
+                                stroke: black;
+                                fill: white;
+                                @include media-query('medium-down'){
+                                    fill: #f8f6f3;
+                                }
+                            }
+                            @include media-query('medium-down'){
+                                margin: 5px auto;
+                                display: block;
+                                width: 20px;
+                                height: 20px;
+                            }
+                        }
+                        p{
+                            font-size: 11px;
+                            line-height: 18px;
+                            text-transform: uppercase;
+                            letter-spacing: 1px;
+                            margin: 0;
+                            font-family: $font_bold;
+                            max-width: 150px;
+                            
+                            @include media-query('medium-down'){
+                                text-align: center;
+                                font-size: 8px;
+                                margin: auto;
+                            }
+                        }
+                    }
+                }
+                
+            }
+        }
+    }
+}

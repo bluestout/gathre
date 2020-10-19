@@ -1,0 +1,317 @@
+@font-face {
+    font-family: 'slick';
+    font-weight: normal;
+    font-style: normal;
+    src: url("//cdn.shopify.com/s/files/1/0111/7077/5098/t/2/assets/slick.eot?16563562711274080149");
+    src: url("//cdn.shopify.com/s/files/1/0111/7077/5098/t/2/assets/slick.eot?%23iefix&16563562711274080149") format("embedded-opentype"),url("//cdn.shopify.com/s/files/1/0111/7077/5098/t/2/assets/slick.woff?16563562711274080149") format("woff"),url("//cdn.shopify.com/s/files/1/0111/7077/5098/t/2/assets/slick.ttf?16563562711274080149") format("truetype"),url("//cdn.shopify.com/s/files/1/0111/7077/5098/t/2/assets/slick.svg%23slick?16563562711274080149") format("svg");
+  }
+  
+  @font-face {
+    font-family:'GothamBook';src:url("//cdn.shopify.com/s/files/1/0111/7077/5098/t/2/assets/GothamBook.eot?16563562711274080149");src:url("//cdn.shopify.com/s/files/1/0111/7077/5098/t/2/assets/GothamBook.eot?%23iefix&16563562711274080149") format("embedded-opentype"),url("//cdn.shopify.com/s/files/1/0111/7077/5098/t/2/assets/GothamBook.woff2?16563562711274080149") format("woff2"),url("//cdn.shopify.com/s/files/1/0111/7077/5098/t/2/assets/GothamBook.woff?16563562711274080149") format("woff"),url("//cdn.shopify.com/s/files/1/0111/7077/5098/t/2/assets/GothamBook.ttf?16563562711274080149") format("truetype"),url("//cdn.shopify.com/s/files/1/0111/7077/5098/t/2/assets/GothamBook.svg%23GothamBook?16563562711274080149") format("svg");font-weight:500;font-style:normal;
+  }
+  
+  @font-face {
+    font-family:'Gothic720 BT';src:url("//cdn.shopify.com/s/files/1/0111/7077/5098/t/2/assets/Gothic720BT-RomanB.eot?16563562711274080149");src:url("//cdn.shopify.com/s/files/1/0111/7077/5098/t/2/assets/Gothic720BT-RomanB.eot?%23iefix&16563562711274080149") format("embedded-opentype"),url("//cdn.shopify.com/s/files/1/0111/7077/5098/t/2/assets/Gothic720BT-RomanB.woff2?16563562711274080149") format("woff2"),url("//cdn.shopify.com/s/files/1/0111/7077/5098/t/2/assets/Gothic720BT-RomanB.woff?16563562711274080149") format("woff"),url("//cdn.shopify.com/s/files/1/0111/7077/5098/t/2/assets/Gothic720BT-RomanB.ttf?16563562711274080149") format("truetype"),url("//cdn.shopify.com/s/files/1/0111/7077/5098/t/2/assets/Gothic720BT-RomanB.svg%23Gothic720BT-RomanB?16563562711274080149") format("svg");font-weight:normal;font-style:normal;
+  }
+  
+  @font-face {
+    font-family:'Gothic720 BT';src:url("//cdn.shopify.com/s/files/1/0111/7077/5098/t/2/assets/Gothic720BT-LightB.eot?16563562711274080149");src:url("//cdn.shopify.com/s/files/1/0111/7077/5098/t/2/assets/Gothic720BT-LightB.eot?%23iefix&16563562711274080149") format("embedded-opentype"),url("//cdn.shopify.com/s/files/1/0111/7077/5098/t/2/assets/Gothic720BT-LightB.woff2?16563562711274080149") format("woff2"),url("//cdn.shopify.com/s/files/1/0111/7077/5098/t/2/assets/Gothic720BT-LightB.woff?16563562711274080149") format("woff"),url("//cdn.shopify.com/s/files/1/0111/7077/5098/t/2/assets/Gothic720BT-LightB.ttf?16563562711274080149") format("truetype"),url("//cdn.shopify.com/s/files/1/0111/7077/5098/t/2/assets/Gothic720BT-LightB.svg%23Gothic720BT-LightB?16563562711274080149") format("svg");font-weight:300;font-style:normal;
+  }
+  *{
+    outline: none;
+  }
+  /* GothamBook */
+  h2, h3, h4 {
+    font-family: 'GothamBook';
+    text-transform: uppercase;
+  }
+  /* Gothic720 Lt BT ? */
+  body {
+    font-family: 'Gothic720 BT';
+    color: #969696;
+    font-weight:300;
+  }
+  
+  .product__description__name {
+     font-family: 'Gothic720 BT';
+    color: #969696;
+    font-weight:300;
+    font-size:18px;
+  }
+  
+  .product__description__variant {
+      font-weight:300;
+  }
+  
+  button, .btn {
+    text-transform: uppercase;
+    border-radius: 0;
+    background-color: #C5B097;
+    padding: 15px 20px;
+    
+  }
+  .button:hover, .btn:hover{
+    background-color: #E7DFD6;
+    color: black;
+  }
+  button, .btn span{
+      font-size: 16px;
+      letter-spacing: 2px;
+      font-family: 'Gothic720 BT';
+  }
+  input, textarea, .field__input, .input-checkbox {
+    border-radius: 0;
+    border-color: #C5B097!important;
+    font-weight: normal;
+    font-family: "Gothic720 BT";
+  }
+  .field__input::placeholder{
+    font-weight: normal;
+    font-family: "Gothic720 BT";
+    color: black;
+  }
+  .input-checkbox:checked{
+    box-shadow: 0 0 0 10px #C5B097 inset!important;
+  }
+  .input-radio:checked{
+    border: 1px solid #C5B097;
+      box-shadow: 0 0 0 10px #ffffff inset;
+  }
+  .input-radio:checked::after{
+    width: 14px;
+    height: 14px;
+    margin-left: -7px;
+    margin-top: -7px;
+    background-color: #C5B097;
+  }
+  /*
+   .product-thumbnail,
+   .product-thumbnail__wrapper,
+   .product-thumbnail__quantity::after{
+   border-radius:0;
+   }
+   */
+  .checkout-logo .logo span{
+    text-transform: uppercase;
+    font-size: 41px;
+    font-family: "GothamBook";
+    letter-spacing: 14px;
+  }
+  .product-thumbnail__quantity {
+    background: #000;
+    padding: 0 8px 1px 7px;
+  }
+  .checkout-logo img {
+    height: 26px;
+  }
+
+  .breadcrumb li a, .breadcrumb li span{
+    font-family: "Gothic720 BT";
+    font-weight: normal;
+    font-size: 14px;
+    color: #030303;
+    text-transform: uppercase;
+  }
+
+  .breadcrumb li.breadcrumb__item--blank span{
+    color: #BCBCBC;
+  }
+  .icon-svg--color-accent{
+    color: #030303;
+  }
+  .step__footer{
+    padding-top: 30px;
+    margin-top: 50px;
+    border-top: 1px solid #E7DFD6;
+  }
+  .step__footer__previous-link-content{
+    color: #030303;
+    font-size: 12px;
+    font-family: "GothamBook";
+    text-decoration: underline;
+  }
+
+  .content-box .content-box__row .review-block__label{
+    font-family: "GothamBook";
+    font-size: 14px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: #030303;
+  }
+
+  .content-box .content-box__row .review-block__link a span{
+    color: #030303!important;
+    font-family: "GothamBook";
+    text-decoration: underline;
+  }
+
+  @media screen and (max-width: 768px) {
+    .content .wrap{
+      background-color: white;
+    }
+    #order-summary{
+      width: 100%;
+    }
+  }
+  .section__header .section__title{
+    font-size: 14px;
+    letter-spacing: 2px;
+  }
+
+  .section__header .layout-flex__item span{
+    font-size: 14px;
+    color: #030303;
+    font-family: "Gothic720 BT";
+    font-weight: 300;
+    margin-right: 10px;
+  }
+  .section__header .layout-flex__item a{
+    font-size: 12px;
+    text-decoration: underline;
+    font-family: "GothamBook";
+    color: #030303;
+  }
+  .order-summary__sections{
+    height: auto!important;
+  }
+  .order-summary__section--product-list{
+      margin-bottom: 100px;
+  }
+  .order-summary__section--product-list::after{
+      height: 0;
+  }
+  #orderbump{
+    position: absolute;
+    width: 100%;
+    bottom: 295px;
+    max-width: 418px;
+  }
+
+  #orderbump .tvgorderbump-app{
+    padding: 0;
+    border: none;
+  }
+  #orderbump .tvgorderbump-app .tvgorderbump-container{
+      position: relative;
+  }
+  #orderbump .tvgorderbump-app .tvgorderbump-container .tvgorderbump-image-container{
+    padding: 0;
+    line-height: 0;
+  }
+
+  #orderbump .tvgorderbump-app .tvgorderbump-container .tvgorderbump-title-container{
+    margin-top: 5px;
+  }
+  #orderbump .tvgorderbump-app .tvgorderbump-container .tvgorderbump-price{
+    position: absolute;
+    left: 82px;
+    top: 35px;
+  }
+  #orderbump .tvgorderbump-app .tvgorderbump-container .tvgorderbump-action{
+    background-color: black;
+    border: 1px solid black;
+    padding: 10px 20px;
+    margin-right: 15px;
+    font-size: 17px;
+    color: white;
+    
+  }
+  .sidebar__content{
+    position: relative;
+  }
+   .sidebar::after{
+    box-shadow: 1px 0 0 #F8F7F5 inset;
+    background: #F8F7F5;
+   }
+   @media screen and (max-width: 768px){
+     .sidebar__content{
+      margin-bottom: 0;
+     }
+   }
+   .order-summary__section{
+     padding: 0;
+     border-top-color: white!important;
+     margin-top: 20px;
+   }
+   .order-summary__section .total-line-table .total-line-table__tbody th, .order-summary__section .total-line-table .total-line-table__tbody td{
+    padding: 20px;
+    border-bottom: 1px solid white;
+    font-size: 16px;
+   }
+   .order-summary__section .total-line-table .total-line-table__tbody td .order-summary__small-text{
+     font-style: italic;
+     font-size: 13px;
+   }
+
+   .order-summary__section .total-line-table .total-line-table__footer .total-line th, .order-summary__section .total-line-table .total-line-table__footer .total-line td{
+     padding: 20px;
+     background: white;
+   }
+   .sidebar .payment-due__currency{
+     vertical-align: middle;
+   }
+   .order-summary__section .total-line-table .total-line-table__footer .total-line td .payment-due__price{
+     font-size: 14px;
+     font-family: "GothamBook";
+   }
+   .order-summary__section .total-line-table .total-line-table__footer .total-line th::before, .order-summary__section .total-line-table .total-line-table__footer .total-line td::before{
+      content: normal;
+    }
+    .field__message.field__message--error{
+      position: absolute;
+    }
+    .tvgorderbump-action-soldout{
+      margin: auto;
+      display: table;
+    }
+
+    @media screen and (max-width: 768px){
+      .checkout-logo .logo span{
+        font-size: 24px;
+        text-align: center;
+        margin: auto;
+        display: table;
+      }
+      .total-recap__final-price {
+        font-size: 14px;
+        font-family: "Gothic720 BT";
+        font-weight: normal;
+        color: #030303;
+      }
+      .order-summary-toggle__icon-wrapper svg{
+        fill: #030303;
+      }
+      .order-summary-toggle__text{
+        font-size: 12px;
+        font-family: "Gothic720 BT";
+        font-weight: normal;
+        color: #030303;
+      }
+      .order-summary-toggle__text svg{
+        fill: #030303;
+      }
+      .order-summary-toggle{
+        border: none;
+        background-color: #F8F7F5;
+      }
+      .checkbox-container .step{
+        padding: 0 20px;
+      }
+      .breadcrumb {
+        display: none;
+      }
+      .tvgorderbump-app{
+        width: 100%;
+        display: flex;
+      }
+      .tvgorderbump-container{
+        min-width: auto!important;
+        width: calc(100% - 120px);
+      }
+      .tvgorderbump-action-container{
+        width: 120px;
+      }
+      #orderbump{
+        bottom: 262px;
+      }
+    }

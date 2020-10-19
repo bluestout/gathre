@@ -1,0 +1,36 @@
+<div class="not_found-section">
+    <h1 class="extra text-center heading-brand">{{ 'general.404.brand' | t }}</h1>
+    <h1 class="extra text-center capitalize">{{ section.settings.title }}</h1>
+    {{ section.settings.desc }}
+    <a href="{{ section.settings.btn_url }}" class="button brown small">{{ section.settings.button }}</a>
+</div>
+{% schema %}
+{
+    "name": "404 section",
+    "settings": [
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "Whoops!"
+        },  
+        {
+            "type": "richtext",
+            "id": "desc",
+            "label": "Description",
+            "default": "<p>We couldn't find the page you are looking for!</p><p>Checkout our top products</p>"
+        },
+        {
+            "type": "text",
+            "id": "button",
+            "label": "Button label",
+            "default": "View Bestsellers"
+        },
+        {
+            "type": "url",
+            "id": "btn_url",
+            "label": "Button url"
+        }
+    ]
+}
+{% endschema %}

@@ -1,0 +1,151 @@
+{% comment %}
+  The data-label attributes on <td> elements are mobile-friendly
+  helpers used for responsive-table labels
+{% endcomment %}
+{% assign heading_title = 'customer.account.title' | t %}
+
+{% include 'page-banner', title: heading_title %}
+<div class="container">
+    <div class="full-content grid">
+        <div class="menu grid__item large-up--one-third">
+            <ul class="select-box-menu">
+              <li class="uppercase">{{ 'customer.menu.dashboard' | t | link_to : "/account" }}</li>
+              <li class="uppercase active">{{ 'customer.menu.order_history' | t | link_to: "#" }}</li>
+              <li class="uppercase">{{ 'customer.menu.account_detail' | t | link_to: "/account/addresses" }}</li>
+              <li class="uppercase"><a href="#swym-wishlist" class="swym-wishlist"> {{ 'customer.menu.wishlist' | t }}</a></li>
+              <li class="uppercase">{{ 'customer.menu.rewards' | t | link_to: "pages/gathred" }}</li>
+              <li class="uppercase">{{ 'customer.menu.log_out' | t | link_to: "/account/logout" }}</li>
+            </ul>
+        </div>
+        <div class="content account-dashborad grid__item large-up--two-thirds">
+            <div>
+                <h2 class="collapse active uppercase title light">
+                    <a class="heading">{{ 'customer.order.title' | t: name: order.name }} <em>{{ order.financial_status_label }}</em></a> 
+                    
+                    {% if order.cancelled %}
+                        <a class="request-button fright">{{'customer.orders.return_label' | t }}</a>
+                    {% else %}
+                        <a class="request-button fright">{{'customer.orders.cencel_label' | t }}</a>
+                    {% endif %}
+                    
+                </h2>
+                <div class="content-field">
+                    {% if order.cancelled %}
+                    {%- assign cancelled_at = order.cancelled_at | date: "%B %d, %Y %I:%M%p" -%}
+                    <p>{{ 'customer.order.cancelled' | t: date: cancelled_at }}</p>
+                    <p>{{ 'customer.order.cancelled_reason' | t: reason: order.cancel_reason }}</p>
+                    {% endif %}
+            
+                    <table class="responsive-table orders">
+                        <thead>
+                            <tr>
+                            <th>{{ 'customer.order.product' | t }}</th>
+                            <th>{{ 'customer.order.quantity' | t }}</th>
+                            <th>{{ 'customer.order.date' | t }}</th>
+                            <th>{{ 'customer.order.total' | t }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for line_item in order.line_items %}
+                            <tr id="{{ line_item.key }}" class="responsive-table-row">
+                                <td class="product">
+                                    <img src="{{ line_item.image | img_url: '50x' }}" class="fleft">
+                                    {{ line_item.title | link_to: line_item.product.url }}
+                                </td>
+                                <td data-label="{{ 'customer.order.quantity' | t }}">{{ line_item.quantity }}</td>
+                                <td data-label="{{ 'customer.order.date' | t }}">{{ order.created_at | date: "%B %d, %Y %I:%M%p" }}</td>
+                                <td data-label="{{ 'customer.order.price' | t }}">{{ line_item.quantity | times: line_item.price | money }}</td>
+                            </tr>
+                            {% endfor %}
+                            {% for discount in order.discounts %}
+                            <tr>
+                                <td colspan="3" class="small--hide tright">{{ discount.code }} {{ 'customer.order.discount' | t }}</td>
+                                <td data-label="{{ 'customer.order.discount' | t }}">{{ discount.savings | money }}</td>
+                            </tr>
+                            {% endfor %}
+            
+                            {% for shipping_method in order.shipping_methods %}
+                            <tr>
+                                <td colspan="3" class="small--hide tright">{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})</td>
+                                <td data-label="{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})">{{ shipping_method.price | money }}</td>
+                            </tr>
+                            {% endfor %}
+            
+                            {% for tax_line in order.tax_lines %}
+                            <tr>
+                                <td colspan="3" class="small--hide tright">{{ 'customer.order.tax' | t }} ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%)</td>
+                                <td data-label="{{ 'customer.order.tax' | t }} ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%)">{{ tax_line.price | money }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                            <td colspan="4" data-label="{{ 'customer.order.total' | t }}" class="tright"><span  class="small--hide tright">{{ 'customer.order.total' | t }} </span> {{ order.total_price | money }} {{ order.currency }}</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+            
+            <div>
+                <h2 class="title uppercase light active"><a class="heading">{{ 'customer.order.billing_address' | t }}</a></h2>
+                <div class="content-field">
+                    {{ order.billing_address | format_address }}
+                </div>
+            </div>
+            
+            <div>
+                <h2 class="title uppercase light active"><a class="heading">{{ 'customer.order.shipping_address' | t }}</a> <em>{{ order.fulfillment_status_label }}</em></h2>
+                <div class="content-field">
+                    {{ order.shipping_address | format_address }}
+                </div>
+            </div>
+            
+    
+        </div>
+    </div>
+</div>
+
+
+{% schema %}
+{
+    "name": "order section",
+    "settings": [
+        {
+          "type": "image_picker",
+          "id": "feature_image",
+          "label": "Feature image"
+        },
+        {
+            "type": "image_picker",
+            "id": "mobile_feature_image",
+            "label": "Mobile feature image"
+        },
+        {
+          "type": "color",
+          "id": "title_color",
+          "label": "Title color",
+          "default": "#030303"
+      },
+      {
+        "type": "select",
+        "id": "pos",
+        "label": "Hero banner title postion",
+        "options": [
+            {
+                "value": "left",
+                "label": "Left"
+            },
+            {
+                "value": "right",
+                "label": "Right"
+            },
+            {
+                "value": "center",
+                "label": "Center"
+            }
+        ]
+      }
+    ]
+}
+{% endschema %}

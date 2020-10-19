@@ -1,0 +1,53 @@
+<div class="full-content logo-list">
+  <div class="heading">
+    <h1 class="uppercase text-center">{{section.settings.title}}</h1>
+  </div>
+  <div class="content max-width-900">
+    {% for block in section.blocks %}
+      <div class="grid__item one-third medium-down--one-whole">
+        <div class="image">
+          {% render 'responsive-image' with 
+            image: block.settings.image,
+            max_width: 100,
+            max_height: 100
+          %}  
+        </div>
+        <div class="info text-center">
+          {{block.settings.text}}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% schema %}
+{
+  "name": "collection logo list",
+  "class": "collection-logo-list",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Heading"
+    }
+  ],
+  "blocks":[
+    {
+      "type": "logo-item",
+      "name": "logo item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

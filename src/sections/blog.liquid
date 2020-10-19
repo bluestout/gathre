@@ -1,0 +1,120 @@
+<div class="blog-section">
+    <div class="grid banner">
+        <div class="container">
+            <div class="grid__item large-up--one-half feature-image">
+                <div class="main-feature">
+                    {% include 'responsive-image' with 
+                        image: section.settings.main_image,
+                        max_width: 1024,
+                        max_height: 1024
+                    %}
+                </div>
+                <div class="sub-feature grid__item large-up--one-half">
+                    {% include 'responsive-image' with
+                        image: section.settings.sub_image,
+                        max_width: 768,
+                        max_height: 768
+                    %}
+                </div>
+            </div>
+        </div>
+        
+        <div class="grid__item large-up--one-half feature-article">
+            <div class="content">
+                {% assign article = articles[section.settings.new_article] %}
+                <h5 class="uppercase bold medium-down--text-center">{{ 'blogs.general.feature_title' | t }}</h5>
+                <h1 class="uppercase devider left title medium-down--text-center">{{ article.title }}</h1>
+                <h1 class="light medium-down--text-center">{{ article.content | strip_html | truncatewords: 20 }}</h1>
+                <a href="{{ article.url }}" class="button brown small">{{ 'blogs.article.read_more' | t }}</a>
+            </div>
+        </div>
+    </div>
+    <div class="full-content content tab-content">
+        <h1 class="uppercase extra text-center devider devider-center">{{ section.settings.title }}</h1>
+        <ul class="tab select-box-menu">
+            {% for block in section.blocks %}
+                {% if forloop.index == 1 %}
+                    {% assign cls = 'active' %}
+                {% else %}
+                    {% assign cls = '' %}
+                {% endif %}
+                {% assign blog = blogs[block.settings.blog_item] %}
+                <li class="{{ cls }}">
+                    <a href="#{{blog.title | remove: '#' | handleize }}">{{ blog.title  }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+        {% for block in section.blocks %}
+            {% assign blog = blogs[block.settings.blog_item] %}
+            {% if forloop.index == 1 %}
+                {% assign cls = 'active' %}
+            {% else %}
+                {% assign cls = '' %}
+            {% endif %}
+            <div class="grid animated fadeIn articles {{ cls }} pannel" id="{{blog.title | remove: '#' | handleize }}">
+                <div class="pagination">
+                    {% assign page_items = 0 %}
+                    {% for article in blog.articles %}
+                        {% if page_items < 6 %}
+                            <div class="grid__item large-up--one-third small--one-whole medium--one-half">
+                                {% include 'blog-item', item: article %}
+                            </div>
+                        {% else %}
+                            <div class="grid__item large-up--one-third medium--one-half  small--one-whole hide animation fadeInDown">
+                                {% include 'blog-item', item: article %}
+                            </div>
+                        {% endif %}
+                        {% assign page_items = page_items | plus: 1 %}
+                    {% endfor %}
+                </div>
+                <div class="load_more_content">
+                    <span class="page-num"></span>
+                    <button class="button load_more_btn brown medium">{{ 'general.general.load_more' | t }}</button>
+                </div>
+            </div>
+        {% endfor %}
+        
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "blog section",
+    "settings": [
+        {
+            "type": "image_picker",
+            "id": "main_image",
+            "label": "Feature image"
+        },
+        {
+            "type": "image_picker",
+            "id": "sub_image",
+            "label": "Feature image"
+        },
+        {
+            "type": "article",
+            "id": "new_article",
+            "label": "Feature article"
+        },
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "Form the blog"
+        }
+    ],
+    "blocks":[
+        {
+            "name": "blog",
+            "type": "blog",
+            "settings": [
+                {
+                    "type": "blog",
+                    "id": "blog_item",
+                    "label": "Blog"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

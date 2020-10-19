@@ -1,0 +1,23 @@
+{% assign products_per_page = section.settings.products_per_page %}
+{% paginate collection.products by products_per_page %}
+  <div class="page-width container">
+
+    {% for product in collection.products %}
+      <div class="product-row">
+        <h1 class="uppercase ">{{ product.title }}</h1>
+        <div class="variants">
+          {% for variant in product.variants %}            
+            {% assign handle = variant.title | handleize %}
+            {% if handle contains collection.handle %}
+              <div class="grid__item large-up--one-quarter medium-down--one-half">
+                {% render 'variant-item' with variant: variant, product: product %}
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+      
+      
+    {% endfor %}
+  </div>
+{% endpaginate %}

@@ -1,0 +1,14 @@
+{% assign article_item = item %}
+<div class="feature_image">
+    {% include 'responsive-image' with 
+        image: article_item.image,
+        max_width: 768,
+        max_height: 768,
+        square: true
+    %}
+</div>
+<div class="info">
+    <h3 class="title uppercase">{{ article_item.title }}</h3>
+    <p class="light">{{ article_item.content | strip_html | truncatewords: 19 }}</p>
+    <a href="{{article_item.url}}">{{ 'blogs.article.read_more' | t }}</a>
+</div>

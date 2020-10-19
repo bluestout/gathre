@@ -1,0 +1,208 @@
+<div class="collection-section">
+  {% include 'collection_page_banner' %}
+  {% include 'icon_bar' %}
+  {% include 'product_list' %}
+</div>
+
+{% schema %}
+  {
+    "name": "Collection pages",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "banner",
+        "label": "Default banner image",
+        "info": "2048 X 816px recommended"
+      },
+      {
+        "type": "image_picker",
+        "id": "mobile_banner",
+        "label": "Default mobile banner image",
+        "info": "760 X 365px recommended"
+      },
+      {
+          "type": "checkbox",
+          "id": "title_status",
+          "label": "Title status",
+          "default": true
+      },
+      {
+          "type": "text",
+          "id": "title",
+          "label": "Default banner title"
+      },
+      {
+          "type": "color",
+          "id": "title_color",
+          "label": "Title color",
+          "default": "#030303"
+      },
+      {
+          "type": "richtext",
+          "id": "desc",
+          "label": "Default banner desc"
+      },
+      {
+          "type": "checkbox",
+          "id": "desc_status",
+          "label": "Description status",
+          "default": true
+      },
+      {
+          "type": "color",
+          "id": "desc_color",
+          "label": "Description color",
+          "default": "#030303"
+      },
+      {
+        "type": "select",
+        "id": "pos",
+        "label": "Hero banner title postion",
+        "options": [
+            {
+                "value": "left",
+                "label": "Left"
+            },
+            {
+                "value": "right",
+                "label": "Right"
+            },
+            {
+                "value": "center",
+                "label": "Center"
+            }
+        ]
+      },
+      {
+          "type": "color",
+          "id": "icon_bar_color",
+          "label": "Icon bar backround",
+          "default": "#F8F6F3"
+      },
+      {
+        "type": "range",
+        "id": "products_per_page",
+        "label": "Products per page",
+        "min": 2,
+        "max": 50,
+        "step": 1,
+        "default": 24
+      },
+      {
+        "type": "range",
+        "id": "products_per_row",
+        "label": "Products per row on Desktop",
+        "min": 2,
+        "max": 4,
+        "step": 1,
+        "default": 3
+      },
+      {
+        "type": "range",
+        "id": "products_per_row_mobile",
+        "label": "Products per row on Mobile",
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "default": 2
+      },
+      {
+        "type": "checkbox",
+        "id": "show_vendor",
+        "label": "Show product vendor",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_price",
+        "label": "Show price",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_sale_label",
+        "label": "Show sale label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_sold_out_label",
+        "label": "Show sold out label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "active_image_swap",
+        "label": "Active image swap",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_sorting",
+        "label": "Enable collection sorting",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "soldout_label",
+        "label": "Sold Out Label",
+        "default": "Sold out"
+      },
+	    {
+        "type": "text",
+        "id": "sale_label",
+        "label": "Sale Label",
+        "default": "Sale"
+      },
+      {
+        "type": "text",
+        "id": "from",
+        "label": "From",
+        "default": "from"
+      }
+    ],
+    "blocks":[
+        {
+            "name": "icon",
+            "type": "icon_block",
+            "settings": [
+                {
+                  "type": "header",
+                  "content": "desktop icon"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "icon_img",
+                    "label": "Icon(image)",
+                    "info": "35 X 35px recommended"
+                },
+                {
+                    "type": "html",
+                    "id": "icon_svg",
+                    "label": "Icon(svg)"
+                },
+                {
+                  "type": "header",
+                  "content": "mobile icon"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "mobile_icon_img",
+                    "label": "Icon(image)",
+                    "info": "35 X 35px recommended"
+                },
+                {
+                    "type": "html",
+                    "id": "mobile_icon_svg",
+                    "label": "Icon(svg)"
+                },
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title"
+                }
+            ]
+        }
+    ]
+  }
+{% endschema %}

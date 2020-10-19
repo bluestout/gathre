@@ -1,0 +1,142 @@
+.blog-section{
+    .banner{
+        position: relative;
+        background-color: $light-grey;
+        padding-bottom: 50px;
+        .feature-image{
+            position: relative;
+            padding-bottom: $grid-gutter * 10;
+            @include media-query('medium-down'){
+                padding-bottom: 0;
+            }
+            .main-feature{
+                width: 100%;
+                float: left;
+                @include media-query('medium-down'){
+                    width: 50%;
+                    float: right;
+                }
+            }
+            .sub-feature{
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                transform: translateX(30%);
+                @include media-query('medium-down'){
+                    width: 50%;
+                    transform: none;
+                    padding: 0;
+                    height: 100%;
+                    left: 5px;
+                    overflow: hidden;
+                }
+                .responsive-image__wrapper {
+                    @include media-query('medium-down'){
+                        transform: translateY(-35%);
+                    }
+                }
+            }
+        }
+        .feature-article{
+            position: absolute;
+            right: 0;
+            height: 100%;
+            display: flex;
+            padding-left: 115px;
+            @include media-query('medium-down'){
+                position: relative;
+                padding: 20px;
+                width: 100%;
+                left: 0;
+                padding-left: 30px;
+            }
+            .content{
+                max-width: 500px;
+                margin: auto;
+                margin-top: 100px;
+                word-wrap: break-word;
+                @include media-query('medium-down'){
+                    margin: 0 auto;
+                }
+                .title{
+                    font-size: $collection_hero_size;
+                    line-height: 45px;
+                    @include media-query('medium-down'){
+                        font-size: 16px;
+                        line-height: 20px;
+                        &:after{
+                            display: table;
+                            margin: 20px auto;
+                        }
+                    }
+                   
+                }
+                h1{
+                    font-size: 24px;
+                    line-height: 31px;
+                    @include media-query('medium-down'){
+                        line-height: 20px;
+                        font-size: 14px;
+                    }
+                    
+                }
+                .button{
+                    float: left;
+                    @include media-query('medium-down'){
+                        max-width: 200px;
+                        margin: auto;
+                        float: none;
+                        margin-top: 20px;
+                    }
+                }
+            }
+        }
+    }
+    .content{
+        h1{
+            font-size: 16px;
+            &::after{
+                margin-top: 5px;
+                width: 50px;
+            }
+        }
+        .articles{
+            max-width: 1440px;
+            .pagination{
+                display: grid;
+                width: 100%;
+                grid-template-columns: 1fr 1fr 1fr;
+                @include media-query('medium-down'){
+                    grid-template-columns: 1fr 1fr;
+                }
+                @include media-query('small'){
+                    grid-template-columns: 1fr;
+                }
+                .grid__item{
+                    width: 100%;
+                    .info{
+                        padding: $grid-gutter;
+                        margin-bottom: $grid-gutter * 2;
+                        .title{
+                            @include media-query('medium-down'){
+                                font-size: 15px;
+                                line-height: 21px;
+                            }
+                        }
+                        p{
+                            @include media-query('medium-down'){
+                                font-size: 13px;
+                                line-height: 21px;
+                            }
+                        }
+                        a{
+                            text-decoration: underline;
+                            color: $black;
+                        }
+                    }
+                    
+                }
+            }
+        }
+    }
+}

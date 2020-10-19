@@ -1,0 +1,91 @@
+<div class="content">
+    <div class="login-section grid">
+        <div class="grid__item large-up--one-half">
+            {% include 'responsive-image' with 
+                image: section.settings.image,
+                max_width: 1024,
+                max_height: 1024,
+                wrapper_class: 'medium-down--hide'
+            %}
+            {% include 'responsive-image' with 
+                image: section.settings.mobile_image,
+                max_width: 1024,
+                max_height: 1024,
+                wrapper_class: 'large-up--hide'
+            %}
+        </div>
+        <div class="grid__item large-up--one-half login-content">
+            <div class="content">
+                <h1 class="extra uppercase text-center">{{ section.settings.title }}</h1>
+
+                {% form 'create_customer' %}
+                    {{ form.errors | default_errors }}
+                    <input type="text"
+                        name="customer[first_name]"
+                        id="FirstName"
+                        placeholder="{{ 'customer.register.first_name' | t }}"
+                        autofocus
+                        {% if form.first_name %}value="{{ form.first_name }}"{% endif %}>
+
+                    <input type="text"
+                        name="customer[last_name]"
+                        id="LastName"
+                        placeholder="{{ 'customer.register.last_name' | t }}"
+                        {% if form.last_name %}value="{{ form.last_name }}"{% endif %}>
+
+                    <input type="email"
+                        name="customer[email]"
+                        id="Email"
+                        class="{% if form.errors contains 'email' %}input-error{% endif %}"
+                        placeholder="{{ 'customer.register.email' | t }}"
+                        value="{% if form.email %}{{ form.email }}{% endif %}"
+                        spellcheck="false"
+                        autocomplete="off"
+                        autocapitalize="off">
+
+                    <input type="password"
+                        name="customer[password]"
+                        id="CreatePassword"
+                        class="{% if form.errors contains 'password' %}input-error{% endif %}"
+                        placeholder="{{ 'customer.register.password' | t }}">
+                    
+                    <input type="checkbox" id="customer[accepts_marketing]" name="customer[accepts_marketing]" class="checkbox hide">
+                    <p class="checkbox-label">{{ 'customer.login.news_letter' | t }}</p>
+                    <input type="hidden" class="return_url" name="checkout_url" value="https://gathre.com/account">
+                    <div class="pannel">
+                        <input type="submit" value="{{ 'customer.register.submit' | t }}" class="button black">
+                        <a class="fleft" href="{{ shop.url }}">{{ 'customer.register.cancel' | t }}</a>
+                        <a class="fright" href="/account/login">{{ 'customer.login.sign_in' | t }}</a>
+                    </div>
+                    
+                {% endform %}
+            </div> 
+        </div>
+    </div>
+</div>
+
+
+{% schema %}
+{
+    "name": "register section",
+    "settings": [
+        {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Feature image"
+        },
+        {
+            "type": "image_picker",
+            "id": "mobile_image",
+            "label": "Mobile feature image"
+        },
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "Create an Account"
+        }
+    ]
+}
+{% endschema %}
+  

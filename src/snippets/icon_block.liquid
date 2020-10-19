@@ -1,0 +1,52 @@
+<div class="icon-block">
+    <h1 class="text-center devider devider-center">{{ block.settings.title }}</h1>
+    <div class="icon-list">
+        {% assign i = 0 %}
+        {% for block in section.blocks %}
+            
+            {% if block.type == 'icon' %}
+                <div class="icon">
+                    {% if block.settings.link != blank %}
+                        <a href="{{ block.settings.link }}">
+                    {% endif %}
+                    {% if block.settings.icon_image != blank %}
+                        <img src="{{ block.settings.icon_image | img_url: 'original' }}">
+                    {% elsif block.settings.icon_svg  != blank %}
+                        {{ block.settings.icon_svg }}
+                    {% endif %}
+                    <h4 class="extra text-center">{{ block.settings.title }}</h4>
+                    <span class="light text-center"> {{ block.settings.sub_title }} </span>
+                    {% if block.settings.link != blank %}
+                        </a>
+                    {% endif %}
+                </div>
+                {% assign i = i | plus: 1 %}
+            {% endif %}
+            
+            {% if block.type == 'banner' %}
+                {% capture banner_html %}
+                    <div class="banner-block">
+                        {% include 'responsive-image' with 
+                            image: block.settings.image,
+                            max_width: 768,
+                            max_height: 768
+                        %}
+                        <div class="caption">
+                            {% if block.settings.link != blank %}
+                                <a href="{{ block.settings.link }}">
+                            {% endif %}
+                            {{ block.settings.icon }}
+                            {{ block.settings.title }}
+                            {% if block.settings.link != blank %}
+                                </a>
+                            {% endif %}                            
+                        </div>
+                    </div>
+                {% endcapture %}
+            {% endif %}
+            {% if i == 4 and banner_html != blank %}
+                {{ banner_html }}
+            {% endif %}   
+        {% endfor %}
+    </div>
+</div>

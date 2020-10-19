@@ -1,0 +1,126 @@
+<div class="homepage_image_text_section">
+    {% assign block_name = section.settings.type | prepend: 'image-text-' | append: '.liquid' %}
+    {% include block_name %}
+</div>
+
+
+{% schema %}
+{
+    "name": "Image text",
+    "settings": [
+        {
+            "type": "checkbox",
+            "id": "grid_style",
+            "label": "Full width?"
+        },
+        {
+            "type": "color",
+            "id": "bg_color",
+            "label": "Background color",
+            "default": "#FBF9F8"
+        },
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "Born from a need in our day to day life."
+        },
+        {
+            "type": "text",
+            "id": "mobile_title",
+            "label": "Mobile title"
+        },
+        {
+            "type": "richtext",
+            "id": "desc",
+            "label": "Description"
+        },
+        {
+            "type": "text",
+            "id": "button_label",
+            "label": "Button label",
+            "default": "read more"
+        },
+        {
+            "type": "url",
+            "id": "button_url",
+            "label": "Button url"
+        },
+        {
+            "type": "text",
+            "id": "heading_caption",
+            "label": "Heading caption",
+            "default": "Gathre pronounced"
+        },
+        {
+            "type": "select",
+            "id": "type",
+            "label": "Type",
+            "options": [
+                {
+                    "value": "origin",
+                    "label": "Origin"
+                },
+                {
+                    "value": "grid",
+                    "label": "Grid"
+                },
+                {
+                    "value": "basic",
+                    "label": "Basic"
+                }
+            ]
+        }
+    ],
+    "blocks" : [
+        {
+            "name": "image",
+            "type": "image_block",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "Image"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "second_image",
+                    "label": "Second image"
+                },
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title"
+                }
+            ]
+        },
+        {
+            "name": "icon",
+            "type": "icon_block",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "icon_img",
+                    "label": "Icon image"
+                },
+                {
+                    "type": "html",
+                    "id": "icon_svg",
+                    "label": "Icon svg"
+                },
+                {
+                    "type": "richtext",
+                    "id": "title",
+                    "label": "Title"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "category": "Text field",
+            "name":"Image Text"
+        }
+    ]
+}
+{% endschema %}

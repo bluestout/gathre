@@ -1,0 +1,12 @@
+{% assign product_val = item %}
+{% assign collection = product_val.collections[0] %}
+<div class="grid related-products full-content">
+    <h1 class="extra uppercase text-center">{{ 'products.product.related_product' | t }}</h1>
+    <div class="content grid__item one-whole">
+        {% for product in collection.products limit: 4 %}
+            <div class="grid__item large-up--one-third medium-down--one-half">
+                {% include 'product-item' %}
+            </div>
+        {% endfor %}
+    </div>
+</div>

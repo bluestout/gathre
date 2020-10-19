@@ -1,0 +1,34 @@
+<div class="page-header">
+    {% if section.settings.feature_image != blank %}
+        {% include 'responsive-image' with 
+            image: section.settings.feature_image,
+            max_width: 2048,
+            max_height: 768,
+            wrapper_class: "medium-down--hide"
+        %}
+        {% include 'responsive-image' with 
+            image: section.settings.mobile_feature_image,
+            max_width: 2048,
+            max_height: 768,
+            wrapper_class: "large-up--hide"
+        %}
+        <div class="caption {{ section.settings.pos }}">
+            {% if title != blank %}
+                <h1 class="uppercase banner-title extra" style="color: {{ section.settings.title_color }}">{{ title }}</h1>
+            {% endif %}
+            {% if desc != blank %}
+                <h1 class="capitalize banner-desc light" style="color: {{ section.settings.desc_color }}" >{{ desc | strip_html }}</h1>
+            {% endif %}
+            {% if section.settings.link != blank and section.settings.label != blank %}
+                <a class="button brown" href="{{ section.settings.link }}" >{{ section.settings.label }}</a>
+            {% endif %}
+            <h4 class="light">{{ section.settings.sub_link }}</h4>
+        </div>
+    {% else %}
+        <div class="full-content">
+            <h1 class="uppercase extra text-{{ section.settings.pos }}" style="color: {{ section.settings.title_color }}">{{ title }}</h1>
+        </div>
+    {% endif %}
+    
+    
+</div>

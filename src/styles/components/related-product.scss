@@ -1,0 +1,15 @@
+.related-products{
+    max-width: 1200px;
+    width: 100%;
+    display: table;
+    margin: auto;
+    padding-top: 0;
+    float: none;
+    .content{
+        margin-top: 20px;
+        @include media-query('medium-down'){
+            padding: 0;
+            margin-left: -10px;
+        }
+    }
+}

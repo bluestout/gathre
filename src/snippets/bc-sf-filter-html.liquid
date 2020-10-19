@@ -1,0 +1,96 @@
+{%- capture bc_layout -%}
+{%- case layout -%}
+
+{%- when 'productGridItemHtml' -%}
+<div class="bc-sf-filter-product-item bc-sf-filter-product-item-grid [[gridWidthClass]][[soldOutClass]][[saleClass]] [[itemActiveSwapClass]]">
+    <script class="bc-sf-filter-product-script" data-id="bc-product-json-[[itemId]]" type="application/json">[[itemJson]]</script>
+    <div class="bc-sf-filter-product-item-inner">
+        <div class="bc-sf-filter-product-item-image">
+            <a href="[[itemUrl]]" class="bc-sf-filter-product-item-image-link">[[itemImages]]</a>
+        </div>
+        <div class="bc-sf-filter-product-item-label">[[itemLabels]][[itemTagLabels]]</div>
+        <div class="bc-sf-filter-product-bottom">
+            <a href="[[itemUrl]]" class="bc-sf-filter-product-item-title">[[itemTitle]]</a>
+            [[itemVendor]]
+            [[itemPrice]]
+        </div>
+    </div>
+</div>
+
+{%- when 'productListItemHtml' -%}
+<div class="bc-sf-filter-product-item bc-sf-filter-product-item-list [[soldOutClass]][[saleClass]] [[itemActiveSwapClass]]">
+    <div class="bc-sf-filter-product-item-list-col-1">
+        <div class="bc-sf-filter-product-item-image">
+            <div class="bc-sf-filter-product-item-label">[[itemLabels]][[itemTagLabels]]</div>
+            <a href="[[itemUrl]]" class="bc-sf-filter-product-item-image-link">[[itemImages]]</a>
+        </div>
+    </div>
+    <div class="bc-sf-filter-product-bottom">
+        <div class="bc-sf-filter-product-item-list-col-2">
+            <a href="[[itemUrl]]" class="bc-sf-filter-product-item-title">[[itemTitle]]</a>
+            [[itemVendor]]
+            <p class="bc-sf-filter-des">[[itemDescription]]</p>
+        </div>
+        <div class="bc-sf-filter-product-item-list-col-3">[[itemPrice]]</div>
+    </div>
+</div>
+
+{%- when 'soldOutLabelHtml' -%}
+<span class="soldout bc-sf-filter-label"> {{ section.settings.soldout_label }} </span>
+
+{%- when 'saleLabelHtml' -%}
+<span class="sale bc-sf-filter-label"> {{ section.settings.sale_label }} </span>
+
+{%- when 'tagLabelHtml' -%}
+<span class="tag bc-sf-filter-label [[labelTag]]" >[[labelTag]]</span>
+
+{%- when 'vendorHtml' -%}
+<p class="bc-sf-filter-product-item-vendor">[[itemVendorLabel]]</p>
+
+{%- when 'previousActiveHtml' -%}
+<li><a href="[[itemUrl]]">&larr;</a></li>
+
+{%- when 'previousDisabledHtml' -%}
+<li class="disabled"><span>&larr;</span></li>
+
+{%- when 'nextActiveHtml' -%}
+<li><a href="[[itemUrl]]">&rarr;</a></li>
+
+{%- when 'nextDisabledHtml' -%}
+<li class="disabled"><span>&rarr;</span></li>
+
+{%- when 'pageItemHtml' -%}
+<li><a href="[[itemUrl]]">[[itemTitle]]</a></li>
+
+{%- when 'pageItemSelectedHtml' -%}
+<li><span class="active">[[itemTitle]]</span></li>
+
+{% when 'pageItemRemainHtml' %}
+<li><span>[[itemTitle]]</span></li>
+
+{%- when 'paginateHtml' -%}
+<ul>[[previous]][[pageItems]][[next]]</ul>
+
+{%- when 'sortingHtml' -%}
+<label><span><span> {% assign temp = 'collections.sorting.title' | t  %} {% unless temp contains 'translation missing'  %} {{ temp }} {% else %} Sorting {% endunless %}, </span></span></label><ul class="bc-sf-filter-filter-dropdown">[[sortingItems]]</ul>
+
+{%- when 'showLimitHtml' -%}
+<label> Show </label><select class="bc-sf-filter-filter-dropdown">[[showLimitItems]]</select>
+
+{%- when 'breadcrumbHtml' -%}
+<a href="/"> Home </a> [[breadcrumbDivider]] [[breadcrumbItems]]
+
+{%- when 'breadcrumbDivider' -%}
+<span class="divider">/</span>
+
+{%- when 'breadcrumbItemLink' -%}
+<a href="[[itemLink]]">[[itemTitle]]</a>
+
+{%- when 'breadcrumbItemSelected' -%}
+<span>[[itemTitle]]</span>
+
+{%- endcase -%}
+{%- endcapture -%}
+
+{%- assign str = '}}' -%}
+{{- bc_layout | json | replace: '[[', '{{' | replace: ']]', str -}}

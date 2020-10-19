@@ -1,0 +1,126 @@
+<div class="swatch hide">
+    {% for option in product.options %}
+        {% include 'swatch' with option %}
+    {% endfor %}
+</div>
+
+<script>
+    swatchs = {
+    {% for block in section.blocks %}
+    '{{ block.settings.title }}': {
+            title: '{{ block.settings.title }}',
+            bg_image: '{{ block.settings.bg_image | img_url: "50x" }}',
+            type: '{{ block.settings.type }}',
+            sub_type: '{{ block.settings.sub_type }}'
+        },
+    {% endfor %}
+    }
+</script>
+
+<style type="text/css">
+    {% for block in section.blocks %}
+      {% if block.settings.image != blank %}
+        {% capture swatch_background %}url({{ block.settings.image | img_url: '100x' }}){% endcapture %}
+      {% else %}
+      {%- assign swatch_color_num = 1 -%}
+        {% for i in (2..3) %}
+          {% capture curr_color_loop %}color{{ i }}{% endcapture %}
+          {% if block.settings[curr_color_loop] != blank %}
+            {%- assign swatch_color_num = swatch_color_num | plus: 1 -%}
+          {% endif %}
+        {% endfor %}
+        {%- assign swatch_background = block.settings.color1 -%}
+        {% case swatch_color_num %}
+          {% when 2 %}
+            {% capture swatch_background %}linear-gradient(to right bottom, {{ block.settings.color1 }} 0%, {{ block.settings.color1 }} 50%, {{ block.settings.color2 }} 50%, {{ block.settings.color2 }} 100%){% endcapture %}
+          {% when 3 %}
+            {% capture swatch_background %}linear-gradient(to right bottom, {{ block.settings.color1 }} 0%, {{ block.settings.color1 }} 33.33%, {{ block.settings.color2 }} 33.33%, {{ block.settings.color2 }} 66.66%, {{ block.settings.color3 }} 66.66%, {{ block.settings.color3 }} 100%){% endcapture %}
+        {% endcase %}
+      {% endif %}
+      .swatch-element.color.{{ block.settings.title | handleize }} label,
+      .swatch-element.color.swatch-product.{{ block.settings.title | handleize }},
+      #SortTags_color + .custom-select .custom-option[data-value="{{ block.settings.title | handleize }}"]:before,
+      #swatchcontainer .swatch-image.{{ block.settings.title | handleize }} {
+        background{% if block.settings.image != blank %}-image{% else %}-color{% endif %}: {{ swatch_background }};
+      }
+    {% endfor %}
+  </style>
+{% schema %}
+{
+    "name": "swatch",
+    "settings": [
+
+    ],
+    "blocks": [
+        {
+            "name": "swatch",
+            "type": "swatch",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title"
+                },
+                {
+                    "type": "color",
+                    "id": "color1",
+                    "label": "Swatch hex color #1"
+                  },
+                  {
+                    "type": "color",
+                    "id": "color2",
+                    "label": "Swatch hex color #2"
+                  },
+                  {
+                    "type": "color",
+                    "id": "color3",
+                    "label": "Swatch hex color #3"
+                  },
+                {
+                    "type": "image_picker",
+                    "id": "bg_image",
+                    "label": "Background image"
+                },
+                {
+                    "type": "select",
+                    "id": "type",
+                    "label": "Type",
+                    "options": [
+                        {
+                            "value": "color",
+                            "label": "Color"
+                        },
+                        {
+                            "value": "shape",
+                            "label": "Shape"
+                        },
+                        {
+                            "value": "size",
+                            "label": "Size"
+                        },
+                        {
+                            "value": "prints",
+                            "label": "Prints"
+                        }
+                    ]
+                },
+                {
+                    "type": "select",
+                    "id": "sub_type",
+                    "label": "Sub type",
+                    "options": [
+                        {
+                            "value": "solids",
+                            "label": "Solids"
+                        },
+                        {
+                            "value": "prints",
+                            "label": "Prints"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

@@ -1,0 +1,98 @@
+.button {
+  display: inline-block;
+  vertical-align: middle;
+  width: auto;
+  border: 0;
+  text-align: center;
+  white-space: nowrap;
+  text-decoration: none;
+  user-select: none;
+  appearance: none;
+  text-transform: uppercase;
+  color: $white;
+  width: 100%;
+  min-height: 50px;
+  margin-top: 10px;
+  padding: 10px 30px;
+  outline: none;
+  font-family: $font-bold;
+  font-size: 16px;
+  letter-spacing: 1.5px;
+  &:hover{
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px;
+    border: none;
+    cursor: pointer;
+  }
+  &.brown{
+    background-color: $brown;
+    &:hover{
+      border-color: $light-brown!important;
+      background-color: $light-brown;
+      color: $black;
+    }
+  }
+  &.black{
+    background-color: $black;
+    &:hover{
+      border-color: $brown!important;
+      background-color: $brown;
+      color: $black;
+    }
+  }
+  &.small{
+    margin: auto;
+    display: table;
+    max-width: 200px;
+    @include media-query('medium-down'){
+      max-width: initial;
+    }
+  }
+
+  &.medium{
+    max-width: 300px;
+    @include media-query('small'){
+      max-width: initial;
+    }
+  }
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  path {
+    stroke-dasharray: 19.79 19.79;
+    stroke-dashoffset: 19.79;
+    stroke: $white;
+    opacity: 0;
+  }
+  &.checkmark-active path {
+    -webkit-animation: drawCheckmark 0.5s linear alternate forwards;
+    animation: drawCheckmark 0.5s linear alternate forwards;
+  }
+}
+
+@keyframes drawCheckmark {
+  from {
+    stroke-dashoffset: 19.79;
+    opacity: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes drawCheckmark {
+  from {
+    stroke-dashoffset: 19.79;
+    opacity: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}

@@ -1,0 +1,71 @@
+{%- assign swatch_types = '<option selected value="all">All</option>' -%}
+{%- assign swatch_options = '' -%}
+{% for product in collection.products %}
+  {% if product.title contains ' - ' %}
+    {%- assign prod_title_splitter = product.title | split: ' - ' -%}
+    {%- assign prod_title = prod_title_splitter[1] -%}
+  {% else %}
+    {%- assign prod_title = product.title -%}
+  {% endif %}
+  {% capture swatch_types %}{{ swatch_types }}<option value="{{ product.handle }}">{{ prod_title }}</option>{% endcapture %}
+  {% for variant in product.variants %}
+    {% capture swatch_options %}
+      {{ swatch_options }}
+      <div class="large-up--one-sixth medium-down--one-quarter grid__item text-center  {{product.handle}} all">
+        <div class="swatch-wrapper">
+          <a href="#" class="variant_item" data-varid="{{ variant.id }}" data-src ="{{ variant.image | img_url:'600x' }}">
+            <span class="swatch-image {{ variant.title | handleize }}"{% if variant.image %} style="background-image:url({{ variant.image | img_url:'600x' }});"{% endif %}></span>
+            <small>{{ variant.title }}</small>
+            <span class="add"><i class="fal fa-plus"></i></span>
+          </a>
+        </div>
+      </div>
+    {% endcapture %}
+  {% endfor %}
+{% endfor %}
+<div class="swatch-studio">
+  <div class="page-header">
+    <div class="full-content content">
+        <h1 class="uppercase banner-title extra text-center">{{ collection.title }}</h1>
+        <h1 class="capitalize banner-desc light text-center">{{ collection.description | strip_html }}</h1>
+    </div>
+  </div>
+  <div class="full-content">
+    <div class="select-pannel">
+        <h2 class="h3 swatch-pick-headline">Swatches</h2>
+        <select id="swatch-change">
+          {{ swatch_types }}
+        </select>
+    </div>
+    <div class="swatch-container">
+      <div id="current_swatches_row" class="grid">
+        {{ swatch_options }}
+      </div>
+      <div id="followme" class="text-center">
+        <div class="close_open_btn">+</div>
+        <h3>Select Up To Three Swatches</h3>
+        <div class="container-fluid">
+          <div class="grid">
+            <div class="one-third grid__item">
+              <div class="swatch-wrapper" variant_id = ""></div>
+            </div>
+            <div class="one-third grid__item">
+              <div class="swatch-wrapper" variant_id = ""></div>
+            </div>
+            <div class="one-third grid__item">
+              <div class="swatch-wrapper" vaiant_id = ""></div>
+            </div>
+            <div class="one-whole grid__item">
+              <div class="alert danger animate bounceIn">
+                <p></p>
+              </div>
+              <a class="button small brown" href="#">Checkout Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% section 'swatch' %}

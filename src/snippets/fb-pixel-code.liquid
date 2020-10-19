@@ -1,0 +1,133 @@
+<!-- Facebook Pixel Code -->
+<script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+                             n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+                             t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+                                                                                                    document,'script','https://connect.facebook.net/en_US/fbevents.js');
+   
+    $(document).ready(function()
+    {
+      
+        fbq('init', '{{settings.facebook_gd_pixel_id}}'); // Insert your pixel ID here. 
+            
+        {% if template contains 'search' %}
+            fbq('track', 'Search', {
+            search_string: '{{ search.results }}',
+            });
+      {% endif %}
+  
+  
+      {% if cart.item_count > 0 %}
+      $(".header-tools").on('click','a[href="checkout"]', function() 
+                            {
+        fbq('track', 'InitiateCheckout', { 
+          content_type: 'checkout',
+          content_name:[{% for item in cart.items %}'{{ item.product.title | escape }} ({{ item.variant.title | escape }})'{% unless forloop.last %},{% endunless %}{% endfor %}],
+                        content_ids: [{% for item in cart.items %}'{{item.variant.id}}'{% unless forloop.last %},{% endunless %}{% endfor %}],
+          value:'{{cart.total_price | money_without_currency}}',
+          currency: '{{ shop.currency }}',
+          num_items:'{{cart.item_count}}'
+        });
+  
+      });
+  
+      $(".cart-totals").on('click','.cart-checkout', function() 
+                           {
+        fbq('track', 'InitiateCheckout', {
+          content_type: 'product',
+          content_name:[{% for item in cart.items %}'{{ item.product.title | escape }} ({{ item.variant.title | escape }})'{% unless forloop.last %},{% endunless %}{% endfor %}],
+                        content_ids: [{% for item in cart.items %}'{{item.variant.id}}'{% unless forloop.last %},{% endunless %}{% endfor %}],
+          value: {{cart.total_price | money_without_currency}},
+          currency: '{{ shop.currency }}',
+          num_items:'{{cart.item_count}}'
+        });
+      });
+      {% endif %}
+  
+      {% if template contains 'customer' %}
+      fbq('track', 'CompleteRegistration');
+      {% endif %}
+  
+      
+      {% if template contains 'collection' %}
+      {% if collection.title != blank %}
+      {% assign collection_name = collection.title %}
+      {% else %}
+      {% assign collection_name = "All" %}
+      {% endif %}
+      $(".quick-shop-wrapper").on('click','.add-to-cart input[type="submit"]', function() 
+      {
+        var variant_id = $(".quick-shop-wrapper select[name='id'] option:selected").val();
+        var current_price = $(".quick-shop-wrapper .product-price .money").text();
+        var product_name=$(".quick-shop-wrapper .product-vendor").attr('title');
+        current_price=current_price.replace('$ ','');
+        fbq('track', 'AddToCart', {
+          content_name:product_name, 
+          content_category: '{{collection_name}}',
+          content_ids: [variant_id],
+          content_type: 'product',
+          value:current_price,
+          currency: '{{shop.currency}}' 
+        });
+      });
+      {% endif %}
+      
+      {% if template contains 'product' %}
+      {% assign product_name = product.title | escape %}
+      {% if collection.title != blank %}
+      {% assign collection_name = collection.title | escape %}
+      {% else %}
+      {% for collection in product.collections limit:1%}
+      {% assign collection_name = collection.title | escape %}
+      {% endfor %}
+      {% endif %}
+      {% if collection_name == blank %}
+      {% assign collection_name = "All" %}
+      {% endif %}
+      $("form").on('click','.add-to-cart input[type="submit"]', function() 
+      {
+        var variant_id = $("select[name='id'] option:selected").val();
+        var current_price = $(".product-price .money").text();
+        current_price=current_price.replace('$ ','');
+        fbq('track', 'AddToCart', {
+          content_name: '{{product_name}}', 
+          content_category: '{{collection_name}}',
+          content_ids: ['shopify_{{ product.id }}_{{ product.variants.first.id }}'],
+          content_type: 'product',
+          value:current_price,
+          currency: '{{shop.currency}}' 
+        });
+        
+      });
+  
+      fbq('track', 'ViewContent', {
+        content_name: '{{ product.title | escape }}',
+        content_category: '{{collection_name}}',
+        content_ids: ['shopify_{{ product.id }}_{{ product.variants.first.id }}'],
+        content_type: 'product',
+        value: '{{ variant.price | money_without_currency }}',
+        currency: '{{shop.currency}}'
+      });
+  
+      {% endif %}
+  
+      {% if template contains 'page' %}
+      fbq('track', 'PageView', {
+        content_name: '{{ page.title | escape }}',
+        content_category: 'page',
+        content_ids: ['shopify_{{ page.id }}_{{ page.id }}'],
+        content_type: 'page',
+        value: '{{ page.content | escape | strip_newlines }}'
+      });
+      {% else %}
+      fbq('track', 'PageView');
+      {% endif %}
+      
+  });
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+                 src="https://www.facebook.com/tr?id={{settings.facebook_gd_pixel_id}}&ev=PageView&noscript=1"
+                 /></noscript>
+  <!-- DO NOT MODIFY -->
+  <!-- End Facebook Pixel Code -->

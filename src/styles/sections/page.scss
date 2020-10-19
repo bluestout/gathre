@@ -1,0 +1,32 @@
+.page-section{
+    .page-header{
+        background-color: $light-grey;
+    }
+    .gallery{
+        padding: 50px 20px;
+        float: left;
+        width: 100%;
+        h1{
+            display: none;
+        }
+        p{
+            font-size: 24px;
+            text-transform: uppercase;
+        }
+    }
+    .content{
+        max-width: 685px;
+        margin: auto;
+        p{
+            strong{
+                font-family: $font-bold;
+                font-weight: normal;
+            }
+            em{
+                font-family: $font-bold;
+                font-weight: normal;
+                font-style: normal;
+            }
+        }
+    }
+}

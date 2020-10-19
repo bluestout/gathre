@@ -1,0 +1,59 @@
+<div class="collection-faq full-content" style="background: {{section.settings.bg_color}}">
+  <div class="heading">
+    <h1 class="uppercase text-center">{{section.settings.title}}</h1>
+  </div>
+  <div class="content max-width-900">
+    <div class="pannel">  
+      {% for block in section.blocks %}
+        <div class="link-list grid__item one-whole">
+          <a class="uppercase slide_btn"><span>{{ block.settings.title }}</span>
+          {% include 'icon_pack' with icon: "plus", class: "plus" %}
+          {% include 'icon_pack' with icon: "minus", class: "minus" %}
+          </a>
+          <div class="slide_content">
+              {{ block.settings.text }}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <a href="/pages/faqs" class="button small black">All Faqs</a>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "collection faq section",
+  "class": "collection-faq-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#f0f0f0"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq_block",
+      "name": "Faq block",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,149 @@
+#shopify-section-header header .nav ul.menu li{
+    .mega_menu{
+        display: none;
+        padding: 50px;
+        padding-top: 50px;
+        position: absolute;
+        width: 100%;
+        left: 10px;
+        background: $white;
+        z-index: 10;
+        .links{ 
+            .child_link{
+                max-width: 250px;
+                float: left;
+                padding-right: 15px;
+                a{
+                    padding: 10px 0;
+                }
+                ul{
+                    float: left;
+                    li{
+                        padding: 0;
+                        width: 100%;
+                        max-width: initial;
+                        a{
+                            text-transform: capitalize;
+                            padding: 5px 0;
+                            font-size: $h4_size;
+                        }
+                    }
+                }
+            }
+        }
+        .banner{
+            .feature-image{
+                display: none;
+                img{
+                    width: 368px;
+                    margin: auto;
+                    display: table;
+                }
+            }
+        }
+    }
+}
+
+.mobile_menu{
+    display: none;
+    position: absolute;
+    z-index: 100000;
+    background: white;
+    left: 0;
+    padding: $grid-gutter $grid-gutter * 2;
+    margin-top: $grid-gutter * 7;
+    width: 100%;
+    height: calc(100vh - 120px);
+    .menus{
+        height: calc(100vh - 240px);
+        overflow-y: scroll;
+        overflow-x: hidden;
+        .links{
+            a.menu-link{
+                font-size: $h4_size;
+                width: 100%;
+                display: block;
+                line-height: 38px;
+                position: relative;
+                &.active{
+                    &::after{
+                        transform: rotate(45deg) translate(-50%, -50%);
+                        top: 50%;
+                    }
+                }
+                &::after{
+                    content: " ";
+                    position: absolute;
+                    top: 50%;
+                    right: 10px;
+                    font-family: monospace;
+                    transform: rotate(-45deg) translate(0%, -50%);
+                    color: $black;
+                    width: 8px;
+                    height: 8px;
+                    border: 2px solid;
+                    border-top: 0;
+                    border-left: 0;
+                }
+            }
+            .child-link{
+                padding-left: 10px;
+                display: none;
+                &.active{
+                    display: block;
+                }
+                a{
+                    font-size: $h4_size;
+                    width: 100%;
+                    display: block;
+                    color: $black;
+                    line-height: 38px;
+                    position: relative;
+                    &.child-link-menu{
+                        &::after{
+                            content: " ";
+                            position: absolute;
+                            top: 50%;
+                            right: 10px;
+                            font-family: monospace;
+                            transform: rotate(-45deg) translate(0%, -50%);
+                            color: $black;
+                            width: 8px;
+                            height: 8px;
+                            border: 2px solid;
+                            border-top: 0;
+                            border-left: 0;
+                        }
+                        &.active{
+                            &::after{
+                                transform: rotate(45deg) translate(-50%, -50%);
+                                top: 50%;
+                            }
+                        }
+                    }
+                }
+                .gchild-link{
+                    padding-left: 20px;
+                    display: none;
+                    &.active{
+                        display: block;
+                    }
+                }
+            }
+        }
+    }
+    .account{
+        position: absolute;
+        padding: $grid-gutter * 2 0;
+        border-top: 1px solid $brown;
+        width: calc(100% - 40px);
+        bottom: $grid-gutter;
+        background: white;
+        a{
+            display: block;
+            width: 100%;
+            color: $black;
+            font-size: $h4_size;
+        }
+    }
+}

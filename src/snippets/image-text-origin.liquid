@@ -1,0 +1,42 @@
+{% if section.settings.grid_style %}
+    {% assign class = 'full-width' %}
+{% else %}
+    {% assign class = '' %}
+{% endif %}
+<div class="image_text_origin_section"  style="background-color: {{ section.settings.bg_color }};">
+    <div class="container">
+        <div class="image-text-block grid {{ class }}">
+            <h1 class="bold heading-title">{{section.settings.heading_caption}}</h1>
+            <div class="grid__item large-up--four-twelfths medium-down--one-half">
+                <div class="text-field">
+                    <div class="content">
+                        <h1 class="extra uppercase devider">{{ section.settings.title }}</h1>
+                        {{ section.settings.desc }}
+                        {% if section.settings.button_url != blank and section.settings.button_label %}
+                            <a href="{{ section.settings.button_url }}" class="button small brown">{{ section.settings.button_label }}</a>
+                        {% endif %}
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="grid__item large-up--eight-twelfths medium-down--one-half">
+                <div class="image-field">
+                    {% for block in section.blocks %}
+                        {% if block.type == 'image_block' %}
+                            <div class="feature-image">
+                                {% include 'responsive-image' with
+                                    image: block.settings.image,
+                                    max_width: 768,
+                                    max_height: 768
+                                %}
+                                <p class="hero">{{ block.settings.title }}</p>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        
+        </div>
+    </div>
+    
+</div>

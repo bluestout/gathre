@@ -1,0 +1,346 @@
+.mini-cart{
+    width: 360px;
+    position: absolute;
+    height: 100vh;
+    right: 0;
+    top: 90px;
+    z-index: 100;
+    background: white;
+    padding: 10px 20px;
+    display: none;
+    @include media-query('medium-down'){
+        top: 0;
+        width: 100%;
+    }
+    .content{
+        .cart-heading{
+            padding: 10px 0;
+            border-bottom: 1px solid $brown;
+            .heading-title{
+                font-size: 12px;
+                text-transform: uppercase;
+                color: $black;
+                font-family: $font-bold;
+            }
+            .close{
+                position: relative;
+                font-size: $span_size;
+                font-family: $font-bold;
+                text-transform: capitalize;
+                svg{
+                    position: absolute;
+                    left: -20px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                }
+            }
+        }
+        .cart-message{
+            h5{
+                text-align: center;
+                letter-spacing: 0.5px;
+            }
+            border-bottom: 1px solid $brown;
+        }
+
+        .empty-product{
+            margin-top: 30px;
+            @include media-query('medium-down'){
+                max-height: calc(100vh - 250px);
+                overflow: scroll;
+            }
+            p{
+                font-size: $span_size;
+                white-space: nowrap;
+                span{
+                    margin-left: 0;
+                    &.spr-badge{
+                        margin: 0;
+                        width: auto;
+                        .spr-starrating{
+                            margin: 0;
+                        }
+                    }
+                }
+            }
+            .product-item{
+                @include media-query('medium-down'){
+                    min-height: auto;
+                }
+            }
+            .button{
+                padding-left: 50px;
+                padding-right: 50px;
+                margin-bottom: 20px;
+            }
+        }
+        .cart-content{
+            position: relative;
+            height: calc(100vh - 255px);
+            @include media-query('medium-down'){
+                height: calc(100vh - 180px);
+            }
+            .item-field{
+                height: calc(100vh - 500px);
+                overflow-y: scroll;
+                @include media-query('medium-down'){
+                    height: calc(100vh - 420px);
+                }
+                &.active{
+                    height: calc(100vh - 668px);
+                }
+                .items{
+                    .item{
+                        float: left;
+                        width: 100%;
+                        padding: 20px 20px;
+                        display: block;
+                        
+                        position: relative;
+                        .remove{
+                            position: absolute;
+                            right: 8px;
+                            z-index: 1000;
+                        }
+                        img{
+                            max-width: 60px;
+                        }
+                        .info{
+                            cursor: pointer;
+                            width: calc(100% - 80px);
+                            float: left;
+                            margin: 10px 10px 0;
+                            p{
+                                font-size: $span_size;
+                                margin: 0;
+                                line-height: 24px;
+                                font-family: $font-bold;
+                                &.name{
+                                    line-height: 16px;
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                .related-product{
+                    background-color: $light-white;
+                    float: left;
+                    width: 100%;
+                    padding: $grid-gutter * 2;
+                    img.fleft{
+                        width: 60px;
+                        height: 60px;
+                    }
+                    .info{
+                        margin-left: $grid-gutter;
+                        p{
+                            font-size: $span_size;
+                            margin: 0;
+                            line-height: 19px;
+                            font-family: $font-bold;
+                        }
+                    }
+                    .item-panel{
+                        display: table;
+                        width: 100%;
+                        padding-top: $grid-gutter;
+                        position: relative;
+                        div{
+                            &.swatch{
+                                width: 50%;
+                                float: left;
+                                padding: 5px;
+                                a{
+                                    line-height: 0;
+                                    padding: 0;
+                                    width: 100%;
+                                    display: flex;
+                                    border: 1px solid $brown;
+                                    span{
+                                        vertical-align: top;
+                                        line-height: 20px;
+                                        font-size: 10px;
+                                        width: 100%;
+                                        display: table;
+                                        text-align: center;
+                                        &.color{
+                                            height: 40px;
+                                            width: 20px;
+                                            float: left;
+                                            margin-left: 10px;
+                                            display: flex;
+                                            img{
+                                                margin: auto;
+                                                display: table;
+                                            }
+                                        }
+                                        &.text{
+                                            width: calc(100% - 40px);
+                                            line-height: 11px;
+                                            display: table;
+                                            vertical-align: middle;
+                                            margin: auto;
+                                        }
+                                    }
+                                }
+                                .swatch-pannel{
+                                    display: none;
+                                    position: absolute;
+                                    width: 100%;
+                                    right: 0;
+                                    margin-top: $grid-gutter;
+                                    background: white;
+                                    z-index: 1000;
+                                    padding: $grid-gutter * 2;
+                                    box-shadow: 0 1px $grid-gutter * 2 rgba(0,0,0,0.2);
+                                    top: 55px;
+                                    margin-bottom: 20px;
+
+                                    &::before{
+                                        content: " ";
+                                        border: $grid-gutter solid transparent;
+                                        display: table;
+                                        border-bottom-color: white;
+                                        position: absolute;
+                                        margin-top: -40px;
+                                        left: 75px;
+                                    }
+                                    h4{
+                                        margin: 0;
+                                        font-size: 11px;
+                                    }
+                                    .type{
+                                        display: table;
+                                        width: 100%;
+                                        margin: $grid-gutter 0;
+                                        a{
+                                            font-size: 12px;
+                                            padding: 5px $grid-gutter;
+                                            text-transform: uppercase;
+                                            border-color: $black ;
+                                            width: auto;
+                                            line-height: 20px;
+                                            text-align: center;
+                                            display: table;
+                                            float: left;
+                                            margin-right: $grid-gutter;
+                                            &.active{
+                                                border-color: $brown;
+                                                color: $brown;
+                                            }
+                                        }
+                                    }
+                                    
+                                    .content{
+                                        margin-top: $grid-gutter;
+                                        a{
+                                            border: none;
+                                            padding: 0;
+                                            margin-bottom: $grid-gutter;
+                                            text-transform: uppercase;
+                                            position: relative;
+                                            &::before{
+                                                content: " ";
+                                                display: table;
+                                                padding-top: 100%;
+                                            }
+                                            &.label{
+                                                &::before{
+                                                    content: none;
+                                                }
+                                            }
+                                            &.active{
+                                                border: 2px solid black;
+                                            }
+                                            img{
+                                                width: 100%;
+                                                height: 100%;
+                                                position: absolute;
+                                            }
+                                            &.label{
+                                                border: 1px solid $black;
+                                                padding: $grid-gutter;
+                                                line-height: 20px;
+                                                width: auto;
+                                                float: left;
+                                                margin: 0 5px;
+                                                font-size: 11px;
+                                                &.active{
+                                                    border-color: $brown;
+                                                    color: $brown;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            &.add-cart-from{
+                                width: 50%;
+                                padding: 5px;
+                                float: right;
+                                .add_cart{
+                                    position: relative;
+                                    margin: 0;
+                                    min-height: auto;
+                                    padding: 12px;
+                                    font-size: $span_size;
+                                    line-height: 18px;
+                                    color: black;
+                                    &.disable{
+                                        opacity: 0.3;
+                                        cursor: default;
+                                    }
+                                }
+                            }
+
+                        }
+                    }
+                }
+            }
+            .swym-button-bar{
+                display: none;
+            }
+            .checkout-field{
+                position: absolute;
+                width: 100%;
+                bottom: 0;
+                background-color: $white;
+                margin: 0 -10px;
+                width: calc(100% + 20px);
+                padding-top: 20px;
+                .gift-desc{
+                    padding: 15px 10px 0;
+                    border-top: 1px solid $brown;
+                    .gift_link{
+                        font-size: 14px;
+                        font-family: $font-bold;
+                        text-decoration: underline;
+                        display: table;
+                        width: 100%;
+                        margin-bottom: 10px;
+                    }
+                    .checkout_description{
+                        display: none;
+                    }
+                }
+                .sub-total{
+                    float: left;
+                    width: 100%;
+                    padding: 15px 10px 0;
+                    border-top: 1px solid $brown;
+                    h4{
+                        margin: 5px;
+                    }
+                }
+                .description{
+                    padding: 20px 20px;
+                    text-align: center;
+                    line-height: 15px;
+                    font-style: italic;
+                    color: #695B49;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,16 @@
+{% if block.settings.title != blank %}
+    {% assign cls = 'title' %}
+{% else %}
+    {% assign cls = 'desc' %}
+{% endif %}
+<div class="title-banner {{ cls }}" style="background-color : {{ block.settings.bg_color }}">
+    <div class="content">
+        {% if block.settings.icon != blank %}
+            {{ block.settings.icon }}
+        {% endif %}
+        <h1 class="extra uppercase text-center">{{ block.settings.title }}</h1>
+        {% if block.settings.desc != blank %}
+            {{ block.settings.desc }}
+        {% endif %}
+    </div>
+</div>

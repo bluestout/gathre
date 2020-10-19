@@ -1,0 +1,60 @@
+{% assign product_price = product.price %}
+{% assign product_compare_at_price  = product.compare_at_price %}
+{% assign collection_handles = product.collections | map: 'handle' %}
+{% assign main_img_url = 'bc-sf-filter-no-image.gif' | asset_url %}
+
+{% if product.first_available_variant.featured_image == blank %}
+  {% if product.featured_image%}
+    {% assign main_img_url = product.featured_image  %}
+  {% endif %}
+  {% if product.images[1] %}
+    {% assign swap_img_url = product.images[1]  %}
+  {% endif %}
+{% else %}
+  {% assign main_img_url = product.first_available_variant.featured_image  %}
+  {% assign swap_img_url = product.images[1]  %}
+  {% for image in product.images %}
+    {% if image.src == main_img_url.src %}
+      {% assign index = forloop.index | plus: 1 %}
+      {% assign swap_img_url = product.images[ index ] %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+<div class="product-item">
+    <a href="{{ product.url }}">
+        <div class="feature-image">
+            {% include 'responsive-image' with
+                image: main_img_url,
+                max_width: 380,
+                max_height: 380,
+                square: true,
+                wrapper_class: "product-feature-image"
+            %}
+
+            {% include 'responsive-image' with
+                image: swap_img_url,
+                max_width: 380,
+                max_height: 380,
+                square: true,
+                wrapper_class: "product-second-image animated fadeIn"
+            %}
+        </div>
+        <div class="info">
+            <p class="light text-left">{{ product.title }}</p>
+            <p class="extra price text-left">
+                {% if product.available %}
+                    {% if product_compare_at_price > product_price %}
+                        {{ product_price | money_without_trailing_zeros  }}
+                        <del>{{ product_compare_at_price | money_without_trailing_zeros  }}</del>
+                    {% else %}
+                        <span>{{ product.price | money_without_trailing_zeros  }}</span>
+                    {% endif %}
+                {% else %}
+                    <span>{{ 'products.product.sold_out' | t }}</span>
+                {% endif %}
+                <span class="stamped-product-reviews-badge stamped-main-badge" data-id="{{ product.id }}" data-product-sku="{{ product.handle }}" style="display: inline-block;">{{ product.metafields.stamped.badge }}</span>
+            </p>
+        </div>
+    </a>
+</div>

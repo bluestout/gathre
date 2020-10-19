@@ -1,0 +1,313 @@
+{%- comment -%}
+  This is a required section for the Shopify Theme Store.
+  It is available in the "Header" section in the theme editor.
+
+  Theme Store required settings
+  - Show announcement
+  - Text: message to announce
+  - Link: link of the announcement bar
+
+  Theme Store optional settings
+  - Home page only: only shows on the home page
+{%- endcomment -%}
+<section data-section-id="{{ section.id }}" data-section-type="header">
+  {%- if section.settings.announcement_bar_enabled -%}
+    <div>
+      {%- if section.settings.announcement_bar_home_page_only == false or template.name == 'index' -%}
+        {%- if section.settings.announcement_bar_link != blank -%}
+          <a href="{{ section.settings.announcement_bar_link }}">
+            {{ section.settings.announcement_bar_text | escape }}
+          </a>
+        {%- else -%}
+          <p>{{ section.settings.announcement_bar_text | escape }}</p>
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  <header role="banner" class="grid animated fade fadeInDown">
+    <div class="nav grid__item medium-up--five-twelfths medium-down--one-fifth">
+      <a class="mobile-nav-btn">  </a>
+      {% include 'navigation' %}
+    </div>
+    <div class="logo medium-up--two-twelfths medium-down--three-fifths grid__item">
+      <a href="/" class="uppercase text-center">
+        {% if section.settings.logo != blank %}
+          <img src="{{ section.settings.logo | img_url : '200x' }}">
+        {% else %}
+          {% include 'icon_pack', icon: 'logo' %}
+        {% endif %}
+      </a>
+    </div>
+    <div class="grid__item fright medium-down--one-fifth side-form">
+      <div class="account">
+        {% if customer %}
+          {% assign url = "/account" %}
+        {% else %}
+          {% assign url = '/account/login' %}
+        {% endif %}
+        {% if settings.user_icon_png != blank %}
+          <a href="{{ url }}"><img src="{{ settings.user_icon_png | img_url: 'original' }}" alt="User account icon"></a>
+        {% else %}
+          <a href="{{ url }}">{{ settings.user_icon_svg }}</a>
+        {% endif %}
+      </div>
+      <div class="search">
+        <a>
+          {% if settings.search_icon_png != blank %}
+            <img src="{{ settings.search_icon_png | img_url: 'original' }}" >
+          {% else %}
+            {{ settings.search_icon_svg }}
+          {% endif %}
+        </a>
+        <ul class="search_menu">
+          <li>
+            <form action="/search" method="get" role="search" class="search_bar" style="direction: ltr;">
+              <div class="inner_div">
+                <input type="search" name="q" id="Search-header" value="" placeholder="Search Gifts, Necklaces and More!" class="lsx-search-field lsx-done tt-input" autocomplete="off" spellcheck="false" dir="auto">
+              </div>
+              </form>
+          </li>
+        </ul>
+      </div>
+      <div class="cart">
+        <a href="#">
+          {% if settings.cart_icon_png != blank %}
+            <img src="{{ settings.cart_icon_png | img_url: 'original' }}" alt="mini cart" >
+          {% else %}
+            {{ settings.cart_icon_svg }}
+          {% endif %}
+        </a>
+      </div>
+    </div>
+    {% include 'mini-cart' %}
+  </header>
+
+</section>
+
+
+{% schema %}
+  {
+    "name": "Header",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Announcement bar"
+      },
+      {
+        "type": "checkbox",
+        "id": "announcement_bar_enabled",
+        "label": "Show announcement",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "announcement_bar_home_page_only",
+        "label": "Show on home page only",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "announcement_bar_text",
+        "label": "Announcement text",
+        "default": "Announce something here"
+      },
+      {
+        "type": "url",
+        "id": "announcement_bar_link",
+        "label": "Announcement link",
+        "info": "Optional"
+      },
+      {
+        "type": "header",
+        "content": "Header"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo image"
+      },
+      {
+        "type": "header",
+        "content": "navigation"
+      },
+      {
+        "type": "link_list",
+        "id": "menu",
+        "label": "Menu",
+        "default": "main-menu"
+      },
+      {
+        "type": "header",
+        "content": "ShopAll menu banners"
+      },
+      {
+        "type": "image_picker",
+        "id": "default_banner",
+        "label": "Default banner"
+      },
+      {
+        "type": "header",
+        "content": "Home menu banners"
+      },
+      {
+        "type": "image_picker",
+        "id": "top_rated_image",
+        "label": "Top rated image"
+      },
+      {
+        "type": "text",
+        "id": "top_rated_title",
+        "label": "Top rated title",
+        "default": "Top Rated"
+      },
+      {
+        "type": "url",
+        "id": "top_rated_url",
+        "label": "Top rated url"
+      },
+      {
+        "type": "image_picker",
+        "id": "new_arrival_image",
+        "label": "New arrival image"
+      },
+      {
+        "type": "text",
+        "id": "new_arrival_title",
+        "label": "New arrival title",
+        "default": "NEW ARRIVALS"
+      },
+      {
+        "type": "url",
+        "id": "new_arrival_url",
+        "label": "New arrival url"
+      },
+      {
+        "type": "image_picker",
+        "id": "bestsellers_image",
+        "label": "Bestsellers image"
+      },
+      {
+        "type": "text",
+        "id": "bestsellers_title",
+        "label": "Bestsellers title",
+        "default": "BESTSELLERS"
+      },
+      {
+        "type": "url",
+        "id": "bestseller_url",
+        "label": "Bestsellers url"
+      },
+      {
+        "type": "header",
+        "content": "Special menu banners"
+      },
+      {
+        "type": "image_picker",
+        "id": "rewards_image",
+        "label": "Rewards image"
+      },
+      {
+        "type": "text",
+        "id": "rewards_title",
+        "label": "Rewards title",
+        "default": "Rewards"
+      },
+      {
+        "type": "url",
+        "id": "rewards_url",
+        "label": "Rewards url"
+      },
+      {
+        "type": "image_picker",
+        "id": "holiday_deals_image",
+        "label": "Holiday deals image"
+      },
+      {
+        "type": "text",
+        "id": "holiday_deals_title",
+        "label": "Holiday deals title",
+        "default": "Holiday Deals"
+      },
+      {
+        "type": "url",
+        "id": "holiday_deals_url",
+        "label": "Holiday deals url"
+      },
+      {
+        "type": "image_picker",
+        "id": "gift_card_image",
+        "label": "Gift card image"
+      },
+      {
+        "type": "text",
+        "id": "gift_card_title",
+        "label": "Gift card title",
+        "default": "Gift Card"
+      },
+      {
+        "type": "url",
+        "id": "gift_card_url",
+        "label": "Gift card url"
+      },
+      {
+        "type": "header",
+        "content": "Baby menu banners"
+      },
+      {
+        "type": "product",
+        "id": "feature_product_1",
+        "label": "Feature product"
+      },
+      {
+        "type": "product",
+        "id": "feature_product_2",
+        "label": "Feature product"
+      },
+      {
+        "type": "product",
+        "id": "feature_product_3",
+        "label": "Feature product"
+      }
+    ]
+  }
+{% endschema %}
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "{{ shop.name }}",
+  {% if section.settings.logo %}
+    {% assign image_size = section.settings.logo.width | append:'x' %}
+    "logo": "https:{{ section.settings.logo | img_url: image_size }}",
+  {% endif %}
+  "sameAs": [
+    "{{ settings.social_twitter_link }}",
+    "{{ settings.social_facebook_link }}",
+    "{{ settings.social_pinterest_link }}",
+    "{{ settings.social_instagram_link }}",
+    "{{ settings.social_tumblr_link }}",
+    "{{ settings.social_snapchat_link }}",
+    "{{ settings.social_youtube_link }}",
+    "{{ settings.social_vimeo_link }}"
+  ],
+  "url": "{{ shop.url }}{{ page.url }}"
+}
+</script>
+
+{% if template.name == 'index' %}
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "name": "{{ shop.name }}",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "{{ shop.url }}/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      },
+      "url": "{{ shop.url }}{{ page.url }}"
+    }
+  </script>
+{% endif %}

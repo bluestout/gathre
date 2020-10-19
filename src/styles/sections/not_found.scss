@@ -1,0 +1,17 @@
+.not_found-section{
+    .heading-brand{
+        font-size: 90px;
+        margin-bottom: 50px;
+        line-height: 128px;
+    }
+    p{
+        text-align: center;
+        font-size: $title_size;
+    }
+    .button{
+        margin-top: 50px;
+        max-width: 350px;
+        letter-spacing: 3px;
+        color: white;
+    }
+}

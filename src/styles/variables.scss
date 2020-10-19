@@ -1,0 +1,116 @@
+// Text colors
+$color-body-text: #030303;
+
+// Background colors
+$color-body: #FFFFFF;
+
+// Placeholders
+$placeholder-color-foreground: #FBF9F8;
+$placeholder-color-background: #FBF9F8;
+
+// component color
+$color-border : #C5B097;
+
+// Other colors
+$black : #030303;
+$light-black : #3D3D3D;
+$dark-grey : #848484;
+$grey : #BCBCBC;
+$light-grey :  #F4F4F4;
+$dark-white :  #FDFDFD;
+$light-white : #FBF9F8;
+$white :  #FFFFFF;
+$blue: rgba(134,168,178,0.52);
+$brown  : #C5B097;
+$light-brown: #E7DFD6;
+$light-red: #F8F6F3;
+$red: #852C2C;
+// Helper colors for form error states
+
+$color-disabled: #000000;
+$color-disabled-border: #000000;
+$color-error: #852C2C;
+$color-error-bg: #ffffff;
+$color-success: #ffffff;
+$color-success-bg: #054615;
+
+
+
+// Typography
+$font-hero : 'Gotham Book';
+$font-bold : 'Gothic720 BT Roman';
+$font-light : 'Gothic720 Lt BT Light';
+$font-italic : 'Gothic720 Lt BT Light Italic';
+
+$body-size : 16px;
+$hero-size : 36px;
+$banner_title: 30px;
+$h1_size : 24px;
+$h2_size : 22px;
+$h3_size : 16px;
+$h4_size : 14px;
+$h5_size : 11px;
+$p_size : 16px;
+$li_size : 16px;
+$span_size : 13px;
+$title_size: 18px;
+$mobile_title_size: 20px;
+$collection_hero_size: 30px;
+
+
+$hero_line_height : 38px;
+$hero_letter_spacing : 3.75px;
+$collection_line_height: 44px;
+$h1_line_height : 38px;
+$h1_letter_spacing : 2.5px;
+$h2_line_height : 31px;
+$h2_letter_spacing : 0.65px;
+$h3_line_height : 28px;
+$h3_letter_spacing : 2.94px;
+$h4_line_height : 22px;
+$h4_letter_spacing : 1px;
+$h5_line_height : 17px;
+$h5_letter_spacing : 2.4px;
+$p_line_height : 28px;
+$p_letter_spacing : 1px;
+$li_line_height : 22px;
+$li_letter_spacing : 1px;
+$span_line_height : 13px;
+$span_letter_spacing : 1px;
+
+
+
+// Transitions
+$transition-duration: 250ms;
+$transition-timing: ease-in-out;
+
+// Grid
+$grid-medium: 768px;
+$grid-large: 1024px;
+$grid-widescreen: 1440px;
+$grid-max-width: 1300px;
+$grid-gutter: 10px;
+
+// Breakpoints used with the media-query mixin
+$small: 'small';
+$medium: 'medium';
+$medium-down: 'medium-down';
+$medium-up: 'medium-up';
+$large: 'large';
+$large-down: 'large-down';
+$large-up: 'large-up';
+$widescreen: 'widescreen';
+
+$breakpoints: (
+  $small '(max-width: #{$grid-medium - 1})',
+  $medium '(min-width: #{$grid-medium}) and (max-width: #{$grid-large - 1})',
+  $medium-down '(max-width: #{$grid-large - 1})',
+  $medium-up '(min-width: #{$grid-medium})',
+  $large '(min-width: #{$grid-large}) and (max-width: #{$grid-widescreen - 1})',
+  $large-down '(max-width: #{$grid-widescreen - 1})',
+  $large-up '(min-width: #{$grid-large})',
+  $widescreen '(min-width: #{$grid-widescreen})'
+);
+
+$breakpoint-has-widths: ($small, $medium, $medium-down, $medium-up, $large-down, $large-up, $widescreen);
+$breakpoint-has-push: ();

@@ -1,0 +1,57 @@
+#shopify-section-contact{
+    .grid{
+        position: relative;
+        .feature_banner{
+            position: relative;
+            float: right;
+            .bg-grey{
+                position: absolute;
+                height: 100%;
+                right: 0;
+                background: $light-grey;
+            }
+            .full-content{
+                @include media-query('medium-down'){
+                    padding: 0;
+                }
+            }
+        }
+        
+        .contact-pannel{
+            position: absolute;
+            height: 100%;
+            left: 0;
+            display: flex;
+            @include media-query('medium-down'){
+                position: static;
+            }
+            .form-content{
+                padding: 30px;
+                max-width: 500px;
+                margin: auto;
+                h1{
+                    font-size: $collection_hero_size;
+                    text-transform: uppercase;
+                    line-height: 58px;
+                    margin-bottom: 30px;
+                    @include media-query('medium-down'){
+                        text-align: center;
+                        font-size: 20px;
+                        margin: 20px;
+                        line-height: 30px;
+                        &:after{
+                            margin: 15px auto 0;
+                        }
+                    }
+                    
+                }
+                p{
+                    @include media-query('medium-down'){
+                        text-align: center;
+                    }
+                }
+            }
+        }
+        
+    }
+}

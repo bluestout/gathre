@@ -1,0 +1,85 @@
+<footer>
+  <div class="full-content">
+    <div class="grid">
+      <div class="grid__item large-up--nine-twelfths medium-down-one-whole">
+        <div class="footer-nav-bar">
+          {% for block in section.blocks %}
+            <div class="link-list grid__item  large-up--one-quarter">
+              <p class="uppercase normal_btn extra medium-down--hide">{{ linklists[block.settings.menu].title | replace: '2019 - ', '' }}</p>
+              <p class="uppercase slide_btn large-up--hide">{{ linklists[block.settings.menu].title | replace: '2019 - ', '' }}
+                {% include 'icon_pack' with icon: "plus", class: "plus" %}
+                {% include 'icon_pack' with icon: "minus", class: "minus" %}
+              </p>
+              <ul class="medium-down--hide">
+                {% for link in linklists[block.settings.menu].links %}
+                  {% if link.url == '#return_order' %}
+                    <li><a href="{{ link.url }}" class="color__white hover_color__white request-button">{{ link.title }}</a></li>
+                  {% else %}
+                    <li><a href="{{ link.url }}" class="color__white hover_color__white">{{ link.title }}</a></li>
+                  {% endif %}
+                  
+                {% endfor %}
+              </ul>
+              <ul class="slide_content large-up--hide">
+                {% for link in linklists[block.settings.menu].links %}
+                  <li><a href="{{ link.url }}" class="color__white hover_color__white">{{ link.title }}</a></li>
+                {% endfor %}
+              </ul>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+      {%- assign social_accounts = 'facebook, twitter, pinterest, instagram, snapchat, ticktok, youTube' | split: ', ' -%}
+      <div class="grid__item large-up--three-twelfths medium-down-one-whole">
+        <div class="social_links">
+          <ul class="social_link-content">
+            {% for social in social_accounts %}
+              {%- assign social_handle = social | handleize -%}
+              {% capture social_link %}social_{{ social_handle }}_link{% endcapture %}
+              {% if settings[social_link] != blank %}
+                <li>
+                  <a target="_blank" href="{{ settings[social_link] }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: social }}">
+                    {% include 'icon_pack' with icon: social %}
+                    <span class="icon-fallback-text">{{ social }}</span>
+                  </a>
+                </li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+          <a href="/pages/site-map">{{ 'general.general.site_map' | t }}</a>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</footer>
+<div class="dark-bg"></div>
+<div class="blank-bg"></div>
+{% schema %}
+  {
+    "name": "footer",
+    "settings": [
+       
+    ],
+    "blocks": [
+      {
+        "type": "link_list",
+        "name": "Menu",
+        "settings": [
+          {
+            "type": "link_list",
+            "id": "menu",
+            "label": "Menu",
+            "info": "This menu won't show drop-down items"
+          },
+          {
+            "type": "checkbox",
+            "id": "social_icons_footer",
+            "label": "Show social media footer icons",
+            "default": false
+          }
+        ]
+      }
+    ]
+  }
+ {% endschema %}

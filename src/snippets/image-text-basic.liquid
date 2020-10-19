@@ -1,0 +1,91 @@
+{% if block.settings.full_width %}
+    {% assign full_width = '' %}
+{% else %}
+    {% assign full_width = 'full-content' %}
+{% endif %}
+
+
+{% assign meta_title = 'feature-desc-' | append: type | remove: 'style_' %}
+{% if product.metafields["global"][meta_title] != blank %}
+    {% assign desc = product.metafields["global"][meta_title] %}
+{% else %}
+    {% assign desc = block.settings.desc %}
+{% endif %}
+
+{% assign meta_title = 'feature-title-' | append: type | remove: 'style_' %}
+{% if product.metafields["global"][meta_title] != blank %}
+    {% assign title = product.metafields["global"][meta_title] %}
+{% else %}
+    {% assign title = block.settings.title %}
+{% endif %}
+
+{% assign meta_title = 'feature-html-' | append: type | remove: 'style_' %}
+{% if product.metafields["global"][meta_title] != blank %}
+    {% assign html = product.metafields["global"][meta_title] %}
+{% else %}
+    {% assign html = block.settings.list %}
+{% endif %}
+
+<div class="container">
+    <div class=" {{ full_width }} image-text-section" style="background: {{ block.settings.bg_color }};">
+        <div class="image-text-basic-section grid {{ type }}  position-{{block.settings.pos}}">
+            <div class="feature-image grid__item">
+                {% assign meta_title = 'feature-image-' | append: type | remove: 'style_' %}
+                {% if product.metafields["global"][meta_title] != blank %}
+                    {% assign image_val = product.metafields["global"][meta_title] %}
+                    <img src="{{ image_val }}">
+                {% else %}
+                    {% assign image_val = block.settings.feature_image %}
+                        {% include 'responsive-image' with 
+                            image: image_val,
+                            max_width: 2048,
+                            max_height: 2048,
+                        %}
+                {% endif %}
+                
+                
+            </div>
+            <div class="bg-icon">
+                <svg width="387px" height="156px" viewBox="0 0 387 156" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <g id="style-guide" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.466294643">
+                        <g id="icons" transform="translate(0.000000, -132.000000)" stroke="#C5B097" stroke-width="2">
+                            <g id="lines_ilu" transform="translate(193.000000, 210.000000) rotate(-90.000000) translate(-193.000000, -210.000000) translate(116.000000, 17.000000)">
+                                <path d="M0.725765887,0 C65.8270855,39.5487813 107.026879,73.1231689 124.325147,100.723163 C141.623415,128.323156 151.515033,179.815094 154,255.198974 C151.949299,306.678844 124.566406,341.895264 71.8513218,360.848236 C19.1362376,379.801208 -4.57228102,388.04275 0.725765887,385.572862" id="Path-3"></path>
+                                <path d="M0.640936108,28 C58.1330105,62.9381721 94.517244,92.5984471 109.793636,116.980825 C125.070029,141.363203 133.805483,186.852194 136,253.447799 C134.188991,298.926129 110.006696,330.037008 63.4531154,346.780437 C16.8995345,363.523865 -4.03785856,370.804606 0.640936108,368.622658" id="Path-3"></path>
+                                <path d="M1.53725527,34 C49.7291412,63.2005251 80.2276898,87.9899045 93.0329011,108.368138 C105.838112,128.746372 113.160479,166.76503 115,222.424113 C113.481948,260.433861 93.2114954,286.435623 54.1886408,300.429397 C15.1657863,314.423172 -2.38467556,320.508248 1.53725527,318.684626" id="Path-3"></path>
+                                <path d="M1.43357443,61 C40.3252718,84.667794 64.9381356,104.760238 75.2721658,121.277333 C85.606196,137.794428 91.515474,168.609551 93,213.722702 C91.7749058,244.530603 75.4162945,265.605715 43.9241663,276.948038 C12.4320381,288.29036 -1.73149256,293.222475 1.43357443,291.744381" id="Path-3"></path>
+                                <path d="M0.254489337,143 C23.0822248,156.831828 37.5289057,168.574165 43.5945321,178.227013 C49.6601585,187.87986 53.1286478,205.888699 54,232.253527 C53.2809229,250.258145 43.6791294,262.574769 25.1946193,269.203399 C6.7101093,275.832029 -1.60326737,278.714433 0.254489337,277.850612" id="Path-3"></path>
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+            </div>
+            
+            <div class="feature-text grid__item">
+                <div class="content">
+                    {% if block.settings.devider %}
+                        {% assign cls = 'devider' %}
+                    {% else %}
+                        {% assign cls = '' %}
+                    {% endif %}
+                    {% if type != blank %}
+                        {% assign big_title = 'hero' %}
+                    {% else %}
+                        {% assign big_title = '' %}
+                    {% endif %}
+                    <h1 class="{{big_title}} uppercase {{ cls }}">{{ title }}</h1>
+                    {% if desc != blank %}
+                        {{desc }}
+                    {% endif %}
+                    {% if html != blank %}
+                        {{ html }}
+                    {% endif %}
+                    {% if block.settings.button_title != blank and block.settings.button_url != blank %}
+                        <a href="{{block.settings.button_url}}" class="button brown small">{{block.settings.button_title}}</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

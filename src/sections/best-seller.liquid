@@ -1,0 +1,61 @@
+<div class="best_sellers container">
+    <h1 class="hero text-center uppercase devider devider-center">{{ section.settings.title }}</h1>
+    <div class="content grid pagination">
+        {% assign products = collections[section.settings.collection].products %}
+        {% assign page_items = 0 %}
+        {% for product in products %}
+            
+            {% if product.url != blank %}
+                {% if page_items < section.settings.item_per_page %}
+                    <div class="grid__item large-up--one-third medium-down--one-half">
+                        {% include 'product-item' %}
+                    </div>
+                {% else %}
+                    <div class="grid__item large-up--one-third medium-down--one-half hide animation fadeInDown">
+                        {% include 'product-item' %}
+                    </div>
+                {% endif %}
+                {% assign page_items = page_items | plus: 1 %}
+            {% endif %}
+        {% endfor %}
+    </div>
+    <div class="load_more_content">
+        <span class="page-num"></span>
+        <button class="button load_more_btn brown medium">{{ 'general.general.load_more' | t }}</button>
+    </div>
+    
+</div>
+
+{% schema %}
+{
+    "name": "Best seller",
+    "settings": [
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "Bestsellers"
+        },
+        {
+            "type": "collection",
+            "id": "collection",
+            "label": "Collection"
+        },
+        {
+            "type": "range",
+            "id": "item_per_page",
+            "label": "Product per page",
+            "min": 1,
+            "max": 10,
+            "step": 1,
+            "default": 6
+        }
+    ],
+    "presets": [
+        {
+            "category": "Feature",
+            "name":"Bestsellers"
+        }
+    ]
+}
+{% endschema %}
